@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    public function test() {
-        #session()->forget("cart");
-        return view('test');
+    public function home() {
+        return view('home');
+    }
+
+    public function about() {
+        return view('about');
     }
 }

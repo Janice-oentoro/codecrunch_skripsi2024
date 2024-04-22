@@ -1,0 +1,11 @@
+.navbar{
+    background-color: #001D3D;
+}
+
+.square-box{
+    width: 65%;
+    height: 45%;
+    border: 2px solid #ededed;
+    border-radius: 10px;
+    box-shadow: 0px 0px 18px 3px rgba(201,201,201,1);
+}

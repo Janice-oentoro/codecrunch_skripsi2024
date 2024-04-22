@@ -7,4 +7,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', [MainController::class, 'test'])->name('test');
+
+Route::get('/home', [MainController::class, 'home'])->name('home');
+Route::get('/about', [MainController::class, 'about'])->name('about');
