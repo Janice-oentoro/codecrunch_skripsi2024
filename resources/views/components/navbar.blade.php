@@ -17,6 +17,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-light fw-bold" href="/about">About</a>
                 </li>
+                @if(Auth::user())
                 <li class="nav-item">
                     <a class="nav-link text-light fw-bold" href="#">Consultation</a>
                 </li>
@@ -26,18 +27,45 @@
                 <li class="nav-item">
                     <a class="nav-link text-light fw-bold" href="#">Chat</a>
                 </li>
+                @endif
                 </ul>
             </div>
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link text-light fw-bold" href="#">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light fw-bold" href="#">Sign Up</a>
-                </li>
-                </ul>
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link text-light fw-bold" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link text-light fw-bold" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown text-light fw-bold" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-dark fw-bold" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
             </div>
     </div>
 </nav>
