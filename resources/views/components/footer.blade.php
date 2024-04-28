@@ -12,8 +12,11 @@
     <footer class="text-center text-lg-start fixed-bottom">
     <!-- Copyright -->
     <div class="text-center p-3 text-white">
-      © 2020 Copyright:
-      <a class="text-white" href="">Adventour.com</a>
+      © 2024 Copyright:
+      <a class="text-white" href="">CodeCrunch</a>
+      <a>Dibuat oleh:</a>
+      <a>- Janice Visakha Oentoro - 2440018822</a>
+      <a>- Muhammad Rafif Prahastya - 2440034334</a>
     </div>
     <!-- Copyright -->
 </footer>

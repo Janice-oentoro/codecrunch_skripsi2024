@@ -1,5 +1,4 @@
 <x-layout>
-    <x-navbar />
 <div class="container-fluid d-block mt-5"> 
      <div class="container square-box">
         <div class="d-block text-center p-3">

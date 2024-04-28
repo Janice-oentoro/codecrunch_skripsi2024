@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-            <a class="navbar-brand text-light fw-bold" href="#">
+            <a class="navbar-brand text-light fw-bold" href="/">
                 <img src="{{ asset('storage/images/code_crunch_no_text.png') }}" alt="" width="30" height="30" class="d-inline-block align-text-top">
                 Code Crunch
             </a>
@@ -12,7 +12,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-light fw-bold" href="#">Home</a>
+                    <a class="nav-link text-light fw-bold" href="/">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light fw-bold" href="/about">About</a>
@@ -53,6 +53,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-dark fw-bold" href="/editprofile">Edit Profile</a>
                                     <a class="dropdown-item text-dark fw-bold" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
