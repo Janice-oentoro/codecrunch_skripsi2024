@@ -48,7 +48,8 @@ class AuthController extends Controller
     {
         if(Auth::check() && Auth::user()->role == "consultant"){
             $programmings = Programming::all();
-            return view('editskill', compact('programmings'));
+            $topics = Topic::all();
+            return view('editskill', compact('programmings', 'topics'));
         }
        else{
         return redirect()->route('login')->with('success', "Login First");
