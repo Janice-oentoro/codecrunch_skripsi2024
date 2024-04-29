@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        $users= [[
             'name' => 'user1',
             'email' => 'user1@gmail.com',
             'password' => bcrypt('12345678'),
@@ -36,23 +36,23 @@ class UserSeeder extends Seeder
             'role' => 'user',
         ],
         [
-            'name' => 'consultant1',
+            'name' => 'consultant2',
             'email' => 'consultant2@gmail.com',
             'password' => bcrypt('12345678'),
             'phone' => '12345678',
             'role' => 'consultant'
         ],
         [
-            'name' => 'David Wilson',
-            'email' => 'david@example.com',
-            'password' => bcrypt('passworddef'),
+            'name' => 'user3',
+            'email' => 'user3@gmail.com',
+            'password' => bcrypt('12345678'),
             'role' => 'user'
         ],
         [
-            'name' => 'Sarah Taylor',
+            'name' => 'consultant3',
             'email' => 'sarah@example.com',
-            'password' => bcrypt('passwordghi'),
-            'role' => 'user'
+            'password' => bcrypt('12345678'),
+            'role' => 'consultant'
         ],
         [
             'name' => 'Chris Martinez',
@@ -107,6 +107,11 @@ class UserSeeder extends Seeder
             'email' => 'mark@example.com',
             'password' => bcrypt('password890'),
             'role' => 'user'
-        ]);
+        ]
+    ];
+        foreach ($users as $key => $value) {
+        User::create($value);
+    }
+
     }
 }
