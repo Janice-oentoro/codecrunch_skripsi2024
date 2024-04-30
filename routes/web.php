@@ -22,5 +22,7 @@ Route::group(['middleware' => 'user'], function(){
 });
 
 Route::group(['middleware' => 'consultant'], function(){
-    Route::get('/editskill',[AuthController::class,'editSkill'])->name('skill')->middleware('consultant');
+    Route::get('/editskill',[MainController::class,'editSkill'])->name('skill')->middleware('consultant');
+    Route::post('add/conprog',[MainController::class,'addConProg'])->name('add-conprog')->middleware('consultant');
+    Route::post('add/contopic',[MainController::class,'addConTopic'])->name('add-contopic')->middleware('consultant');
 });

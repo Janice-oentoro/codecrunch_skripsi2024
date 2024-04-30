@@ -43,16 +43,5 @@ class AuthController extends Controller
         $fileObj->storeAs('public/images', $new_file_name);
         return $new_file_name;
     }
-    
-    public function editSkill()
-    {
-        if(Auth::check() && Auth::user()->role == "consultant"){
-            $programmings = Programming::all();
-            $topics = Topic::all();
-            return view('editskill', compact('programmings', 'topics'));
-        }
-       else{
-        return redirect()->route('login')->with('success', "Login First");
-       } 
-    }
+
 }
