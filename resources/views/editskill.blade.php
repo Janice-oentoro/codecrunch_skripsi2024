@@ -26,15 +26,14 @@
                     <form action="{{ route('add-conprog') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
-                            <div class="form-check">
+                            <div class="test1-form">
+                                <select class="form-select" aria-label="addProg" name="prog_id">
                                 @foreach ($programmings as $p)
-                                <input class="form-check-input" name="prog_id" type="checkbox" value="{{$p->id}}" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    {{$p->prog_name}}
-                                </label>
-                                <br>
+                                    <option value="{{$p->id}}">{{$p->prog_name}}</option>
                                 @endforeach
+                                </select>
                             </div>
+
                                 <input type="hidden" name="consultant_id" value="{{ Auth::user()->id }}">
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-warning">Submit</button>
@@ -66,14 +65,12 @@
                     @if(Auth::check() && Auth::user()->role == "consultant")
                     <form action="{{ route('add-contopic') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                            <div class="form-check">
+                            <div class="test2-form">
+                                <select class="form-select" aria-label="addTopic" name="topic_id">
                                 @foreach ($topics as $t)
-                                <input class="form-check-input" name="topic_id" type="checkbox" value="{{$t->id}}" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    {{$t->topic_name}}
-                                </label>
-                                <br>
+                                    <option value="{{$t->id}}">{{$t->topic_name}}</option>
                                 @endforeach
+                                </select>
                             </div>
                             <input type="hidden" name="consultant_id" value="{{ Auth::user()->id }}">
                             <div class="modal-footer">
