@@ -48,6 +48,7 @@
         </div>
 
         <br>
+
          <!-- Button trigger modal Topic-->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addtopic">
             Add Topic 
@@ -84,6 +85,39 @@
                 </div>
             </div>
             </div>
+
+            <!-- Display -->
+            <!-- Display Programmings -->
+            <h5>Display Programming</h5>
+            <ol class="list-group list-group-flush list-group-numbered flex-fill">
+                @foreach ($progcons as $progcon)
+                    <li class="list-group-item">{{ $progcon->prog_name}}
+                        <form action="{{ route('delete-progcon') }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <input type="text" name="prog_id" value="{{ $progcon->id }}">
+                            <button class="btn btn-danger">Delete</button>
+                        </form> 
+                    </li>
+                @endforeach
+            </ol>
+
+            <br>
+
+            <!-- Display Topics -->
+            <h5>Display Topics</h5>
+            <ol class="list-group list-group-flush list-group-numbered flex-fill">
+                @foreach ($topiccons as $topiccon)
+                    <li class="list-group-item">{{ $topiccon->topic_name}}
+                        <form action="{{ route('delete-topiccon') }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <input type="hidden" name="topic_id" value="{{ $topiccon->id }}">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </li>
+                @endforeach
+            </ol>
 
         </div>
     @else

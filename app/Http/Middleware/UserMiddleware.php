@@ -18,19 +18,11 @@ class UserMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::check()){
-            if(Auth::check() && Auth::user()->role == "user" || Auth::check() && Auth::user()->role == "consultant"){
                 return $next($request);
-            }
-            else{
-                return abort(401);
-                #Auth::logout();
-                #return redirect(url('login'))->with('success', "Login First");
-            }
         }
         else{
             return abort(401);
-            #Auth::logout();
-            #return redirect(url('login'))->with('success', "Login First");
+            #return redirect(url('login'))->with(['success', "Login First"]);
         } 
     }
 }

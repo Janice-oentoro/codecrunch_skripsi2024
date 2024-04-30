@@ -36,19 +36,25 @@ class MainController extends Controller
             return view('editprofile');
         }
        else{
-        return redirect()->route('login')->with('success', "Login First");
+        return redirect()->route('login')->with('success', "Login First as Consultant");
        } 
     }
 
-    public function editSkill()
+    public function viewSkill()
     {
         if(Auth::check() && Auth::user()->role == "consultant"){
             $programmings = Programming::all();
             $topics = Topic::all();
-            return view('editskill', compact('programmings', 'topics'));
+            $progcons = ProgConsultant::where('consultant_id', Auth::id())
+            ->join('programmings', 'prog_id', '=', 'programmings.id')
+            ->get();
+            $topiccons = TopicConsultant::where('consultant_id', Auth::id())
+            ->join('topics', 'topic_id', '=', 'topics.id')
+            ->get();
+            return view('editskill', compact('programmings', 'topics', 'progcons', 'topiccons'));
         }
        else{
-        return redirect()->route('login')->with('success', "Login First");
+        return redirect()->route('login')->with('success', "Login First as Consultant");
        } 
     }
 
@@ -57,7 +63,7 @@ class MainController extends Controller
         $pc->prog_id = $request->prog_id;
         $pc->consultant_id = $request->consultant_id; 
         $pc->save();
-        return redirect()->back()->with('success','Add Programming Skill Success');
+        return redirect()->back()->with('success',"Add Programming Skill Success");
     }
 
     public function addConTopic(Request $request){
@@ -65,6 +71,18 @@ class MainController extends Controller
         $tc->topic_id = $request->topic_id;
         $tc->consultant_id = $request->consultant_id;
         $tc->save();
-        return redirect()->back()->with('success','Add Topic Skill Success');
+        return redirect()->back()->with('success',"Add Topic Skill Success");
+    }
+
+    public function deleteConProg(Request $request)
+    {
+        ProgConsultant::where('id', $request->prog_id)->delete();
+        return redirect()->back()->with('success',"Delete Success");
+    }
+
+    public function deleteConTopic(Request $request)
+    {
+        TopicConsultant::where('id', $request->topic_id)->delete();
+        return redirect('/editskill')->with('success',"Delete Success");
     }
 }

@@ -73,11 +73,10 @@
                             </div>
                         </div>
 
-                        <div class="form-select row mb-3">
+                        <div class="row mb-3">
                             <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
                                 <div class="col-md-6">
-                                    <select class="form-control" id="role" name="role" required focus>
-                                        <option value="" disabled selected>Select Role</option>  
+                                    <select class="form-select" id="role" name="role" required focus>
                                         <option value="user">User</option>        
                                         <option value="consultant">Consultant</option>             
                                     </select>
