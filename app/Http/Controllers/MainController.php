@@ -16,11 +16,14 @@ use App\Models\Topic;
 use App\Models\ProgConsultant;
 use App\Models\TopicConsultant;
 use App\Models\Consultation;
+use App\Models\User;
 
 class MainController extends Controller
 {
     public function land() {
-        return view('land');
+        $users = User::where('role', 'consultant')
+        ->get(['users.id', 'name', 'price']);
+        return view('land', compact('users'));
     }
 
     public function home() {

@@ -27,6 +27,7 @@ class UserSeeder extends Seeder
             'email' => 'consultant@gmail.com',
             'password' => bcrypt('12345678'),
             'phone' => '12345678',
+            'price' => 123000,
             'role' => 'consultant'
         ],
         [
@@ -41,6 +42,7 @@ class UserSeeder extends Seeder
             'email' => 'consultant1@gmail.com',
             'password' => bcrypt('12345678'),
             'phone' => '12345678',
+            'price' => 456000,
             'role' => 'consultant'
         ],
         [
@@ -49,13 +51,6 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'phone' => '12345678',
             'role' => 'user'
-        ],
-        [
-            'name' => 'consultant2',
-            'email' => 'consultant2@gmail.com',
-            'password' => bcrypt('12345678'),
-            'phone' => '12345678',
-            'role' => 'consultant'
         ],
         [
             'name' => 'Chris Martinez',

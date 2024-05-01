@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/', [MainController::class, 'land'])->name('land');
 Route::get('/home', [MainController::class, 'home'])->name('home');
-Route::get('/about', [MainController::class, 'about'])->name('about');
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [MainController::class, 'land'])->name('land');
+Route::get('/about', [MainController::class, 'about'])->name('about');
 
 #USER ROUTES
 Route::group(['middleware' => 'user'], function(){
@@ -34,5 +34,4 @@ Route::group(['middleware' => 'consultant'], function(){
     Route::post('add/con',[MainController::class,'addCon'])->name('add-con');
     Route::delete('delete/con',[MainController::class,'deleteCon'])->name('delete-con');
     Route::put('edit/con',[MainController::class,'editCon'])->name('edit-con');
-
 });
