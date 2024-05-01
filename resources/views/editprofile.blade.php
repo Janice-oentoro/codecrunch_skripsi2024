@@ -13,7 +13,7 @@
             </div>
 
             @if(Auth::check() && Auth::user()->role == "consultant")
-                <a href="/editskill">Edit skill</a>
+                <button class="btn btn-primary" onclick=window.location="{{ url('/editskill') }}">Edit Skill</button>
             @endif
 
             <form action="{{ route('edit-profile') }}" method="POST" enctype="multipart/form-data">

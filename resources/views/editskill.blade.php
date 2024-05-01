@@ -22,7 +22,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    @if(Auth::check() && Auth::user()->role == "consultant")
                     <form action="{{ route('add-conprog') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
@@ -95,7 +94,7 @@
                         <form action="{{ route('delete-progcon') }}" method="POST">
                             @csrf
                             @method('delete')
-                            <input type="text" name="prog_id" value="{{ $progcon->id }}">
+                            <input type="hidden" name="progcon_id" value="{{ $progcon->id }}">
                             <button class="btn btn-danger">Delete</button>
                         </form> 
                     </li>

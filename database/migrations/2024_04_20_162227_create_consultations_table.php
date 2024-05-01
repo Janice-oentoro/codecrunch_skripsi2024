@@ -19,11 +19,12 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('consultant_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->dateTime('consult_datetime');
+            $table->dateTime('end_consult_datetime');
             $table->string('title');
             $table->string('desc');
             $table->string('type');
             $table->string('status');
-            $table->string('link');
+            $table->string('link')->nullable();
         });
     }
 

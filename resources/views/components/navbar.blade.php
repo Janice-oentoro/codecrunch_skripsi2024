@@ -19,7 +19,7 @@
                 </li>
                 @if(Auth::user())
                 <li class="nav-item">
-                    <a class="nav-link text-light fw-bold" href="#">Consultation</a>
+                    <a class="nav-link text-light fw-bold" href="/consultation">Consultation</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light fw-bold" href="#">Transaction</a>
