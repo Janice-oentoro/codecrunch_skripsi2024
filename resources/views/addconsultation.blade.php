@@ -82,7 +82,7 @@
                             <label for="link" class="display:hidden"></label>
                            
                             <div class="col-md-6">
-                                <input id="status" type="hidden" class="form-control" name="status" value="coming soon">
+                                <input id="status" type="hidden" class="form-control" name="status" value="unpaid">
                             </div>
                         </div>
                         

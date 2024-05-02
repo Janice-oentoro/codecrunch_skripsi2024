@@ -1,5 +1,4 @@
 <x-layout>
-    @foreach($users as $u)
     <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
         <div class="col-md-4">
@@ -9,10 +8,13 @@
         <div class="card-body">
             <h5 class="card-title">{{$u->name}}</h5>
             <p class="card-text">Rp {{$u->price}}</p>
-            <a href="/detailconsultant/{{$u->id}}" class="btn btn-warning" name="id">Detail</a>
+            @if(Auth::check())
+            <a href="#Chat" class="btn btn-primary"></a>
+            @else
+            <p></p>
+            @endif
         </div>
         </div>
     </div>
     </div>
-    @endforeach
 </x-layout>

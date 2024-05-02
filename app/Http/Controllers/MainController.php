@@ -25,6 +25,10 @@ class MainController extends Controller
         ->get(['users.id', 'name', 'price']);
         return view('land', compact('users'));
     }
+    public function detailConsultant(Request $request){
+        $u = User::findOrFail($request->id);
+        return view('detailconsultant', compact('u'));
+    }
 
     public function home() {
         return view('home');
