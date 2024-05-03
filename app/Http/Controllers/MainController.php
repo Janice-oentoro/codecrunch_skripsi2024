@@ -20,14 +20,26 @@ use App\Models\User;
 
 class MainController extends Controller
 {
+    public function loginPage() {
+        session();
+        return view('login');
+    }
+    
+    public function registerPage() {
+        session();
+        return view('register');
+    }
+
     public function land() {
+        session();
         $users = User::where('role', 'consultant')
         ->get(['users.id', 'name', 'price']);
         return view('land', compact('users'));
     }
+
     public function detailConsultant(Request $request){
-        $u = User::findOrFail($request->id);
-        return view('detailconsultant', compact('u'));
+        $udtl = User::findOrFail($request->id);
+        return view('detailconsultant', compact('udtl'));
     }
 
     public function home() {
@@ -35,6 +47,7 @@ class MainController extends Controller
     }
 
     public function about() {
+        session();
         return view('about');
     }
 

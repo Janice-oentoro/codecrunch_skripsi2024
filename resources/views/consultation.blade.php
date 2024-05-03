@@ -133,8 +133,8 @@
                                 <p class="card-text">Consultant: {{$cu->name}}</p>
                                 <p class="card-text">Description: {{$cu->desc}}</p>
                                 <p class="card-text">Type: {{$cu->type}}</p>
-                                <p class="card-text">Start DateTime: {{$ccon->consult_datetime}}</p>
-                                <p class="card-text">End DateTime: {{$ccon->end_consult_datetime}}</p>
+                                <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
+                                <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
                                 <p class="card-text">Link: {{$cu->link}}</p>
                                 <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
                             </div>

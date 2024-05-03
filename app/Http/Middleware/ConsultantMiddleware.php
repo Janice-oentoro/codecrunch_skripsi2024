@@ -21,13 +21,13 @@ class ConsultantMiddleware
                 return $next($request);
             }
             else{
-                return abort(401);
-                #return redirect()->back()->with(['success', "Consultants Only"];
+                #return abort(401);
+                return redirect()->back()->with(['success', "Consultants Only"]);
             }
         }
         else{
-            return abort(401);
-            #return redirect(url('login'))->with(['success', "Login First"]);
+            #return abort(401);
+            return redirect(url('login'))->with(['success', "Login First"]);
         } 
     }
 }

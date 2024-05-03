@@ -7,19 +7,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/home', [MainController::class, 'home'])->name('home');
 
-
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [MainController::class, 'land'])->name('land');
 Route::get('/about', [MainController::class, 'about'])->name('about');
 Route::get('/detailconsultant/{id}', [MainController::class,'detailConsultant'])->name('detail/{id}');
+
+#AUTHS USERS
+Route::group(['middleware' => 'guest'], function(){
+Route::get('/login', [MainController::class, 'loginPage'])->name('login_page');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/registeruser', [MainController::class, 'registerPage'])->name('register_page');
+Route::post('/register', [AuthController::class, 'registerUser'])->name('register');    
+});
 
 #USER ROUTES
 Route::group(['middleware' => 'user'], function(){
     Route::get('/editprofile',[MainController::class,'editProfile'])->name('profile');
     Route::post('edit/profile',[AuthController::class,'editProfileLogic'])->name('edit-profile');
     Route::get('/consultation', [MainController::class, 'consultation'])->name('consultation');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 #CONSULTANT ROUTES

@@ -119,7 +119,4 @@
             </ol>
 
         </div>
-    @else
-            <p>Login first</p>
-    @endif
 </x-layout>

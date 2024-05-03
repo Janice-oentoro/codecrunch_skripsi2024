@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-
-class UserMiddleware
+class GuestMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,12 +16,10 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check()){
-                return $next($request);
+        if(!Auth::check())
+        {
+            return $next($request);
         }
-        else{
-            #return abort(401);
-            return redirect(url('login'))->with(['success', "Login First"]);
-        } 
+        return redirect()->back()->with('success',"Please Log Out First");
     }
 }
