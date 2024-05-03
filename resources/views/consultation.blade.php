@@ -1,3 +1,7 @@
+<?php 
+    use Carbon\Carbon; #GET CURRENT TIME
+    $current = Carbon::now('GMT+7')->format('Y-m-d H:i:s');
+?>
 <x-layout>
     @php
     $user = Auth::user();
@@ -5,13 +9,8 @@
 
     @auth
         <div class="test">
-            <a>Consultation</a>
+            <h2>Consultation</h2>
         </div>
-
-            <div class="editprof1">
-            <div class="editprof3">
-                <p>Consultation Schedule</p>
-            </div>
 
             @if(Auth::user()->role == "consultant")
             <!-- Consultant view -->
@@ -120,8 +119,10 @@
             <!-- User view -->
             @elseif(Auth::user()->role == "user")
             <h5>Display Consultation</h5>
+
+            @foreach ($cusers as $cu)
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
-                    @foreach ($cusers as $cu)
+                    
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
@@ -141,8 +142,10 @@
                             </div>
                         </div>
                         </div>
-                    @endforeach
                 </ol>
+
+                @endforeach
+
             @endif
             
     @else

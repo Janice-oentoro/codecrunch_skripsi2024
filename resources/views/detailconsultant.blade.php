@@ -12,6 +12,8 @@
         <div class="card-body">
             <h2 class="card-title">{{$udtl->name}}</h2>
             <p class="card-text">Rp {{$udtl->price}}</p>
+            <p class="card-text">No. Handphone: {{$udtl->phone}}</p>
+            <p class="card-text">Email: {{$udtl->email}}</p>
 
             <!-- Programming Skills View -->
             <h5 class="card-text">Programming Skills</h5>
