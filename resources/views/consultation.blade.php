@@ -1,6 +1,8 @@
 <?php 
     use Carbon\Carbon; #GET CURRENT TIME
-    $current = Carbon::now('GMT+7')->format('Y-m-d H:i:s');
+    use App\Models\Consultation;
+    use Illuminate\Support\Facades\Auth;
+    $curr= Carbon::now('GMT+7')->format('Y-m-d H:i:s');
 ?>
 <x-layout>
     @php
@@ -18,8 +20,11 @@
 
                 <!-- Display Consultations -->
                 <h5>Display Consultation</h5>
+
+                <!-- UNPAID -->
+                @foreach ($cconsults as $ccon)
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
-                    @foreach ($cconsults as $ccon)
+                    
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
@@ -118,10 +123,96 @@
 
             <!-- User view -->
             @elseif(Auth::user()->role == "user")
-            <h5>Display Consultation</h5>
+            <h5>DISPLAY CONSULTATION</h5>
 
-            @foreach ($cusers as $cu)
+            <!-- UNPAID -->
+            <h4>UNPAID</h4>
+            @foreach ($cus as $cu)
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
+                    
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                            <img src="..." class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$cu->title}}</h5>
+                                <p class="card-text">Consultant: {{$cu->name}}</p>
+                                <p class="card-text">Description: {{$cu->desc}}</p>
+                                <p class="card-text">Type: {{$cu->type}}</p>
+                                <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
+                                <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
+                                <p class="card-text">Link: {{$cu->link}}</p>
+                                <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                </ol>
+
+                @endforeach
+                
+            <!-- COMING SOON -->
+            <h4>COMING SOON</h4>
+            @foreach ($ccss as $ccs)
+                <ol class="list-group list-group-flush list-group-numbered flex-fill">
+                    
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                            <img src="..." class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$ccs->title}}</h5>
+                                <p class="card-text">Consultant: {{$ccs->name}}</p>
+                                <p class="card-text">Description: {{$ccs->desc}}</p>
+                                <p class="card-text">Type: {{$ccs->type}}</p>
+                                <p class="card-text">Start DateTime: {{$ccs->consult_datetime}}</p>
+                                <p class="card-text">End DateTime: {{$ccs->end_consult_datetime}}</p>
+                                <p class="card-text">Link: {{$ccs->link}}</p>
+                                <p class="card-text"><small class="text-muted">{{$ccs->status}}</small></p>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                </ol>
+
+                @endforeach
+
+            <!-- ON GOING -->
+            <h4>ONGOING</h4>
+            @foreach ($cogs as $cu)
+                <ol class="list-group list-group-flush list-group-numbered flex-fill">
+                    
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                            <img src="..." class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$cu->title}}</h5>
+                                <p class="card-text">Consultant: {{$cu->name}}</p>
+                                <p class="card-text">Description: {{$cu->desc}}</p>
+                                <p class="card-text">Type: {{$cu->type}}</p>
+                                <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
+                                <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
+                                <p class="card-text">Link: {{$cu->link}}</p>
+                                <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                </ol>
+
+                @endforeach
+
+            <!-- FINISHED -->
+            <h4>FINISHED</h4>
+            @foreach ($cufs as $cu)
+                <ol clsss="list-group list-group-flush list-group-numbered flex-fill">
                     
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">

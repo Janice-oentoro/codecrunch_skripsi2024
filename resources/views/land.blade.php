@@ -1,8 +1,61 @@
 <?php
     use App\Models\ProgConsultant;
     use App\Models\TopicConsultant;
+    use App\Models\Programming;
+    use App\Models\Topic;
+
+    $progs = Programming::all();    
+    $topics = Topic::all();
 ?>
 <x-layout>
+    <form action="" class="" method="GET">
+        <!-- Search -->
+        <div class="row">
+            <div class="col-md-3">    
+                <label for="search">Search</label>
+                <input type="text" name="search" id="search" class="form-control" aria-describedby="helpId" value="{{$search}}">
+            </div>
+
+            <div class="col-md-3">
+                <br>
+                <button class="btn btn-primary">Search</button>
+                <a href="/" class="btn btn-primary">Reset</a>
+            </div>
+        </div>
+    </form>
+
+    <form action="" class="" method="GET">
+        <div class="row">
+        <!-- Filter Programming -->
+            <div class="col-md-3">
+                <label for="filter">Programming</label>
+                <select name="filterprog" id="filterprog" class="form-select">
+                    <option value="">Select Programming</option>
+                    @foreach($progs as $prog)
+                        <option value="{{$prog->prog_name}}">{{$prog->prog_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Filter Topic -->
+            <div class="col-md-3">
+                <label for="filter">Topic</label>
+                <select name="filtertopic" id="filtertopic" class="form-select">
+                    <option value="">Select Topic</option>
+                    @foreach($topics as $topic)
+                        <option value="{{$topic->topic_name}}">{{$topic->topic_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-6">
+                <br>
+                <button class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+    </form>
+
+    
+    <br>
     @foreach($users as $u)
     <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">

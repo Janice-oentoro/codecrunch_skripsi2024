@@ -17,6 +17,8 @@ use App\Models\ProgConsultant;
 use App\Models\TopicConsultant;
 use App\Models\Consultation;
 use App\Models\User;
+use Carbon\Carbon; #GET CURRENT TIME
+use Laravel\Ui\Presets\React;
 
 class MainController extends Controller
 {
@@ -30,11 +32,65 @@ class MainController extends Controller
         return view('register');
     }
 
-    public function land() {
+    public function land(Request $request) {
         session();
-        $users = User::where('role', 'consultant')
-        ->get(['users.id', 'name', 'price']);
-        return view('land', compact('users'));
+        $search = $request['search'] ?? "";
+        $filterprog = $request['filterprog'] ?? "";
+        $filtertopic = $request['filtertopic'] ?? "";
+
+        if($search != "") {
+            $users = User::where('role', 'consultant')->where('name', 'LIKE', "%$search%")
+            ->get(['users.id', 'name', 'price']);
+        } elseif($filterprog != "") {
+            $users = User::where('role', 'consultant')
+            ->join('prog_consultants', 'consultant_id', '=', 'users.id')
+            ->join('programmings', 'prog_id', '=', 'programmings.id')
+            ->where('prog_name', 'LIKE', "$filterprog")->distinct()
+            ->get(['users.id', 'name', 'price']);
+        } elseif($filtertopic != "") {
+            $users = User::where('role', 'consultant')
+            ->join('topic_consultants', 'consultant_id', '=', 'users.id')
+            ->join('topics', 'topic_id', '=', 'topics.id')
+            ->where('topic_name', 'LIKE', "$filtertopic")->distinct()
+            ->get(['users.id', 'name', 'price']);
+        } elseif($search != "" && $filterprog != "") {
+            $users = User::where('role', 'consultant')
+            ->join('prog_consultants', 'consultant_id', '=', 'users.id')
+            ->join('programmings', 'prog_id', '=', 'programmings.id')
+            ->where('prog_name', 'LIKE', "$filterprog")
+            ->where('name', 'LIKE', "%$search%")->distinct()
+            ->get(['users.id', 'name', 'price']);
+        } elseif($search != "" && $filtertopic != "") {
+            $users = User::where('role', 'consultant')
+            ->join('topic_consultants', 'consultant_id', '=', 'users.id')
+            ->join('topics', 'topic_id', '=', 'topics.id')
+            ->where('topic_name', 'LIKE', "$filtertopic")
+            ->where('name', 'LIKE', "%$search%")->distinct()
+            ->get(['users.id', 'name', 'price']);
+        } elseif($search != "" && $filtertopic != "" && $filterprog != "") {
+            $users = User::where('role', 'consultant')
+            ->join('topic_consultants', 'consultant_id', '=', 'users.id')
+            ->join('topics', 'topic_id', '=', 'topics.id')
+            ->join('prog_consultants', 'consultant_id', '=', 'users.id')
+            ->join('programmings', 'prog_id', '=', 'programmings.id')
+            ->where('prog_name', 'LIKE', "$filterprog")
+            ->where('topic_name', 'LIKE', "$filtertopic")
+            ->where('name', 'LIKE', "%$search%")->distinct()
+            ->get(['users.id', 'name', 'price']);
+        } elseif($filtertopic != "" && $filterprog != "") {
+            $users = User::where('role', 'consultant')
+            ->join('topic_consultants', 'consultant_id', '=', 'users.id')
+            ->join('topics', 'topic_id', '=', 'topics.id')
+            ->join('prog_consultants', 'consultant_id', '=', 'users.id')
+            ->join('programmings', 'prog_id', '=', 'programmings.id')
+            ->where('prog_name', 'LIKE', "$filterprog")
+            ->where('topic_name', 'LIKE', "$filtertopic")->distinct()
+            ->get(['users.id', 'name', 'price']);
+        } else {
+            $users = User::where('role', 'consultant')
+            ->get(['users.id', 'name', 'price']);
+        }
+        return view('land', compact('users', 'search', 'filterprog'));
     }
 
     public function detailConsultant(Request $request){
@@ -54,16 +110,41 @@ class MainController extends Controller
     public function consultation(){
         #User view
         if(Auth::check() && Auth::user()->role == "user"){
-            $cusers = Consultation::where('user_id', Auth::id())
+            $cus = Consultation::where('user_id', Auth::id())->where('status', 'unpaid')
             ->join('users', 'consultant_id', '=', 'users.id')
             ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime']);
-            return view('consultation', compact('cusers'));
+            
+            $ccss = Consultation::where('user_id', Auth::id())->where('status', 'coming soon')
+            ->join('users', 'consultant_id', '=', 'users.id')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime']);
+            
+            $cogs = Consultation::where('user_id', Auth::id())->where('status', 'on going')
+            ->join('users', 'consultant_id', '=', 'users.id')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime']);
+            
+            $cufs = Consultation::where('user_id', Auth::id())->where('status', 'finished')
+            ->join('users', 'consultant_id', '=', 'users.id')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime']);
+            return view('consultation', compact('cus', 'ccss', 'cogs', 'cufs'));
         } #Consultant view 
         elseif(Auth::check() && Auth::user()->role == "consultant"){
-            $cconsults = Consultation::where('consultant_id', Auth::id())
+            $ccus = Consultation::where('consultant_id', Auth::id())->where('status', 'unpaid')
             ->join('users', 'user_id', '=', 'users.id')
             ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime']);
-            return view('consultation', compact('cconsults'));
+
+            
+            $cccss = Consultation::where('consultant_id', Auth::id())->where('status', 'coming soon')
+            ->join('users', 'user_id', '=', 'users.id')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime']);
+            
+            $ccogs = Consultation::where('consultant_id', Auth::id())->where('status', 'on going')
+            ->join('users', 'user_id', '=', 'users.id')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime']);
+
+            $ccfs = Consultation::where('consultant_id', Auth::id())->where('status', 'finished')
+            ->join('users', 'user_id', '=', 'users.id')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime']);
+            return view('consultation', compact('ccus', 'cccss', 'ccogs', 'ccfs'));
         }
        else{
         return redirect()->route('login')->with('success', "Login First");
