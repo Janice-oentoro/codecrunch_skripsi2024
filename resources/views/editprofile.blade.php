@@ -1,3 +1,7 @@
+@php
+    use App\Http\Controllers\AuthController;
+    use Illuminate\Support\Str;
+@endphp
 <x-layout>
     @php
         $user = Auth::user();
@@ -11,11 +15,21 @@
             <div class="editprof3">
                 <p>Profile Settings</p>
             </div>
+            @php
+                $image = AuthController::imageAdapter(Auth::user()->image);
+            @endphp
+
+            @if (Auth::user()->image != null)
+            <img class="rounded-circle" alt="avatar" height="25%" width="25%" src="{{ asset($image) }}"/>
+            @else
+            <img class="rounded-circle" alt="avatar" height="25%" width="25%" src="{{ asset('/storage/images/def-icon.png') }}"/>
+            @endif
+
+            <br>
 
             @if(Auth::check() && Auth::user()->role == "consultant")
                 <button class="btn btn-primary" onclick=window.location="{{ url('/editskill') }}">Edit Skill</button>
             @endif
-
             <form action="{{ route('edit-profile') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="editprof2">
@@ -43,7 +57,7 @@
 
                     <div class="form-group-editprof">
                         <label for="image">Profile Picture</label>
-                        <input type="file" class="form-control" name="image" id="image">
+                        <input type="file" class="form-control" name="image" id="image" value="{{$user->image}}">
                     </div>
                     <br>
                     <button class="btn btn-warning">Submit</button>

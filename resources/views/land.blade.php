@@ -3,10 +3,14 @@
     use App\Models\TopicConsultant;
     use App\Models\Programming;
     use App\Models\Topic;
-
     $progs = Programming::all();    
     $topics = Topic::all();
 ?>
+@php
+    use App\Http\Controllers\AuthController;
+    use Illuminate\Support\Str;
+@endphp
+
 <x-layout>
     <form action="" class="" method="GET">
         <!-- Search -->
@@ -57,16 +61,22 @@
     
     <br>
     @foreach($users as $u)
+    @php
+        $image = AuthController::imageAdapter($u->image);
+    @endphp
     <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
         <div class="col-md-4">
-        <img src="..." class="img-fluid rounded-start" alt="...">
+            @if($u->image != null)
+                <img src="{{ asset($image) }}" class="img-fluid rounded-circle" alt="...">
+            @else
+                <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
+            @endif
         </div>
         <div class="col-md-8">
         <div class="card-body">
             <h5 class="card-title">{{$u->name}}</h5>
             <p class="card-text">Rp {{$u->price}}</p>
-            
             <!-- Programming Skills View -->
                 <?php 
                     $pcs = ProgConsultant::where('consultant_id', $u->id)

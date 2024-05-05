@@ -2,13 +2,25 @@
     use App\Models\ProgConsultant;
     use App\Models\TopicConsultant;
 ?>
+@php
+    use App\Http\Controllers\AuthController;
+    use Illuminate\Support\Str;
+@endphp
 <x-layout>
+@php
+    $image = AuthController::imageAdapter($udtl->image);
+@endphp
     <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
         <div class="col-md-4">
-        <img src="..." class="img-fluid rounded-start" alt="...">
+            @if ($udtl->image != null) 
+                <img src="{{ asset($image) }}" class="img-fluid rounded-circle" alt="...">
+            @else
+                <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
+            @endif
         </div>
         <div class="col-md-8">
+
         <div class="card-body">
             <h2 class="card-title">{{$udtl->name}}</h2>
             <p class="card-text">Rp {{$udtl->price}}</p>

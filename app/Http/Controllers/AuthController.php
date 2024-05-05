@@ -86,7 +86,7 @@ class AuthController extends Controller
                 'image' => $this->newImage($request)
             ]);
             return redirect()->route('land')->with('success', 'Edit Profile Success');
-    }
+    } 
 
     public function newImage(Request $request)
     {
@@ -130,4 +130,14 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('land');
     }
+
+    public static function imageAdapter($imageURL)
+    {
+        if(Str::contains($imageURL,'https://')  ||  Str::contains($imageURL,'data:image'))
+        {
+            return $imageURL;
+        }
+        return 'storage/images/'.$imageURL;
+    }
+
 }
