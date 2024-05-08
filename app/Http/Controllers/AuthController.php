@@ -78,20 +78,29 @@ class AuthController extends Controller
     public function editProfileLogic(Request $request)
     {
         $user = User::find(auth()->user()->id);
-        $user->update([
+        if($request->hasFile('image')) {
+            $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'price' => $request->price,
                 'image' => $this->newImage($request)
             ]);
+        } else {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'price' => $request->price
+            ]);           
+        }
             return redirect()->route('land')->with('success', 'Edit Profile Success');
     } 
 
     public function newImage(Request $request)
     {
         $fileObj = $request->file('image');
-        $name = $fileObj->getClientOriginalName();
+        $name = str_replace(' ', '', $fileObj->getClientOriginalName());
         $ext = $fileObj->getClientOriginalExtension();
         $new_file_name = $name . time() . '.' .$ext;
         $fileObj->storeAs('public/images', $new_file_name);

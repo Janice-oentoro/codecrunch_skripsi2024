@@ -1,3 +1,7 @@
+@php
+    use App\Http\Controllers\AuthController;
+    use Illuminate\Support\Str;
+@endphp
 {{-- -------------------- Saved Messages -------------------- --}}
 @if($get == 'saved')
     <table class="messenger-list-item" data-contact="{{ Auth::user()->id }}">
@@ -23,6 +27,9 @@
 $lastMessageBody = mb_convert_encoding($lastMessage->body, 'UTF-8', 'UTF-8');
 $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0, 30, 'UTF-8').'..' : $lastMessageBody;
 ?>
+@php
+    $image = AuthController::imageAdapter($user->image);
+@endphp
 <table class="messenger-list-item" data-contact="{{ $user->id }}">
     <tr data-action="0">
         {{-- Avatar side --}}
@@ -30,9 +37,17 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
             @if($user->active_status)
                 <span class="activeStatus"></span>
             @endif
+        
+        @if ($user->image != null)
         <div class="avatar av-m"
-        style="background-image: url('{{ $user->image }}');">
+        style="background-image: url({{url($image)}});">
         </div>
+        @else
+        <div class="avatar av-m"
+        style="background-image: url({{url('storage/images/def-icon.png')}});">
+        </div>
+        @endif
+
         </td>
         {{-- center side --}}
         <td>
@@ -64,13 +79,24 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
 
 {{-- -------------------- Search Item -------------------- --}}
 @if($get == 'search_item')
+@php
+    $image = AuthController::imageAdapter($user->image);
+@endphp
 <table class="messenger-list-item" data-contact="{{ $user->id }}">
     <tr data-action="0">
         {{-- Avatar side --}}
         <td>
+
+        @if ($user->image != null)
         <div class="avatar av-m"
-        style="background-image: url('{{ $user->image }}');">
+        style="background-image: url({{url($image)}});">
         </div>
+        @else
+        <div class="avatar av-m"
+        style="background-image: url({{url('storage/images/def-icon.png')}});">
+        </div>
+        @endif
+
         </td>
         {{-- center side --}}
         <td>
@@ -84,7 +110,7 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
 
 {{-- -------------------- Shared photos Item -------------------- --}}
 @if($get == 'sharedPhoto')
-<div class="shared-photo chat-image" style="background-image: url('{{ $image }}')"></div>
+<div class="shared-photo chat-image" style="background-image: url({{url('storage/images/def-icon.png')}});"></div>
 @endif
 
 
