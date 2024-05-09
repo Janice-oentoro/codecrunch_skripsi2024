@@ -41,7 +41,7 @@ class AuthController extends Controller
 
     public function registerUser(Request $request) {
         $rules = [
-            'name' => 'required|string|min:5|max:255',
+            'name' => 'required|string|min:5|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:8|alpha_num',
             'phone' => 'required|string|min:10|max:13',
@@ -51,6 +51,7 @@ class AuthController extends Controller
             'name.string' => 'Name must be string',
             'name.min' => 'Name must be filled with min 5 characters',
             'name.max' => 'Name must below than 255 characters',
+            'name.unique' => 'This name has been taken',
             'email.email' => 'Please input valid email address',
             'email.unique' => 'This email has been taken',
             'password.min' => 'Minimum password 8 characters',
@@ -78,13 +79,13 @@ class AuthController extends Controller
     public function editProfileLogic(Request $request)
     {
         $user = User::find(auth()->user()->id);
-        if($request->hasFile('image')) {
+        if($request->hasFile('avatar')) {
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'price' => $request->price,
-                'image' => $this->newImage($request)
+                'avatar' => $this->newImage($request)
             ]);
         } else {
             $user->update([
@@ -99,11 +100,11 @@ class AuthController extends Controller
 
     public function newImage(Request $request)
     {
-        $fileObj = $request->file('image');
+        $fileObj = $request->file('avatar');
         $name = str_replace(' ', '', $fileObj->getClientOriginalName());
         $ext = $fileObj->getClientOriginalExtension();
         $new_file_name = $name . time() . '.' .$ext;
-        $fileObj->storeAs('public/images', $new_file_name);
+        $fileObj->storeAs('public/user-avatars', $new_file_name);
         return $new_file_name;
     }
 
@@ -146,7 +147,13 @@ class AuthController extends Controller
         {
             return $imageURL;
         }
-        return 'storage/images/'.$imageURL;
+        return 'storage/user-avatars/'.$imageURL;
+    }
+
+    public static function matchUser($userMatch)
+    {
+        $user = User::where('name', $userMatch)->get(['name', 'avatar']);
+        return $user;
     }
 
 }

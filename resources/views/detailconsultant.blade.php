@@ -8,13 +8,13 @@
 @endphp
 <x-layout>
 @php
-    $image = AuthController::imageAdapter($udtl->image);
+    $avatar = AuthController::imageAdapter($udtl->avatar);
 @endphp
     <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
         <div class="col-md-4">
-            @if ($udtl->image != null) 
-                <img src="{{ asset($image) }}" class="img-fluid rounded-circle" alt="...">
+            @if ($udtl->avatar != null) 
+                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
             @else
                 <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
             @endif

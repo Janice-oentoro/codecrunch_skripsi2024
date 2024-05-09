@@ -59,8 +59,8 @@ return [
     |-------------------------------------
     */
     'user_avatar' => [
-        'folder' => 'storage/images',
-        'default' => 'avatar.png',
+        'folder' => 'user-avatars',
+        'default' => 'def-icon.png',
     ],
 
     /*

@@ -16,11 +16,11 @@
                 <p>Profile Settings</p>
             </div>
             @php
-                $image = AuthController::imageAdapter(Auth::user()->image);
+                $avatar= AuthController::imageAdapter(Auth::user()->avatar);
             @endphp
 
-            @if (Auth::user()->image != null)
-            <img class="rounded-circle" alt="avatar" height="25%" width="25%" src="{{ asset($image) }}"/>
+            @if (Auth::user()->avatar != null)
+            <img class="rounded-circle" alt="avatar" height="25%" width="25%" src="{{ asset($avatar) }}"/>
             @else
             <img class="rounded-circle" alt="avatar" height="25%" width="25%" src="{{ asset('/storage/images/def-icon.png') }}"/>
             @endif
@@ -57,7 +57,7 @@
 
                     <div class="form-group-editprof">
                         <label for="image">Profile Picture</label>
-                        <input type="file" class="form-control" name="image" id="image" value="{{$user->image}}">
+                        <input type="file" class="form-control" name="avatar" id="avatar" value="{{$user->avatar}}">
                     </div>
                     <br>
                     <button class="btn btn-warning">Submit</button>

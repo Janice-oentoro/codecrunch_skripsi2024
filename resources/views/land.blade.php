@@ -62,13 +62,13 @@
     <br>
     @foreach($users as $u)
     @php
-        $image = AuthController::imageAdapter($u->image);
+        $avatar = AuthController::imageAdapter($u->avatar);
     @endphp
     <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
         <div class="col-md-4">
-            @if($u->image != null)
-                <img src="{{ asset($image) }}" class="img-fluid rounded-circle" alt="...">
+            @if($u->avatar != null)
+                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
             @else
                 <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
             @endif

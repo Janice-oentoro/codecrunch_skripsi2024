@@ -28,7 +28,7 @@ $lastMessageBody = mb_convert_encoding($lastMessage->body, 'UTF-8', 'UTF-8');
 $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0, 30, 'UTF-8').'..' : $lastMessageBody;
 ?>
 @php
-    $image = AuthController::imageAdapter($user->image);
+    $avatar = AuthController::imageAdapter($user->avatar);
 @endphp
 <table class="messenger-list-item" data-contact="{{ $user->id }}">
     <tr data-action="0">
@@ -38,13 +38,13 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
                 <span class="activeStatus"></span>
             @endif
         
-        @if ($user->image != null)
+        @if ($user->avatar != null)
         <div class="avatar av-m"
-        style="background-image: url({{url($image)}});">
+        style="background-image: url({{url($user->avatar)}});">
         </div>
         @else
         <div class="avatar av-m"
-        style="background-image: url({{url('storage/images/def-icon.png')}});">
+        style="background-image: url({{url('storage/user-avatars/def-icon.png')}});">
         </div>
         @endif
 
@@ -80,20 +80,20 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
 {{-- -------------------- Search Item -------------------- --}}
 @if($get == 'search_item')
 @php
-    $image = AuthController::imageAdapter($user->image);
+    $avatar = AuthController::imageAdapter($user->avatar);
 @endphp
 <table class="messenger-list-item" data-contact="{{ $user->id }}">
     <tr data-action="0">
         {{-- Avatar side --}}
         <td>
 
-        @if ($user->image != null)
+        @if ($user->avatar != null)
         <div class="avatar av-m"
-        style="background-image: url({{url($image)}});">
+        style="background-image: url({{url($user->avatar)}});">
         </div>
         @else
         <div class="avatar av-m"
-        style="background-image: url({{url('storage/images/def-icon.png')}});">
+        style="background-image: url({{url('storage/user-avatars/def-icon.png')}});">
         </div>
         @endif
 

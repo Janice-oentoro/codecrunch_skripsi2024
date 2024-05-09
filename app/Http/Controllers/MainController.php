@@ -40,33 +40,33 @@ class MainController extends Controller
 
         if($search != "") {
             $users = User::where('role', 'consultant')->where('name', 'LIKE', "%$search%")
-            ->get(['users.id', 'name', 'price', 'image']);
+            ->get(['users.id', 'name', 'price', 'avatar']);
         } elseif($filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('prog_consultants', 'consultant_id', '=', 'users.id')
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")->distinct()
-            ->get(['users.id', 'name', 'price', 'image']);
+            ->get(['users.id', 'name', 'price', 'avatar']);
         } elseif($filtertopic != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
             ->join('topics', 'topic_id', '=', 'topics.id')
             ->where('topic_name', 'LIKE', "$filtertopic")->distinct()
-            ->get(['users.id', 'name', 'price', 'image']);
+            ->get(['users.id', 'name', 'price', 'avatar']);
         } elseif($search != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('prog_consultants', 'consultant_id', '=', 'users.id')
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")
             ->where('name', 'LIKE', "%$search%")->distinct()
-            ->get(['users.id', 'name', 'price', 'image']);
+            ->get(['users.id', 'name', 'price', 'avatar']);
         } elseif($search != "" && $filtertopic != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
             ->join('topics', 'topic_id', '=', 'topics.id')
             ->where('topic_name', 'LIKE', "$filtertopic")
             ->where('name', 'LIKE', "%$search%")->distinct()
-            ->get(['users.id', 'name', 'price', 'image']);
+            ->get(['users.id', 'name', 'price', 'avatar']);
         } elseif($search != "" && $filtertopic != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
@@ -76,7 +76,7 @@ class MainController extends Controller
             ->where('prog_name', 'LIKE', "$filterprog")
             ->where('topic_name', 'LIKE', "$filtertopic")
             ->where('name', 'LIKE', "%$search%")->distinct()
-            ->get(['users.id', 'name', 'price', 'image']);
+            ->get(['users.id', 'name', 'price', 'avatar']);
         } elseif($filtertopic != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
@@ -85,10 +85,10 @@ class MainController extends Controller
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")
             ->where('topic_name', 'LIKE', "$filtertopic")->distinct()
-            ->get(['users.id', 'name', 'price', 'image']);
+            ->get(['users.id', 'name', 'price', 'avatar']);
         } else {
             $users = User::where('role', 'consultant')
-            ->get(['users.id', 'name', 'price','image']);
+            ->get(['users.id', 'name', 'price','avatar']);
         }
         return view('land', compact('users', 'search', 'filterprog'));
     }
@@ -112,37 +112,37 @@ class MainController extends Controller
         if(Auth::check() && Auth::user()->role == "user"){
             $cus = Consultation::where('user_id', Auth::id())->where('status', 'unpaid')
             ->join('users', 'consultant_id', '=', 'users.id')
-            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'image']);
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
             
             $ccss = Consultation::where('user_id', Auth::id())->where('status', 'coming soon')
             ->join('users', 'consultant_id', '=', 'users.id')
-            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'image']);
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
             
             $cogs = Consultation::where('user_id', Auth::id())->where('status', 'on going')
             ->join('users', 'consultant_id', '=', 'users.id')
-            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'image']);
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
             
             $cufs = Consultation::where('user_id', Auth::id())->where('status', 'finished')
             ->join('users', 'consultant_id', '=', 'users.id')
-            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'image']);
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
             return view('consultation', compact('cus', 'ccss', 'cogs', 'cufs'));
         } #Consultant view 
         elseif(Auth::check() && Auth::user()->role == "consultant"){
             $ccus = Consultation::where('consultant_id', Auth::id())->where('status', 'unpaid')
             ->join('users', 'user_id', '=', 'users.id')
-            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'image']);
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
 
             $cccss = Consultation::where('consultant_id', Auth::id())->where('status', 'coming soon')
             ->join('users', 'user_id', '=', 'users.id')
-            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'image']);
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
             
             $ccogs = Consultation::where('consultant_id', Auth::id())->where('status', 'on going')
             ->join('users', 'user_id', '=', 'users.id')
-            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'image']);
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
 
             $ccfs = Consultation::where('consultant_id', Auth::id())->where('status', 'finished')
             ->join('users', 'user_id', '=', 'users.id')
-            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'image']);
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
             return view('consultation', compact('ccus', 'cccss', 'ccogs', 'ccfs'));
         }
        else{
