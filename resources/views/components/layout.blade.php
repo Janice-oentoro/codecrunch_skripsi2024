@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" type="text/css">
     <!-- MDB icon -->
     <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+    data-client-key="{{config('midtrans.client_key')}}">
+  </script>
 </head>
 <body>
     <x-navbar/>

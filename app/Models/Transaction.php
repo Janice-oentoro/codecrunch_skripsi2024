@@ -12,6 +12,7 @@ class Transaction extends Model
         'user_id',
         'consultation_id',
         'transaction_datetime',
-        'amount'
+        'amount',
+        'status'
     ];
 }

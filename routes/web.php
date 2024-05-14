@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PayController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,6 +27,8 @@ Route::group(['middleware' => 'user'], function(){
     Route::post('edit/profile',[AuthController::class,'editProfileLogic'])->name('edit-profile');
     Route::get('/consultation', [MainController::class, 'consultation'])->name('consultation');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/pay',[PayController::class,'showView']);
+    Route::post('/pay',[PayController::class, 'pay']);
 });
 
 #CONSULTANT ROUTES

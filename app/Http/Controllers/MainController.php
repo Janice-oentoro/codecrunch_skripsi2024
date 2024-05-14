@@ -110,7 +110,7 @@ class MainController extends Controller
     public function consultation(){
         #User view
         if(Auth::check() && Auth::user()->role == "user"){
-            $cus = Consultation::where('user_id', Auth::id())->where('status', 'unpaid')
+            $cus = Consultation::where('user_id', Auth::id())->where('status', 'pending')
             ->join('users', 'consultant_id', '=', 'users.id')
             ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
             
@@ -128,7 +128,7 @@ class MainController extends Controller
             return view('consultation', compact('cus', 'ccss', 'cogs', 'cufs'));
         } #Consultant view 
         elseif(Auth::check() && Auth::user()->role == "consultant"){
-            $ccus = Consultation::where('consultant_id', Auth::id())->where('status', 'unpaid')
+            $ccus = Consultation::where('consultant_id', Auth::id())->where('status', 'pending')
             ->join('users', 'user_id', '=', 'users.id')
             ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
 

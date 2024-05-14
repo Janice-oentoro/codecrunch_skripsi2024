@@ -1,9 +1,3 @@
-<?php 
-    use Carbon\Carbon; #GET CURRENT TIME
-    use App\Models\Consultation;
-    use Illuminate\Support\Facades\Auth;
-    $curr= Carbon::now('GMT+7')->format('Y-m-d H:i:s');
-?>
 @php
     use App\Http\Controllers\AuthController;
     use Illuminate\Support\Str;
@@ -25,18 +19,18 @@
                 <!-- Display Consultations -->
                 <h5>Display Consultation</h5>
 
-                <!-- UNPAID -->
-                <h4>UNPAID</h4>
+                <!-- PENDING -->
+                <h4>PENDING</h4>
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
                 @foreach ($ccus as $ccon)
                 @php
-                    $image = AuthController::imageAdapter($ccon->image);
+                    $avatar = AuthController::imageAdapter($ccon->avatar);
                 @endphp
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                            @if ($ccon->image != null) 
-                                <img src="{{ asset($image) }}" class="img-fluid rounded-circle" alt="...">
+                            @if ($ccon->avatar != null) 
+                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
                             @else
                                 <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
                             @endif
@@ -135,13 +129,13 @@
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
                 @foreach ($cccss as $ccon)
                 @php
-                    $image = AuthController::imageAdapter($ccon->image);
+                    $avatar = AuthController::imageAdapter($ccon->avatar);
                 @endphp
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                            @if ($ccon->image != null) 
-                                <img src="{{ asset($image) }}" class="img-fluid rounded-circle" alt="...">
+                            @if ($ccon->avatar != null) 
+                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
                             @else
                                 <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
                             @endif
@@ -240,13 +234,13 @@
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
                 @foreach ($ccogs as $ccon)
                 @php
-                    $image = AuthController::imageAdapter($ccon->image);
+                    $avatar = AuthController::imageAdapter($ccon->avatar);
                 @endphp
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                            @if ($ccon->image != null) 
-                                <img src="{{ asset($image) }}" class="img-fluid rounded-circle" alt="...">
+                            @if ($ccon->avatar != null) 
+                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
                             @else
                                 <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
                             @endif
@@ -273,13 +267,13 @@
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
                 @foreach ($ccfs as $ccon)
                 @php
-                    $image = AuthController::imageAdapter($ccon->image);
+                    $avatar = AuthController::imageAdapter($ccon->avatar);
                 @endphp
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                            @if ($ccon->image != null) 
-                                <img src="{{ asset($image) }}" class="img-fluid rounded-circle" alt="...">
+                            @if ($ccon->avatar != null) 
+                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
                             @else
                                 <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
                             @endif
@@ -305,18 +299,18 @@
             @elseif(Auth::user()->role == "user")
             <h5>DISPLAY CONSULTATION</h5>
 
-            <!-- UNPAID -->
-            <h4>UNPAID</h4>
+            <!-- PENDING -->
+            <h4>PENDING</h4>
             <ol class="list-group list-group-flush list-group-numbered flex-fill">
                     @foreach ($cus as $cu)
                     @php
-                        $image = AuthController::imageAdapter($cu->image);
+                        $avatar = AuthController::imageAdapter($cu->avatar);
                     @endphp
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                            @if ($cu->image != null) 
-                                <img src="{{ asset($image) }}" class="img-fluid rounded-circle" alt="...">
+                            @if ($cu->avatar != null) 
+                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
                             @else
                                 <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
                             @endif
@@ -331,6 +325,14 @@
                                 <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
                                 <p class="card-text">Link: {{$cu->link}}</p>
                                 <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
+
+                                <form action="/pay">
+
+                                <button type="submit" class="btn text-white" name="pay" value="{{ $cu->id }}"
+                                style="background-color:blueviolet; font-size: 18px">Pay</button>
+
+                                </form>
+
                             </div>
                             </div>
                         </div>
@@ -343,13 +345,13 @@
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
                 @foreach ($ccss as $cu)    
                     @php
-                        $image = AuthController::imageAdapter($cu->image);
+                        $avatar = AuthController::imageAdapter($cu->avatar);
                     @endphp
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                            @if ($cu->image != null) 
-                                <img src="{{ asset($image) }}" class="img-fluid rounded-circle" alt="...">
+                            @if ($cu->avatar != null) 
+                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
                             @else
                                 <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
                             @endif
@@ -376,13 +378,13 @@
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
                 @foreach ($cogs as $cu)    
                     @php
-                        $image = AuthController::imageAdapter($cu->image);
+                        $avatar = AuthController::imageAdapter($cu->avatar);
                     @endphp
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                            @if ($cu->image != null) 
-                                <img src="{{ asset($image) }}" class="img-fluid rounded-circle" alt="...">
+                            @if ($cu->avatar != null) 
+                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
                             @else
                                 <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
                             @endif
@@ -409,13 +411,13 @@
             @foreach ($cufs as $cu)
                 <ol clsss="list-group list-group-flush list-group-numbered flex-fill">
                     @php
-                        $image = AuthController::imageAdapter($cu->image);
+                        $avatar = AuthController::imageAdapter($cu->avatar);
                     @endphp
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                            @if ($cu->image != null) 
-                                <img src="{{ asset($image) }}" class="img-fluid rounded-circle" alt="...">
+                            @if ($cu->avatar != null) 
+                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
                             @else
                                 <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
                             @endif
