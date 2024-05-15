@@ -5,7 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Consultation_Feedback extends Model
+class ConsultationFeedback extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'consultation_id',
+        'rating',
+        'comment'
+    ];
 }

@@ -16,6 +16,8 @@ use App\Models\Topic;
 use App\Models\ProgConsultant;
 use App\Models\TopicConsultant;
 use App\Models\Consultation;
+use App\Models\ConsultationFeedback;
+use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon; #GET CURRENT TIME
 use Laravel\Ui\Presets\React;
@@ -125,8 +127,13 @@ class MainController extends Controller
             $cufs = Consultation::where('user_id', Auth::id())->where('status', 'finished')
             ->join('users', 'consultant_id', '=', 'users.id')
             ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
-            return view('consultation', compact('cus', 'ccss', 'cogs', 'cufs'));
-        } #Consultant view 
+
+            $cucs = Consultation::where('user_id', Auth::id())->where('status', 'cancelled')
+            ->join('users', 'consultant_id', '=', 'users.id')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+            return view('consultation', compact('cus', 'ccss', 'cogs', 'cufs', 'cucs'));
+        } 
+        #Consultant view 
         elseif(Auth::check() && Auth::user()->role == "consultant"){
             $ccus = Consultation::where('consultant_id', Auth::id())->where('status', 'pending')
             ->join('users', 'user_id', '=', 'users.id')
@@ -143,7 +150,11 @@ class MainController extends Controller
             $ccfs = Consultation::where('consultant_id', Auth::id())->where('status', 'finished')
             ->join('users', 'user_id', '=', 'users.id')
             ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
-            return view('consultation', compact('ccus', 'cccss', 'ccogs', 'ccfs'));
+
+            $cccs = Consultation::where('consultant_id', Auth::id())->where('status', 'cancelled')
+            ->join('users', 'user_id', '=', 'users.id')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+            return view('consultation', compact('ccus', 'cccss', 'ccogs', 'ccfs', 'cccs'));
         }
        else{
         return redirect()->route('login')->with('success', "Login First");
@@ -211,8 +222,11 @@ class MainController extends Controller
     }
 
     public function addCon(Request $request){
+        $userName = $request->name;
+        $user_id = User::where('name', $request->name)->select('id')->first();
+
         $c = new Consultation();
-        $c->user_id = $request->user_id;
+        $c->user_id = $user_id->id;
         $c->consultant_id = $request->consultant_id; 
         $c->title = $request->title;
         $c->desc = $request->desc;
@@ -225,10 +239,12 @@ class MainController extends Controller
         return redirect('/consultation')->with('success',"Add Programming Skill Success");
     }
 
-    public function deleteCon(Request $request)
+    public function cancelCon(Request $request)
     {
-        Consultation::where('id', $request->consultation_id)->delete();
-        return redirect()->back()->with('success',"Delete Success");
+        Consultation::where('id', $request->consultation_id)->update([
+            'status' => 'cancelled'
+        ]);
+        return redirect()->back()->with('success',"Cancel Consultation Success");
     }
 
     public function editCon(Request $request)
@@ -243,6 +259,30 @@ class MainController extends Controller
                 'end_consult_datetime' => $request->endconsult_datetime,
                 'link' => $request->link
             ]);
-            return redirect()->back()->with('success', 'Edit Profile Success');
+            return redirect()->back()->with('success', 'Edit Consultation Success');
     }
+
+    public function addFeedback(Request $request)
+    {
+        $cf = new ConsultationFeedback();
+        $cf->consultation_id = $request->consultation_id;
+        $cf->rating = $request->rating; 
+        $cf->comment = $request->comment;
+        $cf->save();
+        return redirect('/consultation')->with('success',"Add Feedback Success");
+    }
+
+    public function viewTransactionHistory(){
+        if(Auth::check()) {
+            $trans = Transaction::where('consultations.user_id', Auth::id())
+            ->where('transactions.status', 'success')
+            ->join('consultations', 'transactions.consultation_id', 'consultations.id')
+            ->join('users', 'users.id', 'consultant_id')
+            ->get(['transactions.id', 'title', 'price', 'transaction_datetime', 'consultations.user_id']);
+            return view('transactionhistory', compact('trans'));
+        }else{
+            return redirect()->route('login')->with('success', "Login First");
+        }
+    }
+
 }

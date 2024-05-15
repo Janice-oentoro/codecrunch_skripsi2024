@@ -22,7 +22,7 @@
                     <a class="nav-link text-light fw-bold" href="/consultation">Consultation</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light fw-bold" href="#">Transaction</a>
+                    <a class="nav-link text-light fw-bold" href="/transactionhistory">Transaction</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light fw-bold" href="/chatify">Chat</a>

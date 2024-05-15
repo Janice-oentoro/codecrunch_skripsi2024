@@ -30,6 +30,8 @@ Route::group(['middleware' => 'user'], function(){
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/pay',[PayController::class,'showView']);
     Route::post('/pay',[PayController::class, 'pay']);
+    Route::post('/addfeedback',[MainController::class, 'addFeedback'])->name('add-feedback');
+    Route::get('/transactionhistory', [MainController::class, 'viewTransactionHistory'])->name('transactionhistory');
 });
 
 #CONSULTANT ROUTES
@@ -41,6 +43,6 @@ Route::group(['middleware' => 'consultant'], function(){
     Route::delete('delete/contopic',[MainController::class,'deleteConTopic'])->name('delete-topiccon');
     Route::get('/addconsultation',[MainController::class,'addConsultation'])->name('add-consultation');
     Route::post('add/con',[MainController::class,'addCon'])->name('add-con');
-    Route::delete('delete/con',[MainController::class,'deleteCon'])->name('delete-con');
+    Route::put('cancel/con',[MainController::class,'cancelCon'])->name('cancel-con');
     Route::put('edit/con',[MainController::class,'editCon'])->name('edit-con');
 });

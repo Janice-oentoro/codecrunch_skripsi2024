@@ -13,13 +13,10 @@ return new class extends Migration
     {
         Schema::create('consultation_feedback', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('consultant_id');
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('consultant_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('consultation_id')->constrained('consultations');
             $table->integer('rating');
             $table->string('comment');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('consultation__feedback');
+        Schema::dropIfExists('consultation_feedback');
     }
 };

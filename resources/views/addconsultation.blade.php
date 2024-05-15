@@ -35,10 +35,10 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="user_id" class="col-md-4 col-form-label text-md-end">{{ __('User ID') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('User Full Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="user_id" type="number" class="form-control" name="user_id" required autofocus>
+                                <input id="name" type="string" class="form-control" name="name" required autofocus>
                             </div>
                         </div>
 
