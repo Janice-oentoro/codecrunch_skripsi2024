@@ -17,6 +17,8 @@ class PayController extends Controller
         if (!Auth::user()) {
             return redirect('/login');
         }
+        // $findConsultationId = Transaction::where('id', 3)->select('consultation_id')->first();
+        // dd($findConsultationId->consultation_id);
 
         $user = new stdClass();
         $user->id = Auth::user()->id; 
@@ -83,24 +85,30 @@ class PayController extends Controller
         $sign_key = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $server_key);
  
         if ($sign_key == $request->signature_key){
-            Transaction::where('id',$request->order_id)->update([
-                'status' => 'success'
-            ]);
-            // if($request->transaction_status == "capture"){
-            //     Transaction::where('id',$request->order_id)->update([
-            //         'status' => 'success'
-            //     ]);
-            //     // $trans = Transaction::find($request->order_id);
-            //     // $trans->update(['status' => 'success']);
-            // }
+            // Transaction::where('id',$request->order_id)->update([
+            //     'status' => 'success'
+            // ]);
+            if($request->transaction_status == "capture"){
+                Transaction::where('id',$request->order_id)->update([
+                    'status' => 'success'
+                ]);
 
-            // else{
-            //     Transaction::where('id',$request->order_id)->update([
-            //         'status' => 'fail'
-            //     ]);
-            //     // $trans = Transaction::find($request->order_id);
-            //     // $trans->update(['status' => 'failed']);
-            // }
+                $findConsultationId = Transaction::where('id',$request->order_id)->select('consultation_id')->first();
+                Consultation::where('id', $findConsultationId->consultation_id)->update([
+                    'status' => 'coming soon'
+                ]);
+                
+                // $trans = Transaction::find($request->order_id);
+                // $trans->update(['status' => 'success']);
+            }
+
+            else{
+                Transaction::where('id',$request->order_id)->update([
+                    'status' => 'fail'
+                ]);
+                // $trans = Transaction::find($request->order_id);
+                // $trans->update(['status' => 'failed']);
+            }
         }
         return true;
     }
