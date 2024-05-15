@@ -54,6 +54,9 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item text-dark fw-bold" href="/editprofile">Edit Profile</a>
+                                    @if(Auth::user()->role == "consultant")
+                                    <a class="dropdown-item text-dark fw-bold" href="/feedback">Feedback</a>
+                                    @endif
                                     <a class="dropdown-item text-dark fw-bold" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

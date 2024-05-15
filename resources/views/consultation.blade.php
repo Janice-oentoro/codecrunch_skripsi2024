@@ -417,7 +417,7 @@
 
                             <div class="card-body text-end">
                                 <!-- Button trigger modal Prog -->
-                                @if($feedback = 0)
+                                @if(!$feedback)
                                     <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addfeedback-{{$cu->id}}">Feedback</a>
                                 @endif
 
@@ -434,7 +434,13 @@
                                                 @csrf
                                                     <div class="form-outline text-start">                        
                                                         <label class="form-label" for="form12">Rating</label>
-                                                        <input type="number" class="form-control" value="{{ old('rating') }}" name="rating" required autofocus/>
+                                                        <select class="form-select" id="rating" name="rating" required focus>
+                                                            <option value="1">1</option>        
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>    
+                                                            <option value="4">4</option>    
+                                                            <option value="5">5</option>                 
+                                                        </select>
                                                     </div>
 
                                                     <div class="form-outline text-start">                        

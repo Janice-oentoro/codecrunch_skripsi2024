@@ -23,6 +23,15 @@
 
         <div class="card-body">
             <h2 class="card-title">{{$udtl->name}}</h2>
+
+            @if($avgRating > 0)
+            <h6 class="card-subtitle mb-2 text-muted">Rating: {{ round($avgRating, 2) }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Helped {{ $countRating }} Users</h6>
+            @else
+            <h6 class="card-subtitle mb-2 text-muted">No Rating</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Helped 0 Users</h6>
+            @endif
+
             <p class="card-text">Rp {{$udtl->price}}</p>
             <p class="card-text">No. Handphone: {{$udtl->phone}}</p>
             <p class="card-text">Email: {{$udtl->email}}</p>

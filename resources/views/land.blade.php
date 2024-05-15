@@ -84,6 +84,7 @@
                     ->join('programmings', 'prog_id', '=', 'programmings.id')
                     ->get(['consultant_id', 'prog_name']);
                 ?>
+                
             @foreach($pcs as $p)
                 <p class="card-text">{{$p->prog_name}}</p>
             @endforeach

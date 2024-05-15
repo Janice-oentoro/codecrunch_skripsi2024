@@ -97,7 +97,20 @@ class MainController extends Controller
 
     public function detailConsultant(Request $request){
         $udtl = User::findOrFail($request->id);
-        return view('detailconsultant', compact('udtl'));
+
+        if(ConsultationFeedback::where('consultant_id', $udtl->id)->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
+        ->exists()) {
+            $avgRating = ConsultationFeedback::where('consultant_id', $udtl->id)->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
+            ->avg('rating');            
+            
+            $countRating = ConsultationFeedback::where('consultant_id', $udtl->id)->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
+            ->count('rating');
+        } else {
+            $avgRating = 0;
+            $countRating = 0;
+        }
+
+        return view('detailconsultant', compact('udtl', 'avgRating', 'countRating'));
     }
 
     public function home() {
@@ -222,7 +235,6 @@ class MainController extends Controller
     }
 
     public function addCon(Request $request){
-        $userName = $request->name;
         $user_id = User::where('name', $request->name)->select('id')->first();
 
         $c = new Consultation();
@@ -280,6 +292,30 @@ class MainController extends Controller
             ->join('users', 'users.id', 'consultant_id')
             ->get(['transactions.id', 'title', 'price', 'transaction_datetime', 'consultations.user_id']);
             return view('transactionhistory', compact('trans'));
+        }else{
+            return redirect()->route('login')->with('success', "Login First");
+        }
+    }
+
+    public function viewFeedback(){
+        if(Auth::check() && Auth::user()->role == "consultant"){
+            if(ConsultationFeedback::where('consultant_id', Auth::id())->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
+            ->exists()) {
+                $feedbacks = ConsultationFeedback::where('consultant_id', Auth::id())->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
+                ->get(['rating', 'comment', 'user_id', 'title']);
+
+                $avgRating = ConsultationFeedback::where('consultant_id', Auth::id())->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
+                ->avg('rating');            
+                
+                $countRating = ConsultationFeedback::where('consultant_id', Auth::id())->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
+                ->count('rating');
+            } else {
+                $feedbacks = "none";
+                $avgRating = 0;
+                $countRating = 0;
+                return view('feedback', compact('feedbacks', 'avgRating', 'countRating'));
+            }
+            return view('feedback', compact('feedbacks', 'avgRating', 'countRating'));
         }else{
             return redirect()->route('login')->with('success', "Login First");
         }

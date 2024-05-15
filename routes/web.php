@@ -45,4 +45,5 @@ Route::group(['middleware' => 'consultant'], function(){
     Route::post('add/con',[MainController::class,'addCon'])->name('add-con');
     Route::put('cancel/con',[MainController::class,'cancelCon'])->name('cancel-con');
     Route::put('edit/con',[MainController::class,'editCon'])->name('edit-con');
+    Route::get('/feedback', [MainController::class, 'viewFeedback'])->name('feedback');
 });
