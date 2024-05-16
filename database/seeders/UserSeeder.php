@@ -73,48 +73,48 @@ class UserSeeder extends Seeder
             'phone' => '12345678',
             'role' => 'user'
         ],
-        [
-            'name' => 'Amanda Rodriguez',
-            'email' => 'amanda@example.com',
-            'password' => bcrypt('12345678'),
-            'phone' => '12345678',
-            'role' => 'user'
-        ],
-        [
-            'name' => 'Daniel White',
-            'email' => 'daniel@example.com',
-            'password' => bcrypt('12345678'),
-            'phone' => '12345678',
-            'role' => 'user'
-        ],
-        [
-            'name' => 'Stephanie Harris',
-            'email' => 'stephanie@example.com',
-            'password' => bcrypt('12345678'),
-            'phone' => '12345678',
-            'role' => 'user'
-        ],
-        [
-            'name' => 'Robert Thompson',
-            'email' => 'robert@example.com',
-            'password' => bcrypt('12345678'),
-            'phone' => '12345678',
-            'role' => 'user'
-        ],
-        [
-            'name' => 'Michelle King',
-            'email' => 'michelle@example.com',
-            'password' => bcrypt('12345678'),
-            'phone' => '12345678',
-            'role' => 'user'
-        ],
-        [
-            'name' => 'Mark Garcia',
-            'email' => 'mark@example.com',
-            'password' => bcrypt('12345678'),
-            'phone' => '12345678',
-            'role' => 'user'
-        ]
+        // [
+        //     'name' => 'Amanda Rodriguez',
+        //     'email' => 'amanda@example.com',
+        //     'password' => bcrypt('12345678'),
+        //     'phone' => '12345678',
+        //     'role' => 'user'
+        // ],
+        // [
+        //     'name' => 'Daniel White',
+        //     'email' => 'daniel@example.com',
+        //     'password' => bcrypt('12345678'),
+        //     'phone' => '12345678',
+        //     'role' => 'user'
+        // ],
+        // [
+        //     'name' => 'Stephanie Harris',
+        //     'email' => 'stephanie@example.com',
+        //     'password' => bcrypt('12345678'),
+        //     'phone' => '12345678',
+        //     'role' => 'user'
+        // ],
+        // [
+        //     'name' => 'Robert Thompson',
+        //     'email' => 'robert@example.com',
+        //     'password' => bcrypt('12345678'),
+        //     'phone' => '12345678',
+        //     'role' => 'user'
+        // ],
+        // [
+        //     'name' => 'Michelle King',
+        //     'email' => 'michelle@example.com',
+        //     'password' => bcrypt('12345678'),
+        //     'phone' => '12345678',
+        //     'role' => 'user'
+        // ],
+        // [
+        //     'name' => 'Mark Garcia',
+        //     'email' => 'mark@example.com',
+        //     'password' => bcrypt('12345678'),
+        //     'phone' => '12345678',
+        //     'role' => 'user'
+        // ]
     ];
         foreach ($users as $key => $value) {
         User::create($value);

@@ -3,6 +3,8 @@
     use App\Models\TopicConsultant;
     use App\Models\Programming;
     use App\Models\Topic;
+    use App\Models\ConsultationFeedback;
+    use Illuminate\Support\Arr;
     $progs = Programming::all();    
     $topics = Topic::all();
 ?>
@@ -58,12 +60,24 @@
         </div>
     </form>
 
-    
+    <!--List of Consultants View -->
     <br>
     @foreach($users as $u)
-    @php
-        $avatar = AuthController::imageAdapter($u->avatar);
-    @endphp
+        @php
+            $avatar = AuthController::imageAdapter($u->avatar);
+            if(ConsultationFeedback::where('consultant_id', $u->id)->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
+            ->exists()) {
+                $avgRating = ConsultationFeedback::where('consultant_id', $u->id)->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
+                ->avg('rating');            
+                
+                $countRating = ConsultationFeedback::where('consultant_id', $u->id)->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
+                ->count('rating');
+            } else {
+                $avgRating = 0;
+                $countRating = 0;
+            }
+        @endphp
+    
     <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
         <div class="col-md-4">
@@ -76,18 +90,29 @@
         <div class="col-md-8">
         <div class="card-body">
             <h5 class="card-title">{{$u->name}}</h5>
+            @if($avgRating > 0)
+                <h6 class="card-subtitle mb-2 text-muted">Rating: {{ round($avgRating, 2) }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Helped {{ $countRating }} Users</h6>
+            @else
+                <h6 class="card-subtitle mb-2 text-muted">No Rating</h6>
+                <h6 class="card-subtitle mb-2 text-muted">No Helped Users</h6>
+            @endif
             <p class="card-text">Rp {{$u->price}}</p>
             <!-- Programming Skills View -->
                 <?php 
                     $pcs = ProgConsultant::where('consultant_id', $u->id)
                     ->join('users', 'consultant_id', '=', 'users.id')
                     ->join('programmings', 'prog_id', '=', 'programmings.id')
-                    ->get(['consultant_id', 'prog_name']);
+                    ->get(['prog_name']);
+
+                    $i = 0;
+                    foreach($pcs as $p){
+                        $progArr[$i] = $p->prog_name;
+                        $i++;
+                    }
+                    $progString = implode(", ", $progArr);
                 ?>
-                
-            @foreach($pcs as $p)
-                <p class="card-text">{{$p->prog_name}}</p>
-            @endforeach
+                <p class="card-text">Programmings: {{$progString}}</p>
             
             <!-- Topic Skills View -->
                 <?php 
@@ -95,10 +120,15 @@
                     ->join('users', 'consultant_id', '=', 'users.id')
                     ->join('topics', 'topic_id', '=', 'topics.id')
                     ->get(['consultant_id', 'topic_name']);
+
+                    $i2 = 0;
+                    foreach($tcs as $t){
+                        $topicArr[$i2] = $t->topic_name;
+                        $i2++;
+                    }
+                    $topicString = implode(", ", $topicArr);
                 ?>
-            @foreach($tcs as $t)
-                <p class="card-text">{{$t->topic_name}}</p>
-            @endforeach
+                <p class="card-text">Topics: {{$topicString}}</p>
 
             <a href="/detailconsultant/{{$u->id}}" class="btn btn-warning" name="id">Detail</a>
         </div>
