@@ -24,7 +24,7 @@ class User extends Authenticatable
         'price',
         'role',
         'avatar',
-        'status'
+        'suspend'
     ];
 
     /**

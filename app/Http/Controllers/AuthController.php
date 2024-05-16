@@ -33,10 +33,16 @@ class AuthController extends Controller
         }
 
         if(Auth::attempt($credentials, true)){
-            Session::put('mysession','');
-            return redirect()->route('land')->with('success','Login Success');
+            if(Auth::user()->suspend == false){
+                Session::put('mysession','');
+                return redirect()->route('land')->with('success','Login Success');
+            } elseif(Auth::user()->suspend == true) {
+                Auth::logout();
+                return redirect(url('login'));
+            }
+        } else {
+            return redirect()->back()->with('success','Login Failed');
         }
-        return redirect()->back()->with('success','Login Failed');
     }
 
     public function registerUser(Request $request) {

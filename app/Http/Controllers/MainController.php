@@ -20,7 +20,6 @@ use App\Models\ConsultationFeedback;
 use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon; #GET CURRENT TIME
-use Laravel\Ui\Presets\React;
 
 class MainController extends Controller
 {
@@ -42,32 +41,32 @@ class MainController extends Controller
 
         if($search != "") {
             $users = User::where('role', 'consultant')->where('name', 'LIKE', "%$search%")
-            ->get(['users.id', 'name', 'price', 'avatar']);
+            ->where('suspend', false)->get(['users.id', 'name', 'price', 'avatar']);
         } elseif($filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('prog_consultants', 'consultant_id', '=', 'users.id')
             ->join('programmings', 'prog_id', '=', 'programmings.id')
-            ->where('prog_name', 'LIKE', "$filterprog")->distinct()
+            ->where('prog_name', 'LIKE', "$filterprog")->where('suspend', false)->distinct()
             ->get(['users.id', 'name', 'price', 'avatar']);
         } elseif($filtertopic != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
             ->join('topics', 'topic_id', '=', 'topics.id')
-            ->where('topic_name', 'LIKE', "$filtertopic")->distinct()
+            ->where('topic_name', 'LIKE', "$filtertopic")->where('suspend', false)->distinct()
             ->get(['users.id', 'name', 'price', 'avatar']);
         } elseif($search != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('prog_consultants', 'consultant_id', '=', 'users.id')
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")
-            ->where('name', 'LIKE', "%$search%")->distinct()
+            ->where('name', 'LIKE', "%$search%")->where('suspend', false)->distinct()
             ->get(['users.id', 'name', 'price', 'avatar']);
         } elseif($search != "" && $filtertopic != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
             ->join('topics', 'topic_id', '=', 'topics.id')
             ->where('topic_name', 'LIKE', "$filtertopic")
-            ->where('name', 'LIKE', "%$search%")->distinct()
+            ->where('name', 'LIKE', "%$search%")->where('suspend', false)->distinct()
             ->get(['users.id', 'name', 'price', 'avatar']);
         } elseif($search != "" && $filtertopic != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
@@ -77,7 +76,7 @@ class MainController extends Controller
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")
             ->where('topic_name', 'LIKE', "$filtertopic")
-            ->where('name', 'LIKE', "%$search%")->distinct()
+            ->where('name', 'LIKE', "%$search%")->where('suspend', false)->distinct()
             ->get(['users.id', 'name', 'price', 'avatar']);
         } elseif($filtertopic != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
@@ -86,10 +85,10 @@ class MainController extends Controller
             ->join('prog_consultants', 'consultant_id', '=', 'users.id')
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")
-            ->where('topic_name', 'LIKE', "$filtertopic")->distinct()
+            ->where('topic_name', 'LIKE', "$filtertopic")->where('suspend', false)->distinct()
             ->get(['users.id', 'name', 'price', 'avatar']);
         } else {
-            $users = User::where('role', 'consultant')
+            $users = User::where('role', 'consultant')->where('suspend', false)
             ->get(['users.id', 'name', 'price','avatar']);
         }
         return view('land', compact('users', 'search', 'filterprog'));
@@ -285,14 +284,43 @@ class MainController extends Controller
     }
 
     public function viewTransactionHistory(){
-        if(Auth::check()) {
-            $trans = Transaction::where('consultations.user_id', Auth::id())
-            ->where('transactions.status', 'success')
-            ->join('consultations', 'transactions.consultation_id', 'consultations.id')
-            ->join('users', 'users.id', 'consultant_id')
-            ->get(['transactions.id', 'title', 'price', 'transaction_datetime', 'consultations.user_id']);
-            return view('transactionhistory', compact('trans'));
-        }else{
+        if(Auth::check() && Auth::user()->role == "user") {
+            // User View
+            if(Transaction::where('transactions.user_id', Auth::id())->join('consultations', 'transactions.consultation_id', 'consultations.id')
+            ->exists()){
+                $transU = Transaction::where('consultations.user_id', Auth::id())
+                ->where('transactions.status', 'success')
+                ->join('consultations', 'transactions.consultation_id', 'consultations.id')
+                ->get(['transactions.id', 'title', 'price', 'transaction_datetime', 'consultations.user_id']);
+
+                $transCountU = Transaction::where('consultations.user_id', Auth::id())
+                ->where('transactions.status', 'success')
+                ->join('consultations', 'transactions.consultation_id', 'consultations.id')
+                ->count('transactions.id');
+            } else {
+                $transU="";
+                $transCountU = 0;
+            }
+            return view('transactionhistory', compact('transU', 'transCountU'));
+        } elseif(Auth::check() && Auth::user()->role == "consultant") {
+            // Consultant View
+            if(Transaction::where('consultations.consultant_id', Auth::id())->join('consultations', 'transactions.consultation_id', 'consultations.id')
+            ->exists()){
+                $transC = Transaction::where('consultations.consultant_id', Auth::id())
+                ->where('transactions.status', 'success')
+                ->join('consultations', 'transactions.consultation_id', 'consultations.id')
+                ->get(['transactions.id', 'title', 'price', 'transaction_datetime', 'consultations.consultant_id']);
+
+                $transCountC = Transaction::where('consultations.consultant_id', Auth::id())
+                ->where('transactions.status', 'success')
+                ->join('consultations', 'transactions.consultation_id', 'consultations.id')
+                ->count('transactions.id');
+            } else {
+                $transC = "";
+                $transCountC = 0;
+            }
+            return view('transactionhistory', compact('transC', 'transCountC'));
+        } else {
             return redirect()->route('login')->with('success', "Login First");
         }
     }

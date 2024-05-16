@@ -58,5 +58,14 @@ class StatusUpdate extends Command
                 Consultation::where('id', $og->id)->update(['status' => 'finished']);
             }
         }
+
+        # Cancelled due to suspended consultant
+        $cancels = Consultation::where('suspend', true)->where('status', 'pending')
+        ->where('status', 'coming soon')->where('status', 'on going')
+        ->join('users', 'consultations.consultant_id', 'users.id')
+        ->get();
+        foreach($cancels as $cl) {
+            Consultation::where('id', $cl->id)->update(['status' => 'cancelled']);
+        }
     }
 }

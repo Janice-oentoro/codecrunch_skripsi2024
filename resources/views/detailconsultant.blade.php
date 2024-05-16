@@ -7,6 +7,8 @@
     use Illuminate\Support\Str;
 @endphp
 <x-layout>
+
+@if($udtl->suspend == false)
 @php
     $avatar = AuthController::imageAdapter($udtl->avatar);
 @endphp
@@ -43,10 +45,15 @@
                     ->join('users', 'consultant_id', '=', 'users.id')
                     ->join('programmings', 'prog_id', '=', 'programmings.id')
                     ->get(['consultant_id', 'prog_name']);
+
+                    $i = 0;
+                    foreach($pcs as $p){
+                        $progArr[$i] = $p->prog_name;
+                        $i++;
+                    }
+                    $progString = implode(", ", $progArr);
                 ?>
-            @foreach($pcs as $p)
-                <p class="card-text">{{$p->prog_name}}</p>
-            @endforeach
+                <p class="card-text">Programmings: {{$progString}}</p>
 
             <!-- Topic Skills View -->
             <h5 class="card-text">Topic Skills</h5>
@@ -55,13 +62,18 @@
                     ->join('users', 'consultant_id', '=', 'users.id')
                     ->join('topics', 'topic_id', '=', 'topics.id')
                     ->get(['consultant_id', 'topic_name']);
+                    
+                    $i2 = 0;
+                    foreach($tcs as $t){
+                        $topicArr[$i2] = $t->topic_name;
+                        $i2++;
+                    }
+                    $topicString = implode(", ", $topicArr);
                 ?>
-            @foreach($tcs as $t)
-                <p class="card-text">{{$t->topic_name}}</p>
-            @endforeach
+                <p class="card-text">Topics: {{$topicString}}</p>
 
             @if(Auth::check())
-            <a href="#Chat" class="btn btn-primary">Contact</a>
+            <a href="/chatify" class="btn btn-primary">Contact</a>
             @else
             <p></p>
             @endif
@@ -69,4 +81,9 @@
         </div>
     </div>
     </div>
+
+@else
+<p>This Consultant is Suspended</p>
+
+@endif
 </x-layout>

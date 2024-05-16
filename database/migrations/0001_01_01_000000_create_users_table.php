@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('price')->nullable();
             $table->string('role');
             $table->string('avatar')->nullable();
+            $table->boolean('suspend')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
