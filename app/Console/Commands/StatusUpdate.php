@@ -60,12 +60,21 @@ class StatusUpdate extends Command
         }
 
         # Cancelled due to suspended consultant
-        $cancels = Consultation::where('suspend', true)->where('status', 'pending')
+        $cancels1 = Consultation::where('suspend', true)->where('status', 'pending')
         ->where('status', 'coming soon')->where('status', 'on going')
         ->join('users', 'consultations.consultant_id', 'users.id')
         ->get();
-        foreach($cancels as $cl) {
-            Consultation::where('id', $cl->id)->update(['status' => 'cancelled']);
+        foreach($cancels1 as $cl1) {
+            Consultation::where('id', $cl1->id)->update(['status' => 'cancelled']);
+        }
+
+        # Cancelled due to suspended user
+        $cancels2 = Consultation::where('suspend', true)->where('status', 'pending')
+        ->where('status', 'coming soon')->where('status', 'on going')
+        ->join('users', 'consultations.user_id', 'users.id')
+        ->get();
+        foreach($cancels2 as $cl2) {
+            Consultation::where('id', $cl2->id)->update(['status' => 'cancelled']);
         }
     }
 }

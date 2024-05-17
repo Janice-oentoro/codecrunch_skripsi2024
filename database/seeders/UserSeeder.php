@@ -73,6 +73,13 @@ class UserSeeder extends Seeder
             'phone' => '12345678',
             'role' => 'user'
         ],
+        [
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('12345678'),
+            'phone' => '12345678',
+            'role' => 'admin'
+        ],
         // [
         //     'name' => 'Amanda Rodriguez',
         //     'email' => 'amanda@example.com',

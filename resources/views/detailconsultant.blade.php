@@ -73,7 +73,7 @@
                 <p class="card-text">Topics: {{$topicString}}</p>
 
             @if(Auth::check())
-            <a href="/chatify" class="btn btn-primary">Contact</a>
+            <a href="/chatify/{{$udtl->id}}" class="btn btn-primary">Contact</a>
             @else
             <p></p>
             @endif

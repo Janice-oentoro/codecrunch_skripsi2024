@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('withdraws', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('Transaction_id')->constrained('transactions');
+            $table->foreignId('transaction_id')->nullable()->constrained('transactions');
             $table->foreignId('user_id')->constrained('users');
             $table->string('bank_acc');
             $table->integer('amount');

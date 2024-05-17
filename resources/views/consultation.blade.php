@@ -1,5 +1,6 @@
 @php
     use App\Http\Controllers\AuthController;
+    use App\Models\Consultation;
     use App\Models\ConsultationFeedback;
     use Illuminate\Support\Str;
 @endphp
@@ -17,9 +18,13 @@
             <!-- Consultant view -->
                 <button class="btn btn-primary" onclick=window.location="{{ url('/addconsultation') }}">Add Consultation</button>
 
+                @if(Consultation::where('consultant_id', Auth::id())->doesntExist())
+                    <p>No Consultations</p>
+                @else
                 <!-- Display Consultations -->
                 <h5>Display Consultation</h5>
 
+                @if($ccus != "")
                 <!-- PENDING -->
                 <h4>PENDING</h4>
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
@@ -74,8 +79,8 @@
                                                     </div>
 
                                                     <div class="form-outline text-start">                        
-                                                        <label class="form-label" for="form12">User ID</label>
-                                                        <input type="number" class="form-control" value="{{$ccon->user_id}}" name="user_id" />
+                                                        <label class="form-label" for="form12">User Full Name</label>
+                                                        <input type="string" class="form-control" value="{{$ccon->name}}" name="name" />
                                                     </div>
 
                                                     <div class="form-outline text-start">                        
@@ -102,7 +107,7 @@
                                                     </div>
 
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-warning">Submit</button>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
                                                     </div>
                                                 
                                                 </form>
@@ -127,7 +132,9 @@
                         </div>
                     @endforeach
                 </ol>
+                @endif
 
+                @if($cccss != "")
                 <!-- COMING SOON -->
                 <h4>COMING SOON</h4>
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
@@ -168,7 +175,9 @@
                         </div>
                     @endforeach
                 </ol>
+                @endif
 
+                @if($ccogs != "")
                 <!-- ONGOING -->
                 <h4>ONGOING</h4>
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
@@ -201,7 +210,9 @@
                         </div>
                     @endforeach
                 </ol>
+                @endif
                 
+                @if($ccfs != "")
                 <!-- FINISHED -->
                 <h4>FINISHED</h4>
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
@@ -234,7 +245,9 @@
                         </div>
                     @endforeach
                 </ol>
+                @endif
 
+                @if($cccs != "")
                 <!-- CANCELLED -->
                 <h4>CANCELLED</h4>
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
@@ -267,11 +280,18 @@
                         </div>
                     @endforeach
                 </ol>
+                @endif
+            @endif
 
             <!-- User view -->
             @elseif(Auth::user()->role == "user")
+
+            @if(Consultation::where('user_id', Auth::id())->doesntExist())
+                <p>No Consultations</p>
+            @else
             <h5>DISPLAY CONSULTATION</h5>
 
+            @if($cus != "")
             <!-- PENDING -->
             <h4>PENDING</h4>
             <ol class="list-group list-group-flush list-group-numbered flex-fill">
@@ -312,7 +332,9 @@
                         </div>
                     @endforeach
                 </ol>
+            @endif
                 
+            @if($ccss != "")
             <!-- COMING SOON -->
             <h4>COMING SOON</h4>
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
@@ -345,7 +367,9 @@
                         </div>
                 @endforeach
                 </ol>
+            @endif
 
+            @if($cogs != "")
             <!-- ONGOING -->
             <h4>ONGOING</h4>
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
@@ -378,7 +402,9 @@
                         </div>
                 @endforeach
                 </ol>
+                @endif
 
+            @if($cufs != "")
             <!-- FINISHED -->
             <h4>FINISHED</h4>
             @foreach ($cufs as $cu)
@@ -460,13 +486,13 @@
                                 </div>
                             </div>
                             </div>
-
-
                         </div>
                     </div>
                         @endforeach
                 </ol>
+                @endif
 
+            @if($cucs != "")
             <!-- CANCELLED -->
             <h4>CANCELLED</h4>
             @foreach ($cucs as $cu)
@@ -499,7 +525,8 @@
                         </div>
                         @endforeach
                 </ol>
-                
+                @endif
+            @endif
             @endif
             
     @else
