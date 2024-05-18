@@ -49,12 +49,12 @@ class AdminController extends Controller
     }
 
     public function userList() {
-        $users = User::all();
+        $users = User::paginate(10);
         return view('admin-page.userlist', compact('users'));
     }
 
     public function requestList() {
-        $reqs = Withdraw::all();
+        $reqs = Withdraw::paginate(10);
         return view('admin-page.requestlist', compact('reqs'));
     }
 

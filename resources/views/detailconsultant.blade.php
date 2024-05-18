@@ -16,9 +16,9 @@
     <div class="row g-0">
         <div class="col-md-4">
             @if ($udtl->avatar != null) 
-                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
+                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
             @else
-                <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
+                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
             @endif
         </div>
         <div class="col-md-8">

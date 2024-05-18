@@ -49,5 +49,8 @@
                 </table>
             </div>
         </div>
+        <div class="pagination">
+            {{ $reqs->links() }}
+        </div>
 
 </x-layout>

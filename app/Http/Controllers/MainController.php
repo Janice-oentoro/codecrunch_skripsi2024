@@ -42,33 +42,33 @@ class MainController extends Controller
 
         if($search != "") {
             $users = User::where('role', 'consultant')->where('name', 'LIKE', "%$search%")
-            ->where('suspend', false)->get(['users.id', 'name', 'price', 'avatar']);
+            ->where('suspend', false)->select('users.id', 'name', 'price', 'avatar')->paginate(10);
         } elseif($filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('prog_consultants', 'consultant_id', '=', 'users.id')
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")->where('suspend', false)->distinct()
-            ->get(['users.id', 'name', 'price', 'avatar']);
+            ->select('users.id', 'name', 'price','avatar')->paginate(10);
         } elseif($filtertopic != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
             ->join('topics', 'topic_id', '=', 'topics.id')
             ->where('topic_name', 'LIKE', "$filtertopic")->where('suspend', false)->distinct()
-            ->get(['users.id', 'name', 'price', 'avatar']);
+            ->select('users.id', 'name', 'price','avatar')->paginate(10);
         } elseif($search != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('prog_consultants', 'consultant_id', '=', 'users.id')
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")
             ->where('name', 'LIKE', "%$search%")->where('suspend', false)->distinct()
-            ->get(['users.id', 'name', 'price', 'avatar']);
+            ->select('users.id', 'name', 'price','avatar')->paginate(10);
         } elseif($search != "" && $filtertopic != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
             ->join('topics', 'topic_id', '=', 'topics.id')
             ->where('topic_name', 'LIKE', "$filtertopic")
             ->where('name', 'LIKE', "%$search%")->where('suspend', false)->distinct()
-            ->get(['users.id', 'name', 'price', 'avatar']);
+            ->select('users.id', 'name', 'price','avatar')->paginate(10);
         } elseif($search != "" && $filtertopic != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
@@ -78,7 +78,7 @@ class MainController extends Controller
             ->where('prog_name', 'LIKE', "$filterprog")
             ->where('topic_name', 'LIKE', "$filtertopic")
             ->where('name', 'LIKE', "%$search%")->where('suspend', false)->distinct()
-            ->get(['users.id', 'name', 'price', 'avatar']);
+            ->select('users.id', 'name', 'price','avatar')->paginate(10);
         } elseif($filtertopic != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
@@ -87,10 +87,10 @@ class MainController extends Controller
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")
             ->where('topic_name', 'LIKE', "$filtertopic")->where('suspend', false)->distinct()
-            ->get(['users.id', 'name', 'price', 'avatar']);
+            ->select('users.id', 'name', 'price','avatar')->paginate(10);
         } else {
             $users = User::where('role', 'consultant')->where('suspend', false)
-            ->get(['users.id', 'name', 'price','avatar']);
+            ->select('users.id', 'name', 'price','avatar')->paginate(10);
         }
         return view('land', compact('users', 'search', 'filterprog'));
     }
@@ -283,6 +283,32 @@ class MainController extends Controller
     }
 
     public function addCon(Request $request){
+        $rules = [
+            'title' => 'required|string|min:5|max:50',
+            'desc' => 'required|string|min:10|max:255',
+            'name' => 'required|string',
+            'consult_datetime' => 'required|after_or_equal:now',
+            'end_consult_datetime' => 'required|after_or_equal:consult_datetime'
+        ];
+        $msg = [
+            'title.string' => 'Title must be string',
+            'title.min' => 'Title must be filled with min 5 characters',
+            'title.max' => 'Title must below than 50 characters',
+            'title.required' => 'Title is required',
+            'desc.required' => 'Description is required',
+            'desc.string' => 'Description must be string',
+            'desc.min' => 'Description must be filled with min 10 characters',
+            'desc.max' => 'Description must below than 255 characters',
+            'name.required' => 'Name is required',
+            'name.string' => 'Name must be in string',
+            'consult_datetime.required' => 'Start Datetime needed',
+            'consult_datetime.after_or_equal:now' => 'Start Datetime must be atleast from now',
+            'end_consult_datetime.required' => 'End Datetime needed',
+            'end_consult_datetime.after_or_equal:consult_datetime' => 'End Datetime must be atleast from Start Datetime',
+        ];
+
+       $request->validate($rules,$msg);
+       
         $user_id = User::where('name', $request->name)->select('id')->first();
 
         $c = new Consultation();
@@ -309,6 +335,31 @@ class MainController extends Controller
 
     public function editCon(Request $request)
     {
+        $rules = [
+            'title' => 'required|string|min:5|max:50',
+            'desc' => 'required|string|min:10|max:255',
+            'name' => 'required|string',
+            'consult_datetime' => 'required|after_or_equal:now',
+            'end_consult_datetime' => 'required|after_or_equal:consult_datetime'
+        ];
+        $msg = [
+            'title.string' => 'Title must be string',
+            'title.min' => 'Title must be filled with min 5 characters',
+            'title.max' => 'Title must below than 50 characters',
+            'title.required' => 'Title is required',
+            'desc.required' => 'Description is required',
+            'desc.string' => 'Description must be string',
+            'desc.min' => 'Description must be filled with min 10 characters',
+            'desc.max' => 'Description must below than 255 characters',
+            'name.required' => 'Name is required',
+            'name.string' => 'Name must be in string',
+            'consult_datetime.required' => 'Start Datetime needed',
+            'consult_datetime.after_or_equal:now' => 'Start Datetime must be atleast from now',
+            'end_consult_datetime.required' => 'End Datetime needed',
+            'end_consult_datetime.after_or_equal:consult_datetime' => 'End Datetime must be atleast from Start Datetime',
+        ];
+
+       $request->validate($rules,$msg);
         $user_id = User::where('name', $request->name)->select('id')->first();
 
         $con = Consultation::findOrFail($request->id);
@@ -352,7 +403,24 @@ class MainController extends Controller
                 $transU="";
                 $transCountU = 0;
             }
-            return view('transactionhistory', compact('transU', 'transCountU'));
+
+            if(Withdraw::where('withdraws.user_id', Auth::id())->where('withdraws.status', 'success')->where('withdraws.type', 'refund')
+            ->exists()){
+                $transUR = Withdraw::where('withdraws.user_id', Auth::id())
+                ->where('withdraws.type', 'refund')
+                ->get(['withdraws.id', 'transaction_id','withdraws.type', 'amount', 
+                'withdraws.created_at AS ref_datetime', 'withdraws.user_id', 'status']);
+
+                $transURC = Withdraw::where('withdraws.user_id', Auth::id())
+                ->where('withdraws.status', 'success')
+                ->where('withdraws.type', 'refund')
+                ->count('withdraws.id');
+            } else {
+                $transUR="";
+                $transURC = 0;
+            }
+                $totalTrans = $transCountU + $transURC;
+            return view('transactionhistory', compact('transU', 'transCountU', 'transUR', 'transURC', 'totalTrans'));
         } elseif(Auth::check() && Auth::user()->role == "consultant") {
             // Consultant View
             if(Transaction::where('consultations.consultant_id', Auth::id())->join('consultations', 'transactions.consultation_id', 'consultations.id')
@@ -372,25 +440,43 @@ class MainController extends Controller
                 ->join('consultations', 'transactions.consultation_id', 'consultations.id')
                 ->sum('amount');
 
-                if(Withdraw::where('user_id', Auth::id())->where('status', 'success')->exists()){
-                    $transWithdraw = Withdraw::where('user_id', Auth::id())->where('status', 'success')
+                if(Withdraw::where('user_id', Auth::id())->exists()){
+                    $transWithdraw = Withdraw::where('user_id', Auth::id())
                     ->where('type', 'withdraw')->sum('amount');
+                    $transW = Withdraw::where('user_id', Auth::id())
+                    ->where('type', 'withdraw')->get();
+                    $transCountW = Withdraw::where('user_id', Auth::id())
+                    ->where('type', 'withdraw')->count('id');
                 } else {
+                    $transW = "";
                     $transWithdraw = 0;
+                    $transCountW = 0;
                 }
                 
                 if($transRefund = Withdraw::where('consultations.consultant_id', Auth::id())
                 ->join('transactions', 'transaction_id', 'transactions.id')
                 ->join('consultations', 'consultation_id', 'consultations.id')
-                ->where('withdraws.status', 'success')
                 ->where('withdraws.type', 'refund')->exists()) {
                     $transRefund = Withdraw::where('consultations.consultant_id', Auth::id())
                     ->join('transactions', 'transaction_id', 'transactions.id')
                     ->join('consultations', 'consultation_id', 'consultations.id')
                     ->where('withdraws.status', 'success')
                     ->where('withdraws.type', 'refund')->sum('withdraws.amount');
+                    
+                    $transRC= Withdraw::where('consultations.consultant_id', Auth::id())
+                    ->join('transactions', 'transaction_id', 'transactions.id')
+                    ->join('consultations', 'consultation_id', 'consultations.id')
+                    ->where('withdraws.type', 'refund')->get(['withdraws.id', 'withdraws.amount', 'withdraws.status',
+                    'withdraws.type', 'withdraws.created_at']);
+
+                    $transCountRC = Withdraw::where('consultations.consultant_id', Auth::id())
+                    ->join('transactions', 'transaction_id', 'transactions.id')
+                    ->join('consultations', 'consultation_id', 'consultations.id')
+                    ->where('withdraws.type', 'refund')->count('withdraws.id');
                 } else {
                     $transRefund = 0;
+                    $transRC = "";
+                    $transCountRC = 0;
                 }
                 
                 $transWallet = $transSumC - $transWithdraw - $transRefund;
@@ -398,8 +484,9 @@ class MainController extends Controller
                 $transC = "";
                 $transCountC = 0;
                 $transWallet = 0;
-            }
-            return view('transactionhistory', compact('transC', 'transCountC', 'transWallet'));
+            } $totalTrans = $transCountC + $transCountRC + $transCountW;
+            return view('transactionhistory', compact('transC', 'transCountC', 'transWallet',
+                'transCountW', 'transW', 'transRC', 'transCountRC', 'totalTrans'));
         } else {
             return redirect()->route('login')->with('success', "Login First");
         }
@@ -410,7 +497,7 @@ class MainController extends Controller
             if(ConsultationFeedback::where('consultant_id', Auth::id())->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
             ->exists()) {
                 $feedbacks = ConsultationFeedback::where('consultant_id', Auth::id())->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
-                ->get(['rating', 'comment', 'user_id', 'title']);
+                ->select('rating', 'comment', 'user_id', 'title')->paginate(10);
 
                 $avgRating = ConsultationFeedback::where('consultant_id', Auth::id())->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
                 ->avg('rating');            

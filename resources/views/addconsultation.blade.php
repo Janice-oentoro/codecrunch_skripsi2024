@@ -22,7 +22,12 @@
                             <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('Title') }}</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autofocus>
+                                @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -30,7 +35,12 @@
                             <label for="desc" class="col-md-4 col-form-label text-md-end">{{ __('Description') }}</label>
 
                             <div class="col-md-6">
-                                <input id="desc" type="text" class="form-control" name="desc" value="{{ old('desc') }}" autofocus>
+                                <input id="desc" type="text" class="form-control @error('desc') is-invalid @enderror" name="desc" value="{{ old('desc') }}" autofocus>
+                                @error('desc')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -38,7 +48,12 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('User Full Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="string" class="form-control" name="name" required autofocus>
+                                <input id="name" type="string" class="form-control @error('name') is-invalid @enderror" name="name" required autofocus>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -56,16 +71,26 @@
                             <label for="consult_datetime" class="col-md-4 col-form-label text-md-end">{{ __('Start Date Time') }}</label>
 
                             <div class="col-md-6">
-                                <input id="consult_datetime" type="datetime-local" class="form-control" name="consult_datetime" required autofocus>
+                                <input id="consult_datetime" type="datetime-local" class="form-control @error('consult_datetime') is-invalid @enderror" name="consult_datetime" required autofocus>
                             </div>
+                            @error('consult_datetime')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="row mb-3">
                             <label for="consult_datetime" class="col-md-4 col-form-label text-md-end">{{ __('End Date Time') }}</label>
 
                             <div class="col-md-6">
-                                <input id="end_consult_datetime" type="datetime-local" class="form-control" name="end_consult_datetime" required autofocus>
+                                <input id="end_consult_datetime" type="datetime-local" class="form-control @error('end_consult_datetime') is-invalid @enderror" name="end_consult_datetime" required autofocus>
                             </div>
+                            @error('end_consult_datetime')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <!-- Link -->

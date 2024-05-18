@@ -88,35 +88,82 @@
             <!-- Display -->
             <!-- Display Programmings -->
             <h5>Display Programming</h5>
-            <ol class="list-group list-group-flush list-group-numbered flex-fill">
-                @foreach ($progcons as $progcon)
-                    <li class="list-group-item">{{ $progcon->prog_name}}
-                        <form action="{{ route('delete-progcon') }}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <input type="hidden" name="progcon_id" value="{{ $progcon->id }}">
-                            <button class="btn btn-danger">Delete</button>
-                        </form> 
-                    </li>
-                @endforeach
-            </ol>
+            <div class="col-md-12" id="consultant-content">
+            <div class="item-table">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Programming Language</th>
+                            <th colspan="2" scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $no = 1;
+                        @endphp
+                        @foreach ($progcons as $progcon)
+                            <tr>
+                                <th scope="row">{{ $no }}</th>
+                                <td>{{ $progcon->prog_name }}</td>
+                                <td>
+                                <form action="{{ route('delete-progcon') }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <input type="hidden" name="progcon_id" value="{{ $progcon->id }}">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form> 
+                                </td>
+                                @php
+                                    $no++;
+                                @endphp
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
             <br>
 
             <!-- Display Topics -->
             <h5>Display Topics</h5>
             <ol class="list-group list-group-flush list-group-numbered flex-fill">
-                @foreach ($topiccons as $topiccon)
-                    <li class="list-group-item">{{ $topiccon->topic_name}}
-                        <form action="{{ route('delete-topiccon') }}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <input type="hidden" name="topic_id" value="{{ $topiccon->id }}">
-                            <button class="btn btn-danger">Delete</button>
-                        </form>
-                    </li>
-                @endforeach
-            </ol>
+            <div class="col-md-12" id="consultant-content">
+            <div class="item-table">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Topic Name</th>
+                            <th colspan="2" scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $no1 = 1;
+                        @endphp
+                        @foreach ($topiccons as $topic)
+                            <tr>
+                                <th scope="row">{{ $no1 }}</th>
+                                <td>{{ $topic->topic_name }}</td>
+                                <td>
+                                <form action="{{ route('delete-topiccon') }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <input type="hidden" name="topic_id" value="{{ $topic->id }}">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form> 
+                                </td>
+                                @php
+                                    $no1++;
+                                @endphp
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
         </div>
 </x-layout>

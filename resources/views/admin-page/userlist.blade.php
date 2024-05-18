@@ -47,4 +47,7 @@
                 </table>
             </div>
         </div>
+        <div class="pagination">
+            {{ $users->links() }}
+        </div>
 </x-layout>

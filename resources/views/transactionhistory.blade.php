@@ -46,11 +46,12 @@
         </div>
     </div>
 
-    <h4>Transaction History Page</h4>
-    <h5>Total Transactions: {{ $transCountU }}</h5>
-
+    <h2>Transaction History Page</h2>
+    <h4>Total Transactions: {{ $totalTrans }}</h4>
+    <br>
+    <h5>Total Transfers: {{ $transCountU }}</h5>
     @foreach($transU as $t)
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 23rem;">
             <div class="card-body">
                 <h5 class="card-title">Transaction ID: {{$t->id}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{$t->title}}</h6>
@@ -59,6 +60,22 @@
             </div>
         </div>
     @endforeach
+    <br>
+    @if($transURC > 0)
+        <h5>Total Successful Refunds: {{ $transURC }}</h5>
+        @foreach($transUR as $t)
+            <div class="card" style="width: 23rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Refund ID: {{$t->id}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Refunded Transaction ID: {{$t->transaction_id}}</h6>
+                    <p class="card-text">{{$t->type}}</p>
+                    <p class="card-text">Rp {{$t->amount}}</p>
+                    <p class="card-text">Transaction Datetime: {{$t->ref_datetime}}</p>
+                    <p class="card-text">Status: {{$t->status}}</p>
+                </div>
+            </div>
+        @endforeach
+    @endif
     
     @else
     <p>No Transactions</p>
@@ -105,9 +122,10 @@
         </div>
     </div>
 
-    <h4>Transaction History Page</h4>
-    <h5>Total Transactions: {{ $transCountC }}</h5>
+    <h2>Transaction History Page</h2>
+    <h4>Total Transactions: {{ $totalTrans }}</h4>
     <h5>Wallet: Rp {{ $transWallet }}</h5>
+    <br>
     @foreach($transC as $t)
         <div class="card" style="width: 18rem;">
             <div class="card-body">
@@ -118,6 +136,38 @@
             </div>
         </div>
     @endforeach
+    <br>
+
+    @if($transCountW > 0)
+    <h5>Total Withdraws: {{ $transCountW }}</h5>
+    @foreach($transW as $t)
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Withdraw ID: {{$t->id}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{$t->type}}</h6>
+                <p class="card-text">Rp {{$t->amount}}</p>
+                <p class="card-text">Transaction Datetime: {{$t->created_at}}</p>
+                <p class="card-text">Status: {{$t->status}}</p>
+            </div>
+        </div>
+    @endforeach
+    @endif
+    <br>
+
+    @if($transCountRC > 0)
+    <h5>Total Refunds: {{ $transCountRC }}</h5>
+    @foreach($transRC as $t)
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Refund ID: {{$t->id}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{$t->type}}</h6>
+                <p class="card-text">Rp {{$t->amount}}</p>
+                <p class="card-text">Transaction Datetime: {{$t->created_at}}</p>
+                <p class="card-text">Status: {{$t->status}}</p>
+            </div>
+        </div>
+    @endforeach
+    @endif
 
     @else
     <p>No Transactions</p>

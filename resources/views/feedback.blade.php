@@ -13,6 +13,9 @@
                 </div>
             </div>
         @endforeach
+        <div class="pagination">
+            {{ $feedbacks->links() }}
+        </div>
     @else
         <p>No ratings found.</p>
     @endif

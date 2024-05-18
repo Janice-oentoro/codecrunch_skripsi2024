@@ -36,9 +36,9 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
                             <div class="col-md-8">
@@ -70,17 +70,32 @@
                                                 @csrf
                                                     <div class="form-outline text-start">                        
                                                         <label class="form-label" for="form12">Title</label>
-                                                        <input type="text" class="form-control" value="{{$ccon->title}}" name="title" />
+                                                        <input type="text" class="form-control @error('title') is-invalid @enderror" value="{{$ccon->title}}" name="title" />
+                                                        @error('title')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
 
                                                     <div class="form-outline text-start">                        
                                                         <label class="form-label" for="form12">Description</label>
-                                                        <input type="text" class="form-control" value="{{$ccon->desc}}" name="desc" />
+                                                        <input type="text" class="form-control @error('desc') is-invalid @enderror" value="{{$ccon->desc}}" name="desc" />
+                                                        @error('desc')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
 
                                                     <div class="form-outline text-start">                        
                                                         <label class="form-label" for="form12">User Full Name</label>
-                                                        <input type="string" class="form-control" value="{{$ccon->name}}" name="name" />
+                                                        <input type="string" class="form-control @error('desc') is-invalid @enderror" value="{{$ccon->name}}" name="name" />
+                                                        @error('name')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
 
                                                     <div class="form-outline text-start">                        
@@ -93,12 +108,22 @@
 
                                                     <div class="form-outline text-start">                        
                                                         <label class="form-label" for="form12">Start DateTime</label>
-                                                        <input type="datetime-local" class="form-control" value="{{$ccon->consult_datetime}}" name="consult_datetime" />
+                                                        <input type="datetime-local" class="form-control @error('consult_datetime') is-invalid @enderror" value="{{$ccon->consult_datetime}}" name="consult_datetime" />
+                                                        @error('consult_datetime')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
 
                                                     <div class="form-outline text-start">                        
                                                         <label class="form-label" for="form12">End DateTime</label>
-                                                        <input type="datetime-local" class="form-control" value="{{$ccon->end_consult_datetime}}" name="end_consult_datetime" />
+                                                        <input type="datetime-local" class="form-control @error('end_consult_datetime') is-invalid @enderror" value="{{$ccon->end_consult_datetime}}" name="end_consult_datetime" />
+                                                        @error('end_consult_datetime')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
 
                                                     <div class="form-outline text-start">                        
@@ -146,9 +171,9 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
                             <div class="col-md-8">
@@ -189,9 +214,9 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
                             <div class="col-md-8">
@@ -224,9 +249,9 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
                             <div class="col-md-8">
@@ -259,9 +284,9 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
                             <div class="col-md-8">
@@ -303,9 +328,9 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
                             <div class="col-md-8">
@@ -346,9 +371,9 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
                             <div class="col-md-8">
@@ -381,9 +406,9 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
                             <div class="col-md-8">
@@ -416,9 +441,9 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
                             <div class="col-md-8">
@@ -504,9 +529,9 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
                             <div class="col-md-8">
