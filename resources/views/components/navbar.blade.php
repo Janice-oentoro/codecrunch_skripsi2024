@@ -18,17 +18,30 @@
                     <a class="nav-link text-light fw-bold" href="/about">About</a>
                 </li>
 
-                @if(Auth::user())
-                <li class="nav-item">
-                    <a class="nav-link text-light fw-bold" href="/consultation">Consultation</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light fw-bold" href="/transactionhistory">Transaction</a>
-                </li>                
+                @if(Auth::check())
+                    @if(Auth::user()->role == "admin")
+                    <li class="nav-item">
+                        <a class="nav-link text-light fw-bold" href="/requestlist">Requests</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-light fw-bold" href="/userlist">Users</a>
+                    </li>
+                    @endif
+                
+                    @if(Auth::user()->role == "user" || Auth::user()->role == "consultant")
+                    <li class="nav-item">
+                        <a class="nav-link text-light fw-bold" href="/consultation">Consultation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light fw-bold" href="/transactionhistory">Transaction</a>
+                    </li>            
+                    @endif   
                 
                 <li class="nav-item">
                     <a class="nav-link text-light fw-bold" href="/chatify">Chat</a>
                 </li>
+
                 @endif
                 </ul>
             </div>
@@ -58,14 +71,6 @@
                                     <a class="dropdown-item text-dark fw-bold" href="/editprofile">Edit Profile</a>
                                     @if(Auth::user()->role == "consultant")
                                     <a class="dropdown-item text-dark fw-bold" href="/feedback">Feedback</a>
-                                    @endif
-
-                                    @if(Auth::user()->role == "admin")
-                                    <a class="dropdown-item text-dark fw-bold" href="/requestlist">Requests</a>
-                                    @endif
-
-                                    @if(Auth::user()->role == "admin")
-                                    <a class="dropdown-item text-dark fw-bold" href="/userlist">Users</a>
                                     @endif
 
                                     <a class="dropdown-item text-dark fw-bold" href="{{ route('logout') }}"
