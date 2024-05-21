@@ -10,20 +10,109 @@
     @endphp
 
     @auth
-        <div class="test">
-            <h2>Consultation</h2>
-        </div>
-
             @if(Auth::user()->role == "consultant")
             <!-- Consultant view -->
-                <button class="btn btn-primary" onclick=window.location="{{ url('/addconsultation') }}">Add Consultation</button>
+
+                <!-- ADD CONSULTATION MODAL -->
+                <!-- Button trigger modal Prog -->
+                <div class="ms-5 my-3">
+                    <a class="btn btn-primary" data-bs-toggle="modal" style="width: 150px;"
+                    data-bs-target="#addconsultation">New Consultation</a>
+                </div>
+
+                <!-- Modal Prog-->
+                <div class="modal fade" id="addconsultation" tabindex="-1" aria-labelledby="addconsultation" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editconsultation">Add Consultation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                                <div class="modal-body">
+                                <form action="{{ route('add-con') }}" method="POST" enctype="multipart/form-data" class="modal-form">
+                                @csrf
+                                    <div class="form-outline text-start">                        
+                                        <label class="form-label" for="form12">Title</label>
+                                        <input type="text" class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}" name="title" />
+                                        @error('title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-outline text-start">                        
+                                        <label class="form-label" for="form12">Description</label>
+                                        <input type="text" class="form-control @error('desc') is-invalid @enderror" value="{{old('desc')}}" name="desc" />
+                                        @error('desc')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-outline text-start">                        
+                                        <label class="form-label" for="form12">User Full Name</label>
+                                        <input type="string" class="form-control @error('desc') is-invalid @enderror" value="{{old('name')}}" name="name" />
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-outline text-start">                        
+                                        <label class="form-label" for="form12">Type</label>
+                                        <select class="form-select" id="type" name="type" required focus>
+                                            <option value="chat">Chat</option>        
+                                            <option value="video conference">Video Conference</option>             
+                                        </select>
+                                    </div>
+
+                                    <div class="form-outline text-start">                        
+                                        <label class="form-label" for="form12">Start DateTime</label>
+                                        <input type="datetime-local" class="form-control @error('consult_datetime') is-invalid @enderror" value="{{old('consult_datetime')}}" name="consult_datetime" />
+                                        @error('consult_datetime')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-outline text-start">                        
+                                        <label class="form-label" for="form12">End DateTime</label>
+                                        <input type="datetime-local" class="form-control @error('end_consult_datetime') is-invalid @enderror" value="{{old('end_consult_datetime')}}" name="end_consult_datetime" />
+                                        @error('end_consult_datetime')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-outline text-start">                        
+                                        <label class="form-label" for="form12">Link</label>
+                                        <input type="text" id="form12" class="form-control" value="{{old('link')}}" name="link" />
+                                    </div>
+
+                                    <input id="status" type="hidden" class="form-control" name="status" value="pending">
+                                    <input id="consultant_id" type="hidden" class="form-control" name="consultant_id" value="{{Auth::user()->id}}">
+                                    
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                
+                                </form>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
 
                 @if(Consultation::where('consultant_id', Auth::id())->doesntExist())
                     <p>No Consultations</p>
                 @else
-                <!-- Display Consultations -->
-                <h5>Display Consultation</h5>
 
+            <div class="ms-5">
                 @if($ccus != "")
                 <!-- PENDING -->
                 <h4>PENDING</h4>
@@ -32,27 +121,33 @@
                 @php
                     $avatar = AuthController::imageAdapter($ccon->avatar);
                 @endphp
-                    <div class="card mb-3" style="max-width: 540px;">
+                    <div class="card mb-3" style="width: 75%;">
                         <div class="row g-0">
-                            <div class="col-md-4">
+                            <div class="col-md-4 p-5">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="150px" height="150px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150px" height="150px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
-                            <div class="col-md-8">
+                            <div class="col">
                             <div class="card-body">
                                 <h5 class="card-title">{{$ccon->title}}</h5>
                                 <p class="card-text">User: {{$ccon->name}}</p>
                                 <p class="card-text">Description: {{$ccon->desc}}</p>
                                 <p class="card-text">Type: {{$ccon->type}}</p>
-                                <p class="card-text">Start DateTime: {{$ccon->consult_datetime}}</p>
-                                <p class="card-text">End DateTime: {{$ccon->end_consult_datetime}}</p>
                                 <p class="card-text">Link: {{$ccon->link}}</p>
-                                <p class="card-text"><small class="text-muted">{{$ccon->status}}</small></p>
                             </div>
                             
+                            <div class="col">
+                                <div class="card-body">
+                                <p class="card-text">Start: {{$ccon->consult_datetime}}</p>
+                                <p class="card-text">Start: {{$ccon->consult_datetime}}</p>
+                                <p class="card-text">End: {{$ccon->end_consult_datetime}}</p>
+                                <p class="card-text"><small class="text-muted">{{$ccon->status}}</small></p>
+                                </div>
+                            </div>
+
                             <div class="card-body text-end">
                                 <!-- Button trigger modal Prog -->
                                 <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editconsultation-{{$ccon->id}}">Edit</a>
@@ -152,12 +247,14 @@
                                 </div>
 
                             </div>
+
                             </div>
                         </div>
                         </div>
                     @endforeach
                 </ol>
                 @endif
+            </div>
 
                 @if($cccss != "")
                 <!-- COMING SOON -->
