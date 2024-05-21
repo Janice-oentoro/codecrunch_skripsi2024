@@ -76,7 +76,7 @@
                             <p class="mb-3" style="font-size: 12px">Please recheck your order</p>
                             <input type="hidden" name="consultationId" id="consultationId" value="{{ $cons->id }}">
                             
-                            <button type="submit" id="paybutton" class="btn form-control text-white" onclick="handlePay()" style="background-color: blueviolet">Pay</button>
+                            <button type="submit" id="paybutton" class="btn btn-primary form-control text-white" onclick="handlePay()">Pay</button>
                             
                         </div>
                     </div>

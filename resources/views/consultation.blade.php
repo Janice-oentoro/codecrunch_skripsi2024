@@ -109,7 +109,9 @@
                 </div>
 
                 @if(Consultation::where('consultant_id', Auth::id())->doesntExist())
+                <div class="ms-5">
                     <p>No Consultations</p>
+                </div>
                 @else
 
             <div class="ms-5">
@@ -125,33 +127,36 @@
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="150px" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150px" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
                             <div class="col">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$ccon->title}}</h5>
-                                <p class="card-text">User: {{$ccon->name}}</p>
-                                <p class="card-text">Description: {{$ccon->desc}}</p>
-                                <p class="card-text">Type: {{$ccon->type}}</p>
-                                <p class="card-text">Link: {{$ccon->link}}</p>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$ccon->title}}</h5>
+                                    <p class="card-text">User: {{$ccon->name}}</p>
+                                    <p class="card-text">Description: {{$ccon->desc}}</p>
+                                    <p class="card-text">Type: {{$ccon->type}}</p>
+                                    <p class="card-text">Link: {{$ccon->link}}</p>
+                                </div>
                             </div>
-                            
+
                             <div class="col">
                                 <div class="card-body">
-                                <p class="card-text">Start: {{$ccon->consult_datetime}}</p>
-                                <p class="card-text">Start: {{$ccon->consult_datetime}}</p>
-                                <p class="card-text">End: {{$ccon->end_consult_datetime}}</p>
-                                <p class="card-text"><small class="text-muted">{{$ccon->status}}</small></p>
+                                    <h5 class="card-title">  </h5>
+                                    <br>
+                                    <p class="card-text">Start: {{$ccon->consult_datetime}}</p>
+                                    <p class="card-text">Start: {{$ccon->consult_datetime}}</p>
+                                    <p class="card-text">End: {{$ccon->end_consult_datetime}}</p>
+                                    <p class="card-text"><small class="text-muted">{{$ccon->status}}</small></p>
+                                    <!-- Button trigger modal Prog -->
+                                    <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editconsultation-{{$ccon->id}}"
+                                    style="width: 100px;">Edit</a>
                                 </div>
                             </div>
 
                             <div class="card-body text-end">
-                                <!-- Button trigger modal Prog -->
-                                <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editconsultation-{{$ccon->id}}">Edit</a>
-                                
                                 <!-- Modal Prog-->
                                 <div class="modal fade" id="editconsultation-{{$ccon->id}}" tabindex="-1" aria-labelledby="editconsultation" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable">
@@ -241,13 +246,9 @@
                                                 </div>
                                             </form>  
                                         </div>
-       
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>
-
                             </div>
                         </div>
                         </div>
@@ -256,49 +257,63 @@
                 @endif
             </div>
 
+            <div class="ms-5 mt-4">    
                 @if($cccss != "")
                 <!-- COMING SOON -->
                 <h4>COMING SOON</h4>
+            
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
                 @foreach ($cccss as $ccon)
                 @php
                     $avatar = AuthController::imageAdapter($ccon->avatar);
                 @endphp
-                    <div class="card mb-3" style="max-width: 540px;">
+                <div class="card mb-3" style="width: 75%;">
                         <div class="row g-0">
-                            <div class="col-md-4">
+                            <div class="col-md-4 p-5">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
-                            <div class="col-md-8">
+                        <div class="col">
                             <div class="card-body">
                                 <h5 class="card-title">{{$ccon->title}}</h5>
                                 <p class="card-text">User: {{$ccon->name}}</p>
                                 <p class="card-text">Description: {{$ccon->desc}}</p>
                                 <p class="card-text">Type: {{$ccon->type}}</p>
+                                <p class="card-text">Link: {{$ccon->link}}</p>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card-body">
+                            <h5 class="card-title">  </h5>
+                                <br>
                                 <p class="card-text">Start DateTime: {{$ccon->consult_datetime}}</p>
                                 <p class="card-text">End DateTime: {{$ccon->end_consult_datetime}}</p>
-                                <p class="card-text">Link: {{$ccon->link}}</p>
                                 <p class="card-text"><small class="text-muted">{{$ccon->status}}</small></p>
-                            </div>
-
                                 <form action="{{ route('cancel-con') }}" method="POST">
                                 @csrf
                                 @method('put')
                                 <input type="hidden" name="consultation_id" value="{{ $ccon->id }}">
                                 <button class="btn btn-danger">Cancel</button>
-                                </form>     
+                                </form>   
                             </div>
-                            </div>
+                        </div>
+
+                            <div class="card-body text-end">
+                            </div>  
+                            
+                        </div>
                         </div>
                         </div>
                     @endforeach
                 </ol>
                 @endif
+            </div>
 
+            <div class="ms-5 mt-4">
                 @if($ccogs != "")
                 <!-- ONGOING -->
                 <h4>ONGOING</h4>
@@ -307,33 +322,42 @@
                 @php
                     $avatar = AuthController::imageAdapter($ccon->avatar);
                 @endphp
-                    <div class="card mb-3" style="max-width: 540px;">
+                <div class="card mb-3" style="width: 75%;">
                         <div class="row g-0">
-                            <div class="col-md-4">
+                            <div class="col-md-4 p-5">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125pxpx" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125pxpx" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
-                            <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$ccon->title}}</h5>
-                                <p class="card-text">User: {{$ccon->name}}</p>
-                                <p class="card-text">Description: {{$ccon->desc}}</p>
-                                <p class="card-text">Type: {{$ccon->type}}</p>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$ccon->title}}</h5>
+                                    <p class="card-text">User: {{$ccon->name}}</p>
+                                    <p class="card-text">Description: {{$ccon->desc}}</p>
+                                    <p class="card-text">Type: {{$ccon->type}}</p>
+                                    <p class="card-text">Link: {{$ccon->link}}</p>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="card-body">
+                                <h5 class="card-title">  </h5>
+                                <br>
                                 <p class="card-text">Start DateTime: {{$ccon->consult_datetime}}</p>
                                 <p class="card-text">End DateTime: {{$ccon->end_consult_datetime}}</p>
-                                <p class="card-text">Link: {{$ccon->link}}</p>
                                 <p class="card-text"><small class="text-muted">{{$ccon->status}}</small></p>
-                            </div>
+                                </div>
                             </div>
                         </div>
                         </div>
                     @endforeach
                 </ol>
                 @endif
+            </div>
                 
+            <div class="ms-5 mt-4">
                 @if($ccfs != "")
                 <!-- FINISHED -->
                 <h4>FINISHED</h4>
@@ -342,33 +366,41 @@
                 @php
                     $avatar = AuthController::imageAdapter($ccon->avatar);
                 @endphp
-                    <div class="card mb-3" style="max-width: 540px;">
+                <div class="card mb-3" style="width: 75%;">
                         <div class="row g-0">
-                            <div class="col-md-4">
+                            <div class="col-md-4 p-5">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125pxpx" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
-                            <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$ccon->title}}</h5>
-                                <p class="card-text">User: {{$ccon->name}}</p>
-                                <p class="card-text">Description: {{$ccon->desc}}</p>
-                                <p class="card-text">Type: {{$ccon->type}}</p>
-                                <p class="card-text">Start DateTime: {{$ccon->consult_datetime}}</p>
-                                <p class="card-text">End DateTime: {{$ccon->end_consult_datetime}}</p>
-                                <p class="card-text">Link: {{$ccon->link}}</p>
-                                <p class="card-text"><small class="text-muted">{{$ccon->status}}</small></p>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$ccon->title}}</h5>
+                                    <p class="card-text">User: {{$ccon->name}}</p>
+                                    <p class="card-text">Description: {{$ccon->desc}}</p>
+                                    <p class="card-text">Type: {{$ccon->type}}</p>
+                                    <p class="card-text">Link: {{$ccon->link}}</p>
+                                </div>
                             </div>
+                            <div class="col">
+                                <div class="card-body">  
+                                <h5 class="card-title">  </h5>
+                                <br>
+                                <p class="card-text">Start DateTime: {{$ccon->consult_datetime}}</p>
+                                    <p class="card-text">End DateTime: {{$ccon->end_consult_datetime}}</p>
+                                    <p class="card-text"><small class="text-muted">{{$ccon->status}}</small></p>
+                                </div>
                             </div>
                         </div>
                         </div>
                     @endforeach
                 </ol>
                 @endif
+            </div>
 
+            <div class="ms-5 mt-4">
                 @if($cccs != "")
                 <!-- CANCELLED -->
                 <h4>CANCELLED</h4>
@@ -377,26 +409,32 @@
                 @php
                     $avatar = AuthController::imageAdapter($ccon->avatar);
                 @endphp
-                    <div class="card mb-3" style="max-width: 540px;">
+                <div class="card mb-3" style="width: 75%;">
                         <div class="row g-0">
-                            <div class="col-md-4">
+                            <div class="col-md-4 p-5">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
-                            <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$ccon->title}}</h5>
-                                <p class="card-text">User: {{$ccon->name}}</p>
-                                <p class="card-text">Description: {{$ccon->desc}}</p>
-                                <p class="card-text">Type: {{$ccon->type}}</p>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$ccon->title}}</h5>
+                                    <p class="card-text">User: {{$ccon->name}}</p>
+                                    <p class="card-text">Description: {{$ccon->desc}}</p>
+                                    <p class="card-text">Type: {{$ccon->type}}</p>
+                                    <p class="card-text">Link: {{$ccon->link}}</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card-body">  
+                                <h5 class="card-title">  </h5>
+                                <br>                                 
                                 <p class="card-text">Start DateTime: {{$ccon->consult_datetime}}</p>
                                 <p class="card-text">End DateTime: {{$ccon->end_consult_datetime}}</p>
-                                <p class="card-text">Link: {{$ccon->link}}</p>
                                 <p class="card-text"><small class="text-muted">{{$ccon->status}}</small></p>
-                            </div>
+                                </div>
                             </div>
                         </div>
                         </div>
@@ -404,15 +442,18 @@
                 </ol>
                 @endif
             @endif
+        </div>
 
-            <!-- User view -->
-            @elseif(Auth::user()->role == "user")
+        <!-- User view -->
+        @elseif(Auth::user()->role == "user")
 
-            @if(Consultation::where('user_id', Auth::id())->doesntExist())
-                <p>No Consultations</p>
-            @else
-            <h5>DISPLAY CONSULTATION</h5>
+        @if(Consultation::where('user_id', Auth::id())->doesntExist())
+        <div class="ms-5 mt-4">
+            <p>No Consultations</p>
+        </div>    
+        @else
 
+        <div class="ms-5 mt-4">
             @if($cus != "")
             <!-- PENDING -->
             <h4>PENDING</h4>
@@ -421,41 +462,49 @@
                     @php
                         $avatar = AuthController::imageAdapter($cu->avatar);
                     @endphp
-                    <div class="card mb-3" style="max-width: 540px;">
+                    <div class="card mb-3" style="width: 75%;">
                         <div class="row g-0">
-                            <div class="col-md-4">
+                            <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125pxpx" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
-                            <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$cu->title}}</h5>
-                                <p class="card-text">Consultant: {{$cu->name}}</p>
-                                <p class="card-text">Description: {{$cu->desc}}</p>
-                                <p class="card-text">Type: {{$cu->type}}</p>
-                                <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
-                                <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
-                                <p class="card-text">Link: {{$cu->link}}</p>
-                                <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
-
-                                <form action="/pay">
-
-                                <button type="submit" class="btn text-white" name="pay" value="{{ $cu->id }}"
-                                style="background-color:blueviolet; font-size: 18px">Pay</button>
-
-                                </form>
-
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$cu->title}}</h5>
+                                    <p class="card-text">Consultant: {{$cu->name}}</p>
+                                    <p class="card-text">Description: {{$cu->desc}}</p>
+                                    <p class="card-text">Type: {{$cu->type}}</p>
+                                    <p class="card-text">Link: {{$cu->link}}</p>
+                                </div>
                             </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">  </h5>
+                                    <br>
+                                    <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
+                                    <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
+                                    <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
+                                    <form action="/pay">
+                                    <button type="submit" class="btn btn-primary text-white" name="pay" value="{{ $cu->id }}"
+                                    style="width: 100px;">Pay</button>
+                                    </form>
+                                </div>
                             </div>
+                            
+                            <div class="card-body text-end">
+                            </div>
+
                         </div>
                         </div>
                     @endforeach
                 </ol>
             @endif
-                
+        </div>
+              
+        <div class="ms-5 mt-4">
             @if($ccss != "")
             <!-- COMING SOON -->
             <h4>COMING SOON</h4>
@@ -464,33 +513,41 @@
                     @php
                         $avatar = AuthController::imageAdapter($cu->avatar);
                     @endphp
-                    <div class="card mb-3" style="max-width: 540px;">
+                    <div class="card mb-3" style="width: 75%;">
                         <div class="row g-0">
-                            <div class="col-md-4">
+                            <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
-                            <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$cu->title}}</h5>
-                                <p class="card-text">Consultant: {{$cu->name}}</p>
-                                <p class="card-text">Description: {{$cu->desc}}</p>
-                                <p class="card-text">Type: {{$cu->type}}</p>
-                                <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
-                                <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
-                                <p class="card-text">Link: {{$cu->link}}</p>
-                                <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$cu->title}}</h5>
+                                    <p class="card-text">Consultant: {{$cu->name}}</p>
+                                    <p class="card-text">Description: {{$cu->desc}}</p>
+                                    <p class="card-text">Type: {{$cu->type}}</p>
+                                    <p class="card-text">Link: {{$cu->link}}</p>
+                                </div>
                             </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">  </h5>
+                                    <br>
+                                    <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
+                                    <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
+                                    <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
+                                </div>
                             </div>
                         </div>
                         </div>
                 @endforeach
                 </ol>
             @endif
+        </div>
 
+        <div class="ms-5 mt-4">
             @if($cogs != "")
             <!-- ONGOING -->
             <h4>ONGOING</h4>
@@ -499,76 +556,88 @@
                     @php
                         $avatar = AuthController::imageAdapter($cu->avatar);
                     @endphp
-                    <div class="card mb-3" style="max-width: 540px;">
+                    <div class="card mb-3" style="width: 75%;">
                         <div class="row g-0">
-                            <div class="col-md-4">
+                            <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
-                            <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$cu->title}}</h5>
-                                <p class="card-text">Consultant: {{$cu->name}}</p>
-                                <p class="card-text">Description: {{$cu->desc}}</p>
-                                <p class="card-text">Type: {{$cu->type}}</p>
-                                <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
-                                <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
-                                <p class="card-text">Link: {{$cu->link}}</p>
-                                <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$cu->title}}</h5>
+                                    <p class="card-text">Consultant: {{$cu->name}}</p>
+                                    <p class="card-text">Description: {{$cu->desc}}</p>
+                                    <p class="card-text">Type: {{$cu->type}}</p>
+                                    <p class="card-text">Link: {{$cu->link}}</p>
+                                </div>
                             </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">  </h5>
+                                    <br>
+                                    <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
+                                    <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
+                                    <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
+                                </div>
                             </div>
                         </div>
                         </div>
                 @endforeach
                 </ol>
                 @endif
+        </div>
 
+        <div class="ms-5 mt-4">    
             @if($cufs != "")
             <!-- FINISHED -->
             <h4>FINISHED</h4>
             @foreach ($cufs as $cu)
-                <ol clsss="list-group list-group-flush list-group-numbered flex-fill">
+                <ol class="list-group list-group-flush list-group-numbered flex-fill">
                     @php
                         $avatar = AuthController::imageAdapter($cu->avatar);
+                        if(ConsultationFeedback::where('consultation_id', $cu->id)->exists()){
+                            $feedback = true;
+                        } else {
+                            $feedback = false;
+                        };
                     @endphp
-                    <div class="card mb-3" style="max-width: 540px;">
+                    <div class="card mb-3" style="width: 75%;">
                         <div class="row g-0">
-                            <div class="col-md-4">
+                            <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
-                            <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$cu->title}}</h5>
-                                <p class="card-text">Consultant: {{$cu->name}}</p>
-                                <p class="card-text">Description: {{$cu->desc}}</p>
-                                <p class="card-text">Type: {{$cu->type}}</p>
-                                <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
-                                <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
-                                <p class="card-text">Link: {{$cu->link}}</p>
-                                <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$cu->title}}</h5>
+                                    <p class="card-text">Consultant: {{$cu->name}}</p>
+                                    <p class="card-text">Description: {{$cu->desc}}</p>
+                                    <p class="card-text">Type: {{$cu->type}}</p>
+                                    <p class="card-text">Link: {{$cu->link}}</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">  </h5>
+                                    <br>
+                                    <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
+                                    <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
+                                    <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
+                                    @if(!$feedback)
+                                        <!-- Button Trigger Modal -->
+                                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addfeedback-{{$cu->id}}"
+                                        style="width:100px;">Feedback</a>
+                                    @endif
+                                </div>
                             </div>
 
-                            @php
-                                if(ConsultationFeedback::where('consultation_id', $cu->id)->exists()){
-                                    $feedback = true;
-                                } else {
-                                    $feedback = false;
-                                };
-                            @endphp
-
                             <div class="card-body text-end">
-                                <!-- Button trigger modal Prog -->
-                                @if(!$feedback)
-                                    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addfeedback-{{$cu->id}}">Feedback</a>
-                                @endif
-
                                 <!-- Modal Prog-->
                                 <div class="modal fade" id="addfeedback-{{$cu->id}}" tabindex="-1" aria-labelledby="addfeedback" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable">
@@ -598,7 +667,7 @@
                                                         <input type="hidden" class="form-control" value="{{ $cu->id }}" name="consultation_id" required autofocus/>
 
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-warning">Submit</button>
+                                                        <button type="submit" class="btn btn-success">Submit</button>
                                                     </div>
                                                 </form> 
                                         </div>
@@ -606,14 +675,16 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            </div>
+                                </div>
+                            
                         </div>
                     </div>
                         @endforeach
                 </ol>
                 @endif
+        </div>
 
+        <div class="ms-5 mt-4">
             @if($cucs != "")
             <!-- CANCELLED -->
             <h4>CANCELLED</h4>
@@ -622,34 +693,42 @@
                     @php
                         $avatar = AuthController::imageAdapter($cu->avatar);
                     @endphp
-                    <div class="card mb-3" style="max-width: 540px;">
+                    <div class="card mb-3" style="width: 75%;">
                         <div class="row g-0">
-                            <div class="col-md-4">
+                            <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150" height="150px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
                             @endif
                             </div>
-                            <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$cu->title}}</h5>
-                                <p class="card-text">Consultant: {{$cu->name}}</p>
-                                <p class="card-text">Description: {{$cu->desc}}</p>
-                                <p class="card-text">Type: {{$cu->type}}</p>
-                                <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
-                                <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
-                                <p class="card-text">Link: {{$cu->link}}</p>
-                                <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$cu->title}}</h5>
+                                    <p class="card-text">Consultant: {{$cu->name}}</p>
+                                    <p class="card-text">Description: {{$cu->desc}}</p>
+                                    <p class="card-text">Type: {{$cu->type}}</p>
+                                    <p class="card-text">Link: {{$cu->link}}</p>
+                                </div>
                             </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">  </h5>
+                                    <br>
+                                    <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
+                                    <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
+                                    <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
+                                </div>
                             </div>
                         </div>
                         </div>
                         @endforeach
                 </ol>
                 @endif
+        </div>
+
             @endif
-            @endif
+        @endif
             
     @else
             <p>Login first</p>
