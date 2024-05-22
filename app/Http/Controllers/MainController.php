@@ -42,33 +42,33 @@ class MainController extends Controller
 
         if($search != "") {
             $users = User::where('role', 'consultant')->where('name', 'LIKE', "%$search%")
-            ->where('suspend', false)->select('users.id', 'name', 'price', 'avatar')->paginate(10);
+            ->where('suspend', false)->select('users.id', 'name', 'price', 'avatar')->paginate(6);
         } elseif($filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('prog_consultants', 'consultant_id', '=', 'users.id')
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")->where('suspend', false)->distinct()
-            ->select('users.id', 'name', 'price','avatar')->paginate(10);
+            ->select('users.id', 'name', 'price','avatar')->paginate(6);
         } elseif($filtertopic != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
             ->join('topics', 'topic_id', '=', 'topics.id')
             ->where('topic_name', 'LIKE', "$filtertopic")->where('suspend', false)->distinct()
-            ->select('users.id', 'name', 'price','avatar')->paginate(10);
+            ->select('users.id', 'name', 'price','avatar')->paginate(6);
         } elseif($search != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('prog_consultants', 'consultant_id', '=', 'users.id')
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")
             ->where('name', 'LIKE', "%$search%")->where('suspend', false)->distinct()
-            ->select('users.id', 'name', 'price','avatar')->paginate(10);
+            ->select('users.id', 'name', 'price','avatar')->paginate(6);
         } elseif($search != "" && $filtertopic != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
             ->join('topics', 'topic_id', '=', 'topics.id')
             ->where('topic_name', 'LIKE', "$filtertopic")
             ->where('name', 'LIKE', "%$search%")->where('suspend', false)->distinct()
-            ->select('users.id', 'name', 'price','avatar')->paginate(10);
+            ->select('users.id', 'name', 'price','avatar')->paginate(6);
         } elseif($search != "" && $filtertopic != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
@@ -78,7 +78,7 @@ class MainController extends Controller
             ->where('prog_name', 'LIKE', "$filterprog")
             ->where('topic_name', 'LIKE', "$filtertopic")
             ->where('name', 'LIKE', "%$search%")->where('suspend', false)->distinct()
-            ->select('users.id', 'name', 'price','avatar')->paginate(10);
+            ->select('users.id', 'name', 'price','avatar')->paginate(6);
         } elseif($filtertopic != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
@@ -87,10 +87,10 @@ class MainController extends Controller
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")
             ->where('topic_name', 'LIKE', "$filtertopic")->where('suspend', false)->distinct()
-            ->select('users.id', 'name', 'price','avatar')->paginate(10);
+            ->select('users.id', 'name', 'price','avatar')->paginate(6);
         } else {
             $users = User::where('role', 'consultant')->where('suspend', false)
-            ->select('users.id', 'name', 'price','avatar')->paginate(10);
+            ->select('users.id', 'name', 'price','avatar')->paginate(6);
         }
         return view('land', compact('users', 'search', 'filterprog'));
     }
@@ -125,7 +125,8 @@ class MainController extends Controller
             ->join('users', 'consultant_id', '=', 'users.id')->exists()){
                 $cus = Consultation::where('user_id', Auth::id())->where('status', 'pending')
                 ->join('users', 'consultant_id', '=', 'users.id')
-                ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);    
+                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
+                ->paginate(2, ['*'], 'cus');
             } else {
                 $cus = "";
             }
@@ -134,7 +135,8 @@ class MainController extends Controller
             ->join('users', 'consultant_id', '=', 'users.id')->exists()){
                 $ccss = $ccss = Consultation::where('user_id', Auth::id())->where('status', 'coming soon')
                 ->join('users', 'consultant_id', '=', 'users.id')
-                ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
+                ->paginate(2, ['*'], 'ccss');
             } else {
                 $ccss = "";
             }
@@ -143,7 +145,8 @@ class MainController extends Controller
             ->join('users', 'consultant_id', '=', 'users.id')->exists()){
                 $cogs = Consultation::where('user_id', Auth::id())->where('status', 'on going')
                 ->join('users', 'consultant_id', '=', 'users.id')
-                ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
+                ->paginate(2, ['*'], 'cogs');
             } else {
                 $cogs = "";
             }
@@ -153,7 +156,8 @@ class MainController extends Controller
             ->join('users', 'consultant_id', '=', 'users.id')->exists()) {
                 $cufs = Consultation::where('user_id', Auth::id())->where('status', 'finished')
                 ->join('users', 'consultant_id', '=', 'users.id')
-                ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
+                ->paginate(2, ['*'], 'cufs');
             } else {
                 $cufs ="";
             }
@@ -162,7 +166,8 @@ class MainController extends Controller
             ->join('users', 'consultant_id', '=', 'users.id')->exists()){
                 $cucs = Consultation::where('user_id', Auth::id())->where('status', 'cancelled')
                 ->join('users', 'consultant_id', '=', 'users.id')
-                ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
+                ->paginate(2, ['*'], 'cucs');
             } else {
                 $cucs = "";
             }
@@ -174,7 +179,8 @@ class MainController extends Controller
             ->join('users', 'user_id', '=', 'users.id')->exists()){
                 $ccus = Consultation::where('consultant_id', Auth::id())->where('status', 'pending')
                 ->join('users', 'user_id', '=', 'users.id')
-                ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);        
+                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
+                ->paginate(2, ['*'], 'ccus');        
             } else {
                 $ccus = "";
             }
@@ -183,7 +189,8 @@ class MainController extends Controller
             ->join('users', 'user_id', '=', 'users.id')->exists()){
                 $cccss = Consultation::where('consultant_id', Auth::id())->where('status', 'coming soon')
                 ->join('users', 'user_id', '=', 'users.id')
-                ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
+                ->paginate(2, ['*'], 'cccss');
             } else {
                 $cccss = "";
             }
@@ -192,7 +199,8 @@ class MainController extends Controller
             ->join('users', 'user_id', '=', 'users.id')->exists()){
                 $ccogs = Consultation::where('consultant_id', Auth::id())->where('status', 'on going')
                 ->join('users', 'user_id', '=', 'users.id')
-                ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);        
+                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
+                ->paginate(2, ['*'], 'ccogs');
             } else {
                 $ccogs = "";
             }
@@ -201,7 +209,8 @@ class MainController extends Controller
             ->join('users', 'user_id', '=', 'users.id')->exists()){
                 $ccfs = Consultation::where('consultant_id', Auth::id())->where('status', 'finished')
                 ->join('users', 'user_id', '=', 'users.id')
-                ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);        
+                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
+                ->paginate(2, ['*'], 'ccfs');
             } else {
                 $ccfs = "";
             }
@@ -210,7 +219,8 @@ class MainController extends Controller
             ->join('users', 'user_id', '=', 'users.id')->exists()){
                 $cccs = Consultation::where('consultant_id', Auth::id())->where('status', 'cancelled')
                 ->join('users', 'user_id', '=', 'users.id')
-                ->get(['title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);        
+                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
+                ->paginate(2, ['*'], 'cccs');
             } else {
                 $cccs = "";
             }
@@ -496,8 +506,10 @@ class MainController extends Controller
         if(Auth::check() && Auth::user()->role == "consultant"){
             if(ConsultationFeedback::where('consultant_id', Auth::id())->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
             ->exists()) {
-                $feedbacks = ConsultationFeedback::where('consultant_id', Auth::id())->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
-                ->select('rating', 'comment', 'user_id', 'title')->paginate(10);
+                $feedbacks = ConsultationFeedback::where('consultant_id', Auth::id())
+                ->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
+                ->join('users', 'consultations.user_id', 'users.id')
+                ->select('rating', 'comment', 'user_id', 'title', 'name')->paginate(9);
 
                 $avgRating = ConsultationFeedback::where('consultant_id', Auth::id())->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
                 ->avg('rating');            

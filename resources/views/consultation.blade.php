@@ -118,19 +118,19 @@
                 @if($ccus != "")
                 <!-- PENDING -->
                 <h4>PENDING</h4>
-                <ol class="list-group list-group-flush list-group-numbered flex-fill">
+                <div class="row g-0">
                 @foreach ($ccus as $ccon)
                 @php
                     $avatar = AuthController::imageAdapter($ccon->avatar);
-                @endphp
-                    <div class="card mb-3" style="width: 75%;">
+                    @endphp
+                    <div class="card mb-3 me-3 d-block" style="width: 48%;">
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
-                            @if ($ccon->avatar != null) 
+                                @if ($ccon->avatar != null) 
                                 <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
-                            @else
+                                @else
                                 <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
-                            @endif
+                                @endif
                             </div>
                             <div class="col">
                                 <div class="card-body">
@@ -147,47 +147,46 @@
                                     <h5 class="card-title">  </h5>
                                     <br>
                                     <p class="card-text">Start: {{$ccon->consult_datetime}}</p>
-                                    <p class="card-text">Start: {{$ccon->consult_datetime}}</p>
                                     <p class="card-text">End: {{$ccon->end_consult_datetime}}</p>
                                     <p class="card-text"><small class="text-muted">{{$ccon->status}}</small></p>
                                     <!-- Button trigger modal Prog -->
                                     <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editconsultation-{{$ccon->id}}"
-                                    style="width: 100px;">Edit</a>
+                                        style="width: 100px;">Edit</a>
+                                    </div>
                                 </div>
-                            </div>
-
+                                
                             <div class="card-body text-end">
                                 <!-- Modal Prog-->
                                 <div class="modal fade" id="editconsultation-{{$ccon->id}}" tabindex="-1" aria-labelledby="editconsultation" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable">
                                         <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="editconsultation">Edit Consultation</h5>
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editconsultation">Edit Consultation</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                                 <div class="modal-body">
-                                                <form action="{{ route('edit-con', $ccon->id) }}" method="POST" enctype="multipart/form-data" class="modal-form">
-                                                @csrf
+                                                    <form action="{{ route('edit-con', $ccon->id) }}" method="POST" enctype="multipart/form-data" class="modal-form">
+                                                        @csrf
                                                     <div class="form-outline text-start">                        
                                                         <label class="form-label" for="form12">Title</label>
                                                         <input type="text" class="form-control @error('title') is-invalid @enderror" value="{{$ccon->title}}" name="title" />
                                                         @error('title')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
                                                         @enderror
                                                     </div>
-
+                                                    
                                                     <div class="form-outline text-start">                        
                                                         <label class="form-label" for="form12">Description</label>
                                                         <input type="text" class="form-control @error('desc') is-invalid @enderror" value="{{$ccon->desc}}" name="desc" />
                                                         @error('desc')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
                                                         @enderror
                                                     </div>
-
+                                                    
                                                     <div class="form-outline text-start">                        
                                                         <label class="form-label" for="form12">User Full Name</label>
                                                         <input type="string" class="form-control @error('desc') is-invalid @enderror" value="{{$ccon->name}}" name="name" />
@@ -195,17 +194,17 @@
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
-                                                        @enderror
-                                                    </div>
+                                                            @enderror
+                                                        </div>
 
-                                                    <div class="form-outline text-start">                        
-                                                        <label class="form-label" for="form12">Type</label>
-                                                        <select class="form-select" id="type" name="type" required focus>
-                                                            <option value="chat">Chat</option>        
+                                                        <div class="form-outline text-start">                        
+                                                            <label class="form-label" for="form12">Type</label>
+                                                            <select class="form-select" id="type" name="type" required focus>
+                                                                <option value="chat">Chat</option>        
                                                             <option value="video conference">Video Conference</option>             
                                                         </select>
                                                     </div>
-
+                                                    
                                                     <div class="form-outline text-start">                        
                                                         <label class="form-label" for="form12">Start DateTime</label>
                                                         <input type="datetime-local" class="form-control @error('consult_datetime') is-invalid @enderror" value="{{$ccon->consult_datetime}}" name="consult_datetime" />
@@ -230,18 +229,18 @@
                                                         <label class="form-label" for="form12">Link</label>
                                                         <input type="text" id="form12" class="form-control" value="{{$ccon->link}}" name="link" />
                                                     </div>
-
+                                                    
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-primary">Submit</button>
                                                     </div>
-                                                
+                                                    
                                                 </form>
 
-                                            <form action="{{ route('cancel-con') }}" method="POST" class="modal-form">
+                                                <form action="{{ route('cancel-con') }}" method="POST" class="modal-form">
                                             @csrf
                                             @method('put')
                                             <input type="hidden" name="consultation_id" value="{{ $ccon->id }}">
-                                                <div class="modal-footer">
+                                            <div class="modal-footer">
                                                     <button class="btn btn-danger">Cancel</button>
                                                 </div>
                                             </form>  
@@ -251,23 +250,27 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
+                    </div>
                     @endforeach
-                </ol>
+                    <div class="mt-1">
+                        <div class="pagination">
+                            {{ $ccus->links() }}
+                        </div>
+                    </div>
                 @endif
             </div>
-
+        </div>
+            
             <div class="ms-5 mt-4">    
                 @if($cccss != "")
                 <!-- COMING SOON -->
                 <h4>COMING SOON</h4>
-            
-                <ol class="list-group list-group-flush list-group-numbered flex-fill">
+            <div class="row g-0">
                 @foreach ($cccss as $ccon)
                 @php
                     $avatar = AuthController::imageAdapter($ccon->avatar);
                 @endphp
-                <div class="card mb-3" style="width: 75%;">
+                    <div class="card mb-3 me-3 d-block" style="width: 48%;">
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($ccon->avatar != null) 
@@ -302,27 +305,28 @@
                             </div>
                         </div>
 
-                            <div class="card-body text-end">
-                            </div>  
-                            
-                        </div>
                         </div>
                         </div>
                     @endforeach
-                </ol>
+                    <div class="mt-1">
+                        <div class="pagination">
+                            {{ $cccss->links() }}
+                        </div>
+                    </div>
                 @endif
+                </div>
             </div>
 
             <div class="ms-5 mt-4">
                 @if($ccogs != "")
                 <!-- ONGOING -->
                 <h4>ONGOING</h4>
-                <ol class="list-group list-group-flush list-group-numbered flex-fill">
+                <div class="row g-0">
                 @foreach ($ccogs as $ccon)
                 @php
                     $avatar = AuthController::imageAdapter($ccon->avatar);
                 @endphp
-                <div class="card mb-3" style="width: 75%;">
+                <div class="card mb-3 d-block" style="width: 48%;">
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($ccon->avatar != null) 
@@ -353,20 +357,25 @@
                         </div>
                         </div>
                     @endforeach
-                </ol>
+                    </div>
+                    <div class="mt-1">
+                        <div class="pagination">
+                            {{ $ccogs->links() }}
+                        </div>
                 @endif
+                </div>
             </div>
                 
             <div class="ms-5 mt-4">
                 @if($ccfs != "")
                 <!-- FINISHED -->
                 <h4>FINISHED</h4>
-                <ol class="list-group list-group-flush list-group-numbered flex-fill">
+                <div class="row g-0">
                 @foreach ($ccfs as $ccon)
                 @php
                     $avatar = AuthController::imageAdapter($ccon->avatar);
                 @endphp
-                <div class="card mb-3" style="width: 75%;">
+                <div class="card mb-3" style="width: 48%;">
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($ccon->avatar != null) 
@@ -396,20 +405,25 @@
                         </div>
                         </div>
                     @endforeach
-                </ol>
+                    <div class="mt-1">
+                        <div class="pagination">
+                            {{ $ccfs->links() }}
+                        </div>
+                    </div>
                 @endif
+                </div>
             </div>
 
             <div class="ms-5 mt-4">
                 @if($cccs != "")
                 <!-- CANCELLED -->
                 <h4>CANCELLED</h4>
-                <ol class="list-group list-group-flush list-group-numbered flex-fill">
+                <div class="row g-0">
                 @foreach ($cccs as $ccon)
                 @php
                     $avatar = AuthController::imageAdapter($ccon->avatar);
                 @endphp
-                <div class="card mb-3" style="width: 75%;">
+                <div class="card mb-3" style="width: 48%;">
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($ccon->avatar != null) 
@@ -439,10 +453,15 @@
                         </div>
                         </div>
                     @endforeach
-                </ol>
+                    <div class="mt-1">
+                        <div class="pagination">
+                            {{ $cccs->links() }}
+                        </div>
+                    </div>
                 @endif
-            @endif
-        </div>
+                </div>
+            </div>
+        @endif
 
         <!-- User view -->
         @elseif(Auth::user()->role == "user")
@@ -457,12 +476,12 @@
             @if($cus != "")
             <!-- PENDING -->
             <h4>PENDING</h4>
-            <ol class="list-group list-group-flush list-group-numbered flex-fill">
+            <div class="row g-0">
                     @foreach ($cus as $cu)
                     @php
                         $avatar = AuthController::imageAdapter($cu->avatar);
                     @endphp
-                    <div class="card mb-3" style="width: 75%;">
+                    <div class="card mb-3" style="width: 48%;">
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
@@ -493,27 +512,29 @@
                                     </form>
                                 </div>
                             </div>
-                            
-                            <div class="card-body text-end">
-                            </div>
 
                         </div>
                         </div>
                     @endforeach
-                </ol>
+                    <div class="mt-1">
+                        <div class="pagination">
+                            {{ $cus->links() }}
+                        </div>
+                    </div>
             @endif
+            </div>
         </div>
               
         <div class="ms-5 mt-4">
             @if($ccss != "")
             <!-- COMING SOON -->
             <h4>COMING SOON</h4>
-                <ol class="list-group list-group-flush list-group-numbered flex-fill">
+                <div class="row">
                 @foreach ($ccss as $cu)    
                     @php
                         $avatar = AuthController::imageAdapter($cu->avatar);
                     @endphp
-                    <div class="card mb-3" style="width: 75%;">
+                    <div class="card mb-3" style="width: 48%;">
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
@@ -543,20 +564,25 @@
                         </div>
                         </div>
                 @endforeach
-                </ol>
+                <div class="mt-1">
+                    <div class="pagination">
+                        {{ $ccss->links() }}
+                    </div>
+                </div>
             @endif
+            </div>
         </div>
 
         <div class="ms-5 mt-4">
             @if($cogs != "")
             <!-- ONGOING -->
             <h4>ONGOING</h4>
-                <ol class="list-group list-group-flush list-group-numbered flex-fill">
+                <div class="row g-0">
                 @foreach ($cogs as $cu)    
                     @php
                         $avatar = AuthController::imageAdapter($cu->avatar);
                     @endphp
-                    <div class="card mb-3" style="width: 75%;">
+                    <div class="card mb-3" style="width: 48%;">
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
@@ -586,14 +612,20 @@
                         </div>
                         </div>
                 @endforeach
-                </ol>
+                <div class="mt-1">
+                    <div class="pagination">
+                        {{ $cogs->links() }}
+                    </div>
+                </div>
                 @endif
+            </div>
         </div>
 
         <div class="ms-5 mt-4">    
             @if($cufs != "")
             <!-- FINISHED -->
             <h4>FINISHED</h4>
+            <div class="row g-0"></div>
             @foreach ($cufs as $cu)
                 <ol class="list-group list-group-flush list-group-numbered flex-fill">
                     @php
@@ -604,7 +636,7 @@
                             $feedback = false;
                         };
                     @endphp
-                    <div class="card mb-3" style="width: 75%;">
+                    <div class="card mb-3" style="width: 48%;">
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
@@ -680,20 +712,26 @@
                         </div>
                     </div>
                         @endforeach
-                </ol>
+                        <div class="mt-1">
+                            <div class="pagination">
+                                {{ $cufs->links() }}
+                            </div>
+                        </div>
                 @endif
+                </div>
         </div>
 
         <div class="ms-5 mt-4">
             @if($cucs != "")
             <!-- CANCELLED -->
             <h4>CANCELLED</h4>
+            <div class="row g-0">
             @foreach ($cucs as $cu)
                 <ol clsss="list-group list-group-flush list-group-numbered flex-fill">
                     @php
                         $avatar = AuthController::imageAdapter($cu->avatar);
                     @endphp
-                    <div class="card mb-3" style="width: 75%;">
+                    <div class="card mb-3" style="width: 48%;">
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
@@ -723,8 +761,13 @@
                         </div>
                         </div>
                         @endforeach
-                </ol>
+                        <div class="mt-1">
+                            <div class="pagination">
+                                {{ $cucs->links() }}
+                            </div>
+                        </div>
                 @endif
+            </div>
         </div>
 
             @endif
