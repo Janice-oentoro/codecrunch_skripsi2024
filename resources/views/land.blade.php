@@ -88,11 +88,15 @@
     
     <div class="card mb-3 me-5 d-block" style="width: 45%; ">
     <div class="row g-0">
-        <div class="col-md-4 p-5">
+        <div class="col-md-4 pt-5 ps-4">
             @if($u->avatar != null)
-                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                <img src="{{ asset($avatar) }}" width="125px" height="125px" style="clip-path: circle();" 
+                class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                style="height:125px; width:125px;" alt="...">
             @else
-                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" style="clip-path: circle();" 
+                class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                style="height:125px; width:125px;" alt="...">
             @endif
         </div>
         <div class="col-md-8">
@@ -100,7 +104,7 @@
             <div class="card-body">
             @if($avgRating > 0)
                 <h6 class="card-subtitle mb-2 text-muted">{{ round($avgRating, 2) }} <i class="fa-solid fa-star" style="color: #f5d047;"></i></h6>
-                <h6 class="card-subtitle mb-2 text-muted">Helped {{ $countRating }} Users</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ $countRating }} <i class="fa-solid fa-user"></i></h6>
             @else
                 <h6 class="card-subtitle mb-2 text-muted">No Rating</h6>
                 <h6 class="card-subtitle mb-2 text-muted">No Helped Users</h6>

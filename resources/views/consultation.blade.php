@@ -127,9 +127,13 @@
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                                 @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                                 @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                                 @endif
                             </div>
                             <div class="col">
@@ -274,9 +278,13 @@
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @endif
                             </div>
                         <div class="col">
@@ -293,8 +301,8 @@
                             <div class="card-body">
                             <h5 class="card-title">  </h5>
                                 <br>
-                                <p class="card-text">Start DateTime: {{$ccon->consult_datetime}}</p>
-                                <p class="card-text">End DateTime: {{$ccon->end_consult_datetime}}</p>
+                                <p class="card-text">Start: {{$ccon->consult_datetime}}</p>
+                                <p class="card-text">End: {{$ccon->end_consult_datetime}}</p>
                                 <p class="card-text"><small class="text-muted">{{$ccon->status}}</small></p>
                                 <form action="{{ route('cancel-con') }}" method="POST">
                                 @csrf
@@ -330,9 +338,13 @@
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="125px" height="125pxpx" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125pxpx" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @endif
                             </div>
                             <div class="col">
@@ -349,8 +361,8 @@
                                 <div class="card-body">
                                 <h5 class="card-title">  </h5>
                                 <br>
-                                <p class="card-text">Start DateTime: {{$ccon->consult_datetime}}</p>
-                                <p class="card-text">End DateTime: {{$ccon->end_consult_datetime}}</p>
+                                <p class="card-text">Start: {{$ccon->consult_datetime}}</p>
+                                <p class="card-text">End: {{$ccon->end_consult_datetime}}</p>
                                 <p class="card-text"><small class="text-muted">{{$ccon->status}}</small></p>
                                 </div>
                             </div>
@@ -379,9 +391,13 @@
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125pxpx" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}"width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @endif
                             </div>
                             <div class="col">
@@ -397,8 +413,8 @@
                                 <div class="card-body">  
                                 <h5 class="card-title">  </h5>
                                 <br>
-                                <p class="card-text">Start DateTime: {{$ccon->consult_datetime}}</p>
-                                    <p class="card-text">End DateTime: {{$ccon->end_consult_datetime}}</p>
+                                <p class="card-text">Start: {{$ccon->consult_datetime}}</p>
+                                    <p class="card-text">End: {{$ccon->end_consult_datetime}}</p>
                                     <p class="card-text"><small class="text-muted">{{$ccon->status}}</small></p>
                                 </div>
                             </div>
@@ -427,9 +443,13 @@
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($ccon->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}"width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}"width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @endif
                             </div>
                             <div class="col">
@@ -445,8 +465,8 @@
                                 <div class="card-body">  
                                 <h5 class="card-title">  </h5>
                                 <br>                                 
-                                <p class="card-text">Start DateTime: {{$ccon->consult_datetime}}</p>
-                                <p class="card-text">End DateTime: {{$ccon->end_consult_datetime}}</p>
+                                <p class="card-text">Start: {{$ccon->consult_datetime}}</p>
+                                <p class="card-text">End: {{$ccon->end_consult_datetime}}</p>
                                 <p class="card-text"><small class="text-muted">{{$ccon->status}}</small></p>
                                 </div>
                             </div>
@@ -485,9 +505,13 @@
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="125px" height="125pxpx" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}"width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}"width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @endif
                             </div>
                             <div class="col">
@@ -503,8 +527,8 @@
                                 <div class="card-body">
                                     <h5 class="card-title">  </h5>
                                     <br>
-                                    <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
-                                    <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
+                                    <p class="card-text">Start: {{$cu->consult_datetime}}</p>
+                                    <p class="card-text">End: {{$cu->end_consult_datetime}}</p>
                                     <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
                                     <form action="/pay">
                                     <button type="submit" class="btn btn-primary text-white" name="pay" value="{{ $cu->id }}"
@@ -538,9 +562,13 @@
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}"width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}"width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @endif
                             </div>
                             <div class="col">
@@ -556,8 +584,8 @@
                                 <div class="card-body">
                                     <h5 class="card-title">  </h5>
                                     <br>
-                                    <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
-                                    <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
+                                    <p class="card-text">Start: {{$cu->consult_datetime}}</p>
+                                    <p class="card-text">End: {{$cu->end_consult_datetime}}</p>
                                     <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
                                 </div>
                             </div>
@@ -586,9 +614,13 @@
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}"width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}"width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @endif
                             </div>
                             <div class="col">
@@ -604,8 +636,8 @@
                                 <div class="card-body">
                                     <h5 class="card-title">  </h5>
                                     <br>
-                                    <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
-                                    <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
+                                    <p class="card-text">Start: {{$cu->consult_datetime}}</p>
+                                    <p class="card-text">End: {{$cu->end_consult_datetime}}</p>
                                     <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
                                 </div>
                             </div>
@@ -640,9 +672,13 @@
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}"width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}"width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @endif
                             </div>
                             <div class="col">
@@ -658,8 +694,8 @@
                                 <div class="card-body">
                                     <h5 class="card-title">  </h5>
                                     <br>
-                                    <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
-                                    <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
+                                    <p class="card-text">Start: {{$cu->consult_datetime}}</p>
+                                    <p class="card-text">End: {{$cu->end_consult_datetime}}</p>
                                     <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
                                     @if(!$feedback)
                                         <!-- Button Trigger Modal -->
@@ -735,9 +771,13 @@
                         <div class="row g-0">
                             <div class="col-md-4 p-5">
                             @if ($cu->avatar != null) 
-                                <img src="{{ asset($avatar) }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset($avatar) }}" width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @else
-                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" class="img-fluid rounded-circle" alt="...">
+                                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" style="clip-path: circle();" 
+                                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                                    style="height:125px; width:125px;" alt="...">
                             @endif
                             </div>
                             <div class="col">
@@ -753,8 +793,8 @@
                                 <div class="card-body">
                                     <h5 class="card-title">  </h5>
                                     <br>
-                                    <p class="card-text">Start DateTime: {{$cu->consult_datetime}}</p>
-                                    <p class="card-text">End DateTime: {{$cu->end_consult_datetime}}</p>
+                                    <p class="card-text">Start: {{$cu->consult_datetime}}</p>
+                                    <p class="card-text">End: {{$cu->end_consult_datetime}}</p>
                                     <p class="card-text"><small class="text-muted">{{$cu->status}}</small></p>
                                 </div>
                             </div>

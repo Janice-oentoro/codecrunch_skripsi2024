@@ -2,8 +2,8 @@
 <div class="ms-5 mt-4">
     <h4>Feedback</h4>
     @if($avgRating > 0)
-        <h5 class="my-3">Rating          : {{ round($avgRating,2) }}</h5>
-        <h5 class="mb-3">Total Users Helped   : {{ $countRating }}</h5>
+        <h5 class="my-3">{{ round($avgRating,2) }} <i class="fa-solid fa-star" style="color: #f5d047;"></i></h5>
+        <h5 class="mb-3">{{ $countRating }} <i class="fa-solid fa-user"></i></h5>
 
         <div class="row g-0">
         @foreach($feedbacks as $f)

@@ -3,15 +3,16 @@
         $user = Auth::user()->role == "consultant";
     @endphp
     @auth
-        <div class="test">
-            <a>Edit Programming Language Consultant Page</a>
-        </div>
+    <div class="container mt-3">
+            <h3> Edit Skill </h3>
 
-        <div class="test">
+        <div class="row g-0 my-3">
          <!-- Button trigger modal Prog -->
+        <div class="col-md-2">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addprogramming">
                 Add Programming 
             </button>
+        </div>
 
          <!-- Modal Prog-->
             <div class="modal fade" id="addprogramming" tabindex="-1" aria-labelledby="addprogramming" aria-hidden="true">
@@ -44,14 +45,16 @@
 
                 </div>
             </div>
-        </div>
+        
 
         <br>
 
          <!-- Button trigger modal Topic-->
+        <div class="col-md-2">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addtopic">
             Add Topic 
             </button>
+        </div>
 
          <!-- Modal Topic-->
             <div class="modal fade" id="addtopic" tabindex="-1" aria-labelledby="addtopic" aria-hidden="true">
@@ -83,7 +86,7 @@
 
                 </div>
             </div>
-            </div>
+        </div>
 
             <!-- Display -->
             <!-- Display Programmings -->
@@ -111,7 +114,7 @@
                                     @csrf
                                     @method('delete')
                                     <input type="hidden" name="progcon_id" value="{{ $progcon->id }}">
-                                    <button class="btn btn-danger">Delete</button>
+                                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
                                 </form> 
                                 </td>
                                 @php
@@ -152,7 +155,7 @@
                                     @csrf
                                     @method('delete')
                                     <input type="hidden" name="topic_id" value="{{ $topic->id }}">
-                                    <button class="btn btn-danger">Delete</button>
+                                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
                                 </form> 
                                 </td>
                                 @php
@@ -165,5 +168,5 @@
             </div>
         </div>
 
-        </div>
+    </div>
 </x-layout>
