@@ -49,7 +49,7 @@ class AdminController extends Controller
     }
 
     public function userList() {
-        $users = User::paginate(10);
+        $users = User::where('role', 'not like','admin')->paginate(10);
         return view('admin-page.userlist', compact('users'));
     }
 

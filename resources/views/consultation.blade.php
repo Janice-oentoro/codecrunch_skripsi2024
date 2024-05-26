@@ -64,6 +64,11 @@ $user = Auth::user();
                         <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editconsultation-{{$ccon->id}}"
                             style="width: 40px;"><i class="fas fa-edit"></i></a>
                         </div>
+                        @elseif(Auth::user()->role == "user")
+                        <form action="/pay">
+                            <button type="submit" class="btn btn-primary text-white" name="pay" value="{{ $ccon->id }}"
+                            style="width: 100px;">Pay</button>
+                         </form>
                         @endif
                     </div>
             </div>
@@ -177,7 +182,7 @@ $user = Auth::user();
     @php
         $avatar = AuthController::imageAdapter($ccon->avatar);
     @endphp
-        <div class="card mb-3 me-3 d-block" style="width: 48%;">
+        <div class="card mb-3 me-3 ms-3 d-block" style="width: 48%;">
             <div class="row g-0">
                 <div class="col-md-4 p-5">
                 @if ($ccon->avatar != null) 
@@ -288,7 +293,7 @@ $user = Auth::user();
     @php
         $avatar = AuthController::imageAdapter($ccon->avatar);
         if(Auth::user()->role == 'user') {
-            if(ConsultationFeedback::where('consultation_id', $cu->id)->exists()){
+            if(ConsultationFeedback::where('consultation_id', $ccon->id)->exists()){
                 $feedback = true;
             } else {
                 $feedback = false;
@@ -329,7 +334,7 @@ $user = Auth::user();
                         style="background-color:mediumslateblue; width:150px; text-align:center;">{{$ccon->status}}</p>
                         <!-- Finished Button Trigger Modal -->
                         @if(!$feedback )    
-                            <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addfeedback-{{$cu->id}}"
+                            <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addfeedback-{{$ccon->id}}"
                             style="width:100px;">Feedback</a>
                         @endif
                     </div>

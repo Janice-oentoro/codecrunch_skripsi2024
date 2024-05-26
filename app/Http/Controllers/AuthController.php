@@ -107,10 +107,12 @@ class AuthController extends Controller
     public function newImage(Request $request)
     {
         $fileObj = $request->file('avatar');
+        $fileObj1 = $request->file('avatar');
         $name = str_replace(' ', '', $fileObj->getClientOriginalName());
         $ext = $fileObj->getClientOriginalExtension();
         $new_file_name = $name . time() . '.' .$ext;
         $fileObj->storeAs('public/user-avatars', $new_file_name);
+        $fileObj1->storeAs('public/images', $new_file_name);
         return $new_file_name;
     }
 
@@ -153,7 +155,7 @@ class AuthController extends Controller
         {
             return $imageURL;
         }
-        return 'storage/user-avatars/'.$imageURL;
+        return 'storage/images/'.$imageURL;
     }
 
     public static function matchUser($userMatch)

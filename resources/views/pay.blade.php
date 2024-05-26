@@ -8,7 +8,7 @@
 @endphp
 <div class="d-flex justify-content-center mt-5 mb-1">
     <div style="width: 80%">
-        <h3 style="color: rgb(8, 10, 143); font-family: 'Comfortaa'; ">Pay</h3>
+        <h3>Pay</h3>
 
         <div class="my-5 d-flex flex-row justify-content-between">
             <div id="snap-container"></div>

@@ -110,7 +110,7 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
 
 {{-- -------------------- Shared photos Item -------------------- --}}
 @if($get == 'sharedPhoto')
-<div class="shared-photo chat-image" style="background-image: url({{url('storage/images/def-icon.png')}});"></div>
+<div class="shared-photo chat-image" style="background-image: url('{{ $image }}')"></div>
 @endif
 
 

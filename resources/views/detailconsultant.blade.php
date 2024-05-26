@@ -13,7 +13,7 @@
     $avatar = AuthController::imageAdapter($udtl->avatar);
 @endphp
 <div class="container d-block align-items-center justify-content-center mt-5 pt-5">
-    <div class="card mb-3 d-block text-white" style="width:100%; background-color: #001D3D;">
+    <div class="card mb-3 d-block text-white" style="width:100%; height:60vh; background-color: #001D3D;">
     <div class="row g-0">
         <div class="col-md-3 pt-5 container justify-content-center align-items-center">
             <div class="row g-0">
@@ -48,34 +48,49 @@
             <!-- Programming Skills View -->
             <h5 class="card-text">Programming Skills</h5>
                 <?php 
+                if(ProgConsultant::where('consultant_id', $udtl->id)
+                ->join('users', 'consultant_id', '=', 'users.id')
+                ->join('programmings', 'prog_id', '=', 'programmings.id')->exists()) {
                     $pcs = ProgConsultant::where('consultant_id', $udtl->id)
                     ->join('users', 'consultant_id', '=', 'users.id')
                     ->join('programmings', 'prog_id', '=', 'programmings.id')
                     ->get(['consultant_id', 'prog_name']);
+                } else {
+                    $pcs="";
+                }
 
+                if($pcs != ""){
                     $i = 0;
                     foreach($pcs as $p){
                         $progArr[$i] = $p->prog_name;
                         $i++;
                     }
                     $progString = implode(", ", $progArr);
+                } else {$progString = "";}
                 ?>
                 <p class="card-text">{{$progString}}</p>
 
             <!-- Topic Skills View -->
             <h5 class="card-text">Topic Skills</h5>
                 <?php 
+                if(TopicConsultant::where('consultant_id', $udtl->id)
+                ->join('users', 'consultant_id', '=', 'users.id')
+                ->join('topics', 'topic_id', '=', 'topics.id')->exists()){
                     $tcs = TopicConsultant::where('consultant_id', $udtl->id)
                     ->join('users', 'consultant_id', '=', 'users.id')
                     ->join('topics', 'topic_id', '=', 'topics.id')
                     ->get(['consultant_id', 'topic_name']);
-                    
+                } else {
+                    $tcs = "";
+                }
+                    if($tcs != "") {
                     $i2 = 0;
                     foreach($tcs as $t){
                         $topicArr[$i2] = $t->topic_name;
                         $i2++;
                     }
                     $topicString = implode(", ", $topicArr);
+                } else {$topicString = "";}
                 ?>
                 <p class="card-text">{{$topicString}}</p>
 
