@@ -1,4 +1,5 @@
 <x-layout>
+<div class="container mt-3">
     <h3>User List Page</h3>
     <div class="col-md-12" id="admin-content">
             <div class="item-table">
@@ -50,4 +51,5 @@
         <div class="pagination">
             {{ $users->links() }}
         </div>
+</div>
 </x-layout>

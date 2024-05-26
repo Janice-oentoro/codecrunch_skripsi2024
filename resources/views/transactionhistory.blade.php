@@ -1,9 +1,14 @@
 <x-layout>
 <!-- USER VIEW -->
 @if(Auth::user()->role == "user")
-    @if($transCountU > 0)
+    @if($transCountU > 0)    
+    <div class="mt-3 mx-5">
+    <div class="row g-0">
     <!-- Button trigger modal Prog -->
+    <div class="col text-start"><h2>Transaction History Page</h2></div>
+    <div class="col text-end">
     <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#refund">Refund</a>
+    </div>
                                 
     <!-- Modal Prog-->
     <div class="modal fade" id="refund" tabindex="-1" aria-labelledby="refund" aria-hidden="true">
@@ -45,45 +50,79 @@
             </div>
         </div>
     </div>
-
-    <h2>Transaction History Page</h2>
+    </div>
+    
+    <!-- TRANSFERS -->
     <h4>Total Transactions: {{ $totalTrans }}</h4>
-    <br>
-    <h5>Total Transfers: {{ $transCountU }}</h5>
-    @foreach($transU as $t)
-        <div class="card" style="width: 23rem;">
-            <div class="card-body">
-                <h5 class="card-title">Transaction ID: {{$t->id}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{$t->title}}</h6>
-                <p class="card-text">Rp {{$t->amount}}</p>
-                <p class="card-text">Transaction Datetime: {{$t->transaction_datetime}}</p>
+    <h5 class="mb-3">Total Transfers: {{ $transCountU }}</h5>
+    <div class="row g-0">
+        @foreach($transU as $t)
+        <div class="col-md-3 mb-3">
+            <div class="card d-block" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Transaction ID: {{$t->id}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{$t->title}}</h6>
+                    <p class="card-text">Rp {{$t->amount}}</p>
+                    <p class="card-text">{{$t->transaction_datetime}}</p>
+                </div>
             </div>
         </div>
     @endforeach
+    </div>
+    <div class="mt-3">
+        <div class="pagination">
+            {{ $transU->links() }}
+        </div>
+    </div>
+    <!-- TRANSFERS -->
+
     <br>
+    <!-- REFUNDS -->
     @if($transURC > 0)
-        <h5>Total Successful Refunds: {{ $transURC }}</h5>
+        <h5 class="mb-3">Total Refunds: {{ $transURC }}</h5>
+        <div class="row g-0">
         @foreach($transUR as $t)
-            <div class="card" style="width: 23rem;">
+        <div class="col-md-3 mb-3">
+            <div class="card d-block" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Refund ID: {{$t->id}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Refunded Transaction ID: {{$t->transaction_id}}</h6>
                     <p class="card-text">{{$t->type}}</p>
                     <p class="card-text">Rp {{$t->amount}}</p>
-                    <p class="card-text">Transaction Datetime: {{$t->ref_datetime}}</p>
-                    <p class="card-text">Status: {{$t->status}}</p>
+                    <p class="card-text">{{$t->ref_datetime}}</p>
+                    @if($t->status == "pending")
+                    <p class="card-text rounded-pill text-white" 
+                    style="background-color:peru; width:150px; text-align:center;">{{$t->status}}</p>
+                    @elseif($t->status == "success")
+                    <p class="card-text rounded-pill text-white" 
+                    style="background-color:green; width:150px; text-align:center;">{{$t->status}}</p>
+                    @else
+                    <p class="card-text rounded-pill text-white" 
+                    style="background-color:firebrick; width:150px; text-align:center;">{{$t->status}}</p>
+                    @endif
                 </div>
             </div>
+        </div>
         @endforeach
+        </div>
     @endif
+    </div>
+    <!-- REFUNDS -->
     
     @else
+    <div class="mt-3 ms-5">
     <p>No Transactions</p>
+    </div>
     @endif
 
 <!-- CONSULTANT VIEW -->
 @elseif(Auth::user()->role == "consultant")
+<!-- TRANSACTIONS -->
     @if($transCountC > 0)
+    <div class="mt-3 mx-5">
+    <div class="row g-0">
+        <div class="col text-start"><h2>Transaction History Page</h2></div>
+        <div class="col text-end">
     <!-- Button trigger modal Prog -->
     <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#withdraw">Withdraw</a>
                                 
@@ -120,58 +159,110 @@
 
             </div>
         </div>
+        </div>
     </div>
-
-    <h2>Transaction History Page</h2>
+</div>
     <h4>Total Transactions: {{ $totalTrans }}</h4>
-    <h5>Wallet: Rp {{ $transWallet }}</h5>
-    <br>
-    @foreach($transC as $t)
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Transaction ID: {{$t->id}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{$t->title}}</h6>
-                <p class="card-text">Rp {{$t->amount}}</p>
-                <p class="card-text">Transaction Datetime: {{$t->transaction_datetime}}</p>
+    <h5 class="mb-3">Wallet: Rp {{ $transWallet }}</h5>
+    <div class="row g-0">
+        @foreach($transC as $t)
+        <div class="col-md-3 mb-3">
+            <div class="card d-block" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Transaction ID: {{$t->id}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{$t->title}}</h6>
+                    <p class="card-text">Rp {{$t->amount}}</p>
+                    <p class="card-text">{{$t->transaction_datetime}}</p>
+                </div>
             </div>
         </div>
-    @endforeach
+        @endforeach
+    </div>
+    <div class="mt-3">
+        <div class="pagination">
+            {{ $transC->links() }}
+        </div>
+    </div>
+<!-- TRANSACTIONS -->
     <br>
 
+<!-- WITHDRAWS -->
     @if($transCountW > 0)
     <h5>Total Withdraws: {{ $transCountW }}</h5>
+    <div class="row g-0">
     @foreach($transW as $t)
-        <div class="card" style="width: 18rem;">
+    <div class="col-md-3 mb-3">
+        <div class="card d-block" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">Withdraw ID: {{$t->id}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{$t->type}}</h6>
                 <p class="card-text">Rp {{$t->amount}}</p>
-                <p class="card-text">Transaction Datetime: {{$t->created_at}}</p>
-                <p class="card-text">Status: {{$t->status}}</p>
+                <p class="card-text">{{$t->created_at}}</p>
+                @if($t->status == "pending")
+                <p class="card-text rounded-pill text-white" 
+                style="background-color:peru; width:150px; text-align:center;">{{$t->status}}</p>
+                @elseif($t->status == "success")
+                <p class="card-text rounded-pill text-white" 
+                style="background-color:green; width:150px; text-align:center;">{{$t->status}}</p>
+                @else
+                <p class="card-text rounded-pill text-white" 
+                style="background-color:firebrick; width:150px; text-align:center;">{{$t->status}}</p>
+                @endif
             </div>
         </div>
+    </div>
     @endforeach
+    </div>
+    <div class="mt-3">
+        <div class="pagination">
+            {{ $transW->links() }}
+        </div>
+    </div>
     @endif
+<!-- WITHDRAWS -->
     <br>
 
+<!-- REFUNDS FROM USER -->
     @if($transCountRC > 0)
     <h5>Total Refunds: {{ $transCountRC }}</h5>
+    <div class="row g-0">
     @foreach($transRC as $t)
+    <div class="col-md-3 mb-3">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">Refund ID: {{$t->id}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{$t->type}}</h6>
                 <p class="card-text">Rp {{$t->amount}}</p>
-                <p class="card-text">Transaction Datetime: {{$t->created_at}}</p>
-                <p class="card-text">Status: {{$t->status}}</p>
+                <p class="card-text">{{$t->created_at}}</p>
+                @if($t->status == "pending")
+                <p class="card-text rounded-pill text-white" 
+                style="background-color:peru; width:150px; text-align:center;">{{$t->status}}</p>
+                @elseif($t->status == "success")
+                <p class="card-text rounded-pill text-white" 
+                style="background-color:green; width:150px; text-align:center;">{{$t->status}}</p>
+                @else
+                <p class="card-text rounded-pill text-white" 
+                style="background-color:firebrick; width:150px; text-align:center;">{{$t->status}}</p>
+                @endif
             </div>
         </div>
+    </div>
     @endforeach
+    </div>
+    <div class="mt-3">
+        <div class="pagination">
+            {{ $transRC->links() }}
+        </div>
+    </div>
     @endif
+<!-- REFUNDS FROM USER -->
 
     @else
-    <p>No Transactions</p>
+        <div class="mt-3 ms-5">
+        <p>No Transactions</p>  
+        </div>
     @endif 
+    </div>
 @else
     <p> Login First</p>
 @endif

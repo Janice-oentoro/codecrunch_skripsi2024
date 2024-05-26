@@ -68,7 +68,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    @if(Auth::user()->role == "consultant" || Auth::user()->role == "user")
                                     <a class="dropdown-item text-dark fw-bold" href="/editprofile">Edit Profile</a>
+                                    @endif
+
                                     @if(Auth::user()->role == "consultant")
                                     <a class="dropdown-item text-dark fw-bold" href="/feedback">Feedback</a>
                                     @endif

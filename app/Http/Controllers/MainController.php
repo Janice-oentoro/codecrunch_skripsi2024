@@ -119,119 +119,124 @@ class MainController extends Controller
     }
 
     public function consultation(){
-        #User view
-        if(Auth::check() && Auth::user()->role == "user"){
-            if($cus = Consultation::where('user_id', Auth::id())->where('status', 'pending')
-            ->join('users', 'consultant_id', '=', 'users.id')->exists()){
-                $cus = Consultation::where('user_id', Auth::id())->where('status', 'pending')
-                ->join('users', 'consultant_id', '=', 'users.id')
-                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
-                ->paginate(2, ['*'], 'cus');
-            } else {
-                $cus = "";
-            }
-            
-            if(Consultation::where('user_id', Auth::id())->where('status', 'coming soon')
-            ->join('users', 'consultant_id', '=', 'users.id')->exists()){
-                $ccss = $ccss = Consultation::where('user_id', Auth::id())->where('status', 'coming soon')
-                ->join('users', 'consultant_id', '=', 'users.id')
-                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
-                ->paginate(2, ['*'], 'ccss');
-            } else {
-                $ccss = "";
-            }
-
-            if(Consultation::where('user_id', Auth::id())->where('status', 'on going')
-            ->join('users', 'consultant_id', '=', 'users.id')->exists()){
-                $cogs = Consultation::where('user_id', Auth::id())->where('status', 'on going')
-                ->join('users', 'consultant_id', '=', 'users.id')
-                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
-                ->paginate(2, ['*'], 'cogs');
-            } else {
-                $cogs = "";
-            }
-
-            
-            if(Consultation::where('user_id', Auth::id())->where('status', 'finished')
-            ->join('users', 'consultant_id', '=', 'users.id')->exists()) {
-                $cufs = Consultation::where('user_id', Auth::id())->where('status', 'finished')
-                ->join('users', 'consultant_id', '=', 'users.id')
-                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
-                ->paginate(2, ['*'], 'cufs');
-            } else {
-                $cufs ="";
-            }
-            
-            if(Consultation::where('user_id', Auth::id())->where('status', 'cancelled')
-            ->join('users', 'consultant_id', '=', 'users.id')->exists()){
-                $cucs = Consultation::where('user_id', Auth::id())->where('status', 'cancelled')
-                ->join('users', 'consultant_id', '=', 'users.id')
-                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
-                ->paginate(2, ['*'], 'cucs');
-            } else {
-                $cucs = "";
-            }
-            return view('consultation', compact('cus', 'ccss', 'cogs', 'cufs', 'cucs'));
-        } 
-        #Consultant view 
-        elseif(Auth::check() && Auth::user()->role == "consultant"){
-            if(Consultation::where('consultant_id', Auth::id())->where('status', 'pending')
-            ->join('users', 'user_id', '=', 'users.id')->exists()){
-                $ccus = Consultation::where('consultant_id', Auth::id())->where('status', 'pending')
-                ->join('users', 'user_id', '=', 'users.id')
-                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
-                ->paginate(2, ['*'], 'ccus');        
-            } else {
-                $ccus = "";
-            }
-
-            if(Consultation::where('consultant_id', Auth::id())->where('status', 'coming soon')
-            ->join('users', 'user_id', '=', 'users.id')->exists()){
-                $cccss = Consultation::where('consultant_id', Auth::id())->where('status', 'coming soon')
-                ->join('users', 'user_id', '=', 'users.id')
-                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
-                ->paginate(2, ['*'], 'cccss');
-            } else {
-                $cccss = "";
-            }
-
-            if(Consultation::where('consultant_id', Auth::id())->where('status', 'on going')
-            ->join('users', 'user_id', '=', 'users.id')->exists()){
-                $ccogs = Consultation::where('consultant_id', Auth::id())->where('status', 'on going')
-                ->join('users', 'user_id', '=', 'users.id')
-                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
-                ->paginate(2, ['*'], 'ccogs');
-            } else {
-                $ccogs = "";
-            }
-
-            if(Consultation::where('consultant_id', Auth::id())->where('status', 'finished')
-            ->join('users', 'user_id', '=', 'users.id')->exists()){
-                $ccfs = Consultation::where('consultant_id', Auth::id())->where('status', 'finished')
-                ->join('users', 'user_id', '=', 'users.id')
-                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
-                ->paginate(2, ['*'], 'ccfs');
-            } else {
-                $ccfs = "";
-            }
-
-            if($cccs = Consultation::where('consultant_id', Auth::id())->where('status', 'cancelled')
-            ->join('users', 'user_id', '=', 'users.id')->exists()){
-                $cccs = Consultation::where('consultant_id', Auth::id())->where('status', 'cancelled')
-                ->join('users', 'user_id', '=', 'users.id')
-                ->select('title', 'desc', 'type', 'status', 'link', 'name', 'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar')
-                ->paginate(2, ['*'], 'cccs');
-            } else {
-                $cccs = "";
-            }
-            
-            return view('consultation', compact('ccus', 'cccss', 'ccogs', 'ccfs', 'cccs'));
+    #User view
+    if(Auth::check() && Auth::user()->role == "user"){
+        if(Consultation::where('user_id', Auth::id())->where('status', 'pending')
+        ->join('users', 'consultant_id', '=', 'users.id')->exists()){
+            $ps= Consultation::where('user_id', Auth::id())->where('status', 'pending')
+            ->join('users', 'consultant_id', '=', 'users.id')
+            ->orderByDesc('consultations.created_at')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 
+            'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+        } else {
+            $ps = "";
         }
-       else{
-        return redirect()->route('login')->with('success', "Login First");
-       } 
-    }
+        
+        if(Consultation::where('user_id', Auth::id())->where('status', 'coming soon')
+        ->join('users', 'consultant_id', '=', 'users.id')->exists()){
+            $cms = $ccss = Consultation::where('user_id', Auth::id())->where('status', 'coming soon')
+            ->join('users', 'consultant_id', '=', 'users.id')
+            ->orderByDesc('consultations.created_at')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 
+            'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+        } else {
+            $cms = "";
+        }
 
+        if(Consultation::where('user_id', Auth::id())->where('status', 'on going')
+        ->join('users', 'consultant_id', '=', 'users.id')->exists()){
+            $ogs = Consultation::where('user_id', Auth::id())->where('status', 'on going')
+            ->join('users', 'consultant_id', '=', 'users.id')
+            ->orderByDesc('consultations.created_at')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 
+            'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+        } else {
+            $ogs = "";
+        }
+        
+        if(Consultation::where('user_id', Auth::id())->where('status', 'finished')
+        ->join('users', 'consultant_id', '=', 'users.id')->exists()) {
+            $fs = Consultation::where('user_id', Auth::id())->where('status', 'finished')
+            ->join('users', 'consultant_id', '=', 'users.id')
+            ->orderByDesc('consultations.created_at')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 
+            'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+        } else {
+            $fs ="";
+        }
+        
+        if(Consultation::where('user_id', Auth::id())->where('status', 'cancelled')
+        ->join('users', 'consultant_id', '=', 'users.id')->exists()){
+            $cs = Consultation::where('user_id', Auth::id())->where('status', 'cancelled')
+            ->join('users', 'consultant_id', '=', 'users.id')
+            ->orderByDesc('consultations.created_at')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 
+            'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+        } else {
+            $cs = "";
+        }
+        return view('consultation', compact('ps', 'cms', 'ogs', 'fs', 'cs'));
+    } 
+    #Consultant view 
+    elseif(Auth::check() && Auth::user()->role == "consultant"){
+        if(Consultation::where('consultant_id', Auth::id())->where('status', 'pending')->exists()){
+            $ps = Consultation::where('consultant_id', Auth::id())->where('status', 'pending')
+            ->join('users', 'user_id', '=', 'users.id')         
+            ->orderByDesc('consultations.created_at')   
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 
+            'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);    
+        } else {
+            $ps = "";
+        }
+
+        if(Consultation::where('consultant_id', Auth::id())->where('status', 'coming soon')
+        ->join('users', 'user_id', '=', 'users.id')->exists()){
+            $cms = Consultation::where('consultant_id', Auth::id())->where('status', 'coming soon')
+            ->join('users', 'user_id', '=', 'users.id')
+            ->orderByDesc('consultations.created_at')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 
+            'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+        } else {
+            $cms = "";
+        }
+
+        if(Consultation::where('consultant_id', Auth::id())->where('status', 'on going')
+        ->join('users', 'user_id', '=', 'users.id')->exists()){
+            $ogs = Consultation::where('consultant_id', Auth::id())->where('status', 'on going')
+            ->join('users', 'user_id', '=', 'users.id')
+            ->orderByDesc('consultations.created_at')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 
+            'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+        } else {
+            $ogs = "";
+        }
+
+        if(Consultation::where('consultant_id', Auth::id())->where('status', 'finished')
+        ->join('users', 'user_id', '=', 'users.id')->exists()){
+            $fs = Consultation::where('consultant_id', Auth::id())->where('status', 'finished')
+            ->join('users', 'user_id', '=', 'users.id')
+            ->orderByDesc('consultations.created_at')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 
+            'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+        } else {
+            $fs = "";
+        }
+
+        if(Consultation::where('consultant_id', Auth::id())->where('status', 'cancelled')
+        ->join('users', 'user_id', '=', 'users.id')->exists()){
+            $cs = Consultation::where('consultant_id', Auth::id())->where('status', 'cancelled')
+            ->join('users', 'user_id', '=', 'users.id')
+            ->orderByDesc('consultations.created_at')
+            ->get(['title', 'desc', 'type', 'status', 'link', 'name', 
+            'consultations.id', 'consult_datetime', 'end_consult_datetime', 'avatar']);
+        } else {
+            $cs = "";
+        }
+        return view('consultation', compact('ps', 'cms', 'ogs', 'fs', 'cs'));
+    } else {
+    return redirect()->route('login')->with('success', "Login First");
+   } 
+}
     public function addConsultation(){
         return view('addconsultation');
     }
@@ -294,8 +299,8 @@ class MainController extends Controller
 
     public function addCon(Request $request){
         $rules = [
-            'title' => 'required|string|min:5|max:50',
-            'desc' => 'required|string|min:10|max:255',
+            'title' => 'required|string|min:5|max:20',
+            'desc' => 'required|string|min:10|max:50',
             'name' => 'required|string',
             'consult_datetime' => 'required|after_or_equal:now',
             'end_consult_datetime' => 'required|after_or_equal:consult_datetime'
@@ -332,7 +337,7 @@ class MainController extends Controller
         $c->status = $request->status;
         $c->link = $request->link;
         $c->save();
-        return redirect('/consultation')->with('success',"Add Programming Skill Success");
+        return redirect('/consultation')->with('success',"Add Consultation Success");
     }
 
     public function cancelCon(Request $request)
@@ -346,11 +351,11 @@ class MainController extends Controller
     public function editCon(Request $request)
     {
         $rules = [
-            'title' => 'required|string|min:5|max:50',
-            'desc' => 'required|string|min:10|max:255',
+            'title' => 'required|string|min:5|max:20',
+            'desc' => 'required|string|min:10|max:50',
             'name' => 'required|string',
             'consult_datetime' => 'required|after_or_equal:now',
-            'end_consult_datetime' => 'required|after_or_equal:consult_datetime'
+            'end_consult_datetime' => 'required|after_or_equal:now'
         ];
         $msg = [
             'title.string' => 'Title must be string',
@@ -369,20 +374,19 @@ class MainController extends Controller
             'end_consult_datetime.after_or_equal:consult_datetime' => 'End Datetime must be atleast from Start Datetime',
         ];
 
-       $request->validate($rules,$msg);
+       $request->validate($rules, $msg);
         $user_id = User::where('name', $request->name)->select('id')->first();
 
-        $con = Consultation::findOrFail($request->id);
-        $con->update([
+        Consultation::where('consultations.id', $request->id)->update([
                 'title' => $request->title,
                 'desc' => $request->desc,
-                'user_id' => $user_id,
+                'user_id' => $user_id->id,
                 'type' => $request->type,
                 'consult_datetime' => $request->consult_datetime,
-                'end_consult_datetime' => $request->endconsult_datetime,
+                'end_consult_datetime' => $request->end_consult_datetime,
                 'link' => $request->link
             ]);
-            return redirect()->back()->with('success', 'Edit Consultation Success');
+        return redirect('/consultation')->with('success', 'Edit Consultation Success');
     }
 
     public function addFeedback(Request $request)
@@ -400,12 +404,14 @@ class MainController extends Controller
             // User View
             if(Transaction::where('transactions.user_id', Auth::id())->join('consultations', 'transactions.consultation_id', 'consultations.id')
             ->exists()){
-                $transU = Transaction::where('consultations.user_id', Auth::id())
+                $transU = Transaction::where('transactions.user_id', Auth::id())
                 ->where('transactions.status', 'success')
                 ->join('consultations', 'transactions.consultation_id', 'consultations.id')
-                ->get(['transactions.id', 'title', 'amount', 'transaction_datetime', 'consultations.user_id']);
+                ->latest('transactions.created_at')
+                ->select('transactions.id', 'title', 'amount', 'transaction_datetime', 'transactions.user_id')
+                ->paginate(3, ['*'], 'transU');
 
-                $transCountU = Transaction::where('consultations.user_id', Auth::id())
+                $transCountU = Transaction::where('transactions.user_id', Auth::id())
                 ->where('transactions.status', 'success')
                 ->join('consultations', 'transactions.consultation_id', 'consultations.id')
                 ->count('transactions.id');
@@ -414,15 +420,16 @@ class MainController extends Controller
                 $transCountU = 0;
             }
 
-            if(Withdraw::where('withdraws.user_id', Auth::id())->where('withdraws.status', 'success')->where('withdraws.type', 'refund')
+            if(Withdraw::where('withdraws.user_id', Auth::id())->where('withdraws.type', 'refund')
             ->exists()){
                 $transUR = Withdraw::where('withdraws.user_id', Auth::id())
                 ->where('withdraws.type', 'refund')
-                ->get(['withdraws.id', 'transaction_id','withdraws.type', 'amount', 
-                'withdraws.created_at AS ref_datetime', 'withdraws.user_id', 'status']);
+                ->latest('withdraws.created_at')
+                ->select('withdraws.id', 'transaction_id','withdraws.type', 'amount', 
+                'withdraws.created_at AS ref_datetime', 'withdraws.user_id', 'status')
+                ->paginate(3, ['*'], 'transUR');
 
                 $transURC = Withdraw::where('withdraws.user_id', Auth::id())
-                ->where('withdraws.status', 'success')
                 ->where('withdraws.type', 'refund')
                 ->count('withdraws.id');
             } else {
@@ -438,7 +445,9 @@ class MainController extends Controller
                 $transC = Transaction::where('consultations.consultant_id', Auth::id())
                 ->where('transactions.status', 'success')
                 ->join('consultations', 'transactions.consultation_id', 'consultations.id')
-                ->get(['transactions.id', 'title', 'amount', 'transaction_datetime', 'consultations.consultant_id']);
+                ->latest('transactions.created_at')
+                ->select('transactions.id', 'title', 'amount', 'transaction_datetime', 'consultations.consultant_id')
+                ->paginate(3, ['*'], 'transC');
 
                 $transCountC = Transaction::where('consultations.consultant_id', Auth::id())
                 ->where('transactions.status', 'success')
@@ -454,7 +463,9 @@ class MainController extends Controller
                     $transWithdraw = Withdraw::where('user_id', Auth::id())
                     ->where('type', 'withdraw')->sum('amount');
                     $transW = Withdraw::where('user_id', Auth::id())
-                    ->where('type', 'withdraw')->get();
+                    ->where('type', 'withdraw')
+                    ->latest('withdraws.created_at')
+                    ->select()->paginate(3, ['*'], 'transW');
                     $transCountW = Withdraw::where('user_id', Auth::id())
                     ->where('type', 'withdraw')->count('id');
                 } else {
@@ -476,8 +487,10 @@ class MainController extends Controller
                     $transRC= Withdraw::where('consultations.consultant_id', Auth::id())
                     ->join('transactions', 'transaction_id', 'transactions.id')
                     ->join('consultations', 'consultation_id', 'consultations.id')
-                    ->where('withdraws.type', 'refund')->get(['withdraws.id', 'withdraws.amount', 'withdraws.status',
-                    'withdraws.type', 'withdraws.created_at']);
+                    ->where('withdraws.type', 'refund')
+                    ->latest('withdraws.created_at')
+                    ->select('withdraws.id', 'withdraws.amount', 'withdraws.status',
+                    'withdraws.type', 'withdraws.created_at')->paginate(3, ['*'], 'transRC');
 
                     $transCountRC = Withdraw::where('consultations.consultant_id', Auth::id())
                     ->join('transactions', 'transaction_id', 'transactions.id')
@@ -488,12 +501,15 @@ class MainController extends Controller
                     $transRC = "";
                     $transCountRC = 0;
                 }
-                
                 $transWallet = $transSumC - $transWithdraw - $transRefund;
             } else {
                 $transC = "";
                 $transCountC = 0;
                 $transWallet = 0;
+                $transCountRC = 0;
+                $transCountW = 0;
+                $transW = "";
+                $transRC = "";
             } $totalTrans = $transCountC + $transCountRC + $transCountW;
             return view('transactionhistory', compact('transC', 'transCountC', 'transWallet',
                 'transCountW', 'transW', 'transRC', 'transCountRC', 'totalTrans'));
@@ -509,6 +525,7 @@ class MainController extends Controller
                 $feedbacks = ConsultationFeedback::where('consultant_id', Auth::id())
                 ->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')
                 ->join('users', 'consultations.user_id', 'users.id')
+                ->latest('consultation_feedback.created_at')
                 ->select('rating', 'comment', 'user_id', 'title', 'name')->paginate(9);
 
                 $avgRating = ConsultationFeedback::where('consultant_id', Auth::id())->join('consultations', 'consultation_feedback.consultation_id', 'consultations.id')

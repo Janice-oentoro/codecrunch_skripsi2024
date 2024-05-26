@@ -164,7 +164,6 @@
     @endforeach    
     
 </div>
-
     <div class="pagination">
         {{ $users->links() }}
     </div>
