@@ -16,7 +16,7 @@
 <x-layout>
 <div class="ms-5">
     <div class="mt-2">
-        <form action="" class="" method="GET">
+        <form action="{{ route('land') }}" class="" method="GET">
             <!-- Search -->
             <div class="row g-0">
                 <div class="col-md-3">    
@@ -26,7 +26,7 @@
 
                 <div class="col-md-3">
                     <br>
-                    <button class="btn btn-primary mx-2" type="button">
+                    <button class="btn btn-primary mx-2">
                         <i class="fa fa-search"></i></button>
                         <a href="/" class="btn btn-primary"><i class="fa fa-rotate-left"></i></a>
                 </div>
@@ -35,7 +35,7 @@
     </div>
 
     <div class="mt-3">
-        <form action="" class="" method="GET">
+        <form action="{{ route('land') }}" class="" method="GET">
             <div class="row g-0">
             <!-- Filter Programming -->
                 <div class="col-md-4" style="width: 25%;">
