@@ -21,12 +21,12 @@
         <div class="container mt-4 py-5 editprofcont">
             <div class="container d-block align-items-center justify-content-center" style="width:200px; height:150px;">
                 @if (Auth::user()->avatar != null)
-                <img src="{{ asset($avatar) }}" width="150px" height="150px" style="clip-path: circle();" 
-                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                <img src="{{ asset($avatar) }}" width="150px" height="150px"
+                    class="rounded-circle justify-content-center align-items-center"
                     style="height:150px; width:150px;" alt="..."/>
                 @else
-                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150px" height="150px" style="clip-path: circle();" 
-                    class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                <img src="{{ asset('/storage/images/def-icon.png') }}" width="150px" height="150px"
+                    class="justify-content-center align-items-center"
                     style="height:150px; width:150px;" alt="..."/>
                 @endif
             </div>

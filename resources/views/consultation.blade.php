@@ -31,15 +31,15 @@ $user = Auth::user();
         <div class="card mb-3 me-3 d-block" style="width: 48%;">
             <div class="row g-0">
                 <div class="col-md-4 p-5">
-                    @if ($ccon->avatar != null) 
-                    <img src="{{ asset($avatar) }}" width="125px" height="125px" style="clip-path: circle();" 
-                        class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                @if ($ccon->avatar != null) 
+                    <img src="{{ asset($avatar) }}" width="125px" height="125px"
+                        class="rounded-circle justify-content-center align-items-center"
                         style="height:125px; width:125px;" alt="...">
-                    @else
-                    <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" style="clip-path: circle();" 
-                        class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                @else
+                    <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px"
+                        class="rounded-circle justify-content-center align-items-center"
                         style="height:125px; width:125px;" alt="...">
-                    @endif
+                @endif
                 </div>
                 <div class="col">
                     <div class="card-body">
@@ -182,16 +182,16 @@ $user = Auth::user();
     @php
         $avatar = AuthController::imageAdapter($ccon->avatar);
     @endphp
-        <div class="card mb-3 me-3 ms-3 d-block" style="width: 48%;">
+        <div class="card mb-3 me-3 d-block" style="width: 48%;">
             <div class="row g-0">
                 <div class="col-md-4 p-5">
                 @if ($ccon->avatar != null) 
-                    <img src="{{ asset($avatar) }}" width="125px" height="125px" style="clip-path: circle();" 
-                        class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                    <img src="{{ asset($avatar) }}" width="125px" height="125px"
+                        class="rounded-circle justify-content-center align-items-center"
                         style="height:125px; width:125px;" alt="...">
                 @else
-                    <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" style="clip-path: circle();" 
-                        class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                    <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px"
+                        class="rounded-circle justify-content-center align-items-center"
                         style="height:125px; width:125px;" alt="...">
                 @endif
                 </div>
@@ -247,12 +247,11 @@ $user = Auth::user();
             <div class="row g-0">
                 <div class="col-md-4 p-5">
                 @if ($ccon->avatar != null) 
-                    <img src="{{ asset($avatar) }}" width="125px" height="125px" style="clip-path: circle();" 
-                        class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                    <img src="{{ asset($avatar) }}" width="125px" height="125px"
+                        class="rounded-circle justify-content-center align-items-center"
                         style="height:125px; width:125px;" alt="...">
                 @else
-                    <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" style="clip-path: circle();" 
-                        class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                    <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px"
                         style="height:125px; width:125px;" alt="...">
                 @endif
                 </div>
@@ -306,12 +305,12 @@ $user = Auth::user();
             <div class="row g-0">
                 <div class="col-md-4 p-5">
                 @if ($ccon->avatar != null) 
-                    <img src="{{ asset($avatar) }}" width="125px" height="125px" style="clip-path: circle();" 
-                        class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                    <img src="{{ asset($avatar) }}" width="125px" height="125px"
+                        class="rounded-circle justify-content-center align-items-center"
                         style="height:125px; width:125px;" alt="...">
                 @else
-                    <img src="{{ asset('/storage/images/def-icon.png') }}"width="125px" height="125px" style="clip-path: circle();" 
-                        class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                    <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px"
+                        class="rounded-circle justify-content-center align-items-center"
                         style="height:125px; width:125px;" alt="...">
                 @endif
                 </div>
@@ -398,12 +397,12 @@ $user = Auth::user();
             <div class="row g-0">
                 <div class="col-md-4 p-5">
                 @if ($ccon->avatar != null) 
-                    <img src="{{ asset($avatar) }}"width="125px" height="125px" style="clip-path: circle();" 
-                        class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                    <img src="{{ asset($avatar) }}" width="125px" height="125px"
+                        class="rounded-circle justify-content-center align-items-center"
                         style="height:125px; width:125px;" alt="...">
                 @else
-                    <img src="{{ asset('/storage/images/def-icon.png') }}"width="125px" height="125px" style="clip-path: circle();" 
-                        class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+                    <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px"
+                        class="rounded-circle justify-content-center align-items-center"
                         style="height:125px; width:125px;" alt="...">
                 @endif
                 </div>

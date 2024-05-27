@@ -17,9 +17,9 @@
                     <div class="ms-4 my-3 d-flex flex-row justify-content-between align-items-end w-100" >
                         <div>
                             @if($cons->avatar != null) 
-                            <img src="{{ asset($avatar) }}" class="img-fluid rounded-circle" width="100" height="100px" style="object-fit: cover;">
+                            <img src="{{ asset($avatar) }}" class="rounded-circle" width="100px" height="100px">
                             @else
-                            <img src="{{ asset('/storage/images/def-icon.png') }}" class="img-fluid rounded-circle" width="100" height="100px" style="object-fit: cover;">
+                            <img src="{{ asset('/storage/images/def-icon.png') }}" width="100px" height="100px" >
                             @endif
                             <p  class="mb-2" style="font-size: 18px; font-weight: bold">{{$cons->title}}</p>
 <!--                        <p class="mb-2">

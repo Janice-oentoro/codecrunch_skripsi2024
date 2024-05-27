@@ -10,17 +10,18 @@
 
 @if($udtl->suspend == false)
 @php
-    $avatar = AuthController::imageAdapter($udtl->avatar);
+   $avatar = AuthController::imageAdapter($udtl->avatar);
 @endphp
 <div class="container d-block align-items-center justify-content-center mt-5 pt-5">
-    <div class="card mb-3 d-block text-white" style="width:100%; height:60vh; background-color: #001D3D;">
+    <div class="card mb-3 d-block text-white" style="width:100%; height:80%; background-color: #001D3D;">
     <div class="row g-0">
         <div class="col-md-3 pt-5 container justify-content-center align-items-center">
             <div class="row g-0">
             @if ($udtl->avatar != null) 
-                <img src="{{ asset($avatar) }}" width="125px" height="125px" style="clip-path: circle();" 
-                class="img-fluid rounded-circle d-flex justify-content-center align-items-center border border-white border-4"
-                style="height:125px; width:125px;" alt="...">
+            <div class="d-flex flex-column align-items-center text-center ">
+                <img src="{{ asset($avatar) }}" width="300px" height="300px"
+                class="rounded-circle justify-content-center align-items-center border border-white border-4"alt="...">
+            </div>
             @else
                 <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" style="clip-path: circle();" 
                 class="img-fluid rounded-circle d-flex justify-content-center align-items-center border border-white border-4"

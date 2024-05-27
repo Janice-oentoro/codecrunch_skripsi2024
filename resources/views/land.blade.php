@@ -90,13 +90,17 @@
     <div class="row g-0">
         <div class="col-md-4 pt-5 ps-4">
             @if($u->avatar != null)
-                <img src="{{ asset($avatar) }}" width="125px" height="125px" style="clip-path: circle();" 
-                class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+            <div class="d-flex flex-column align-items-center text-center">
+                <img src="{{ asset($avatar) }}" width="125px" height="125px"
+                class="rounded-circle justify-content-center align-items-center"
                 style="height:125px; width:125px;" alt="...">
+            </div>
             @else
-                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px" style="clip-path: circle();" 
-                class="img-fluid rounded-circle d-flex justify-content-center align-items-center"
+            <div class="d-flex flex-column align-items-center text-center">
+                <img src="{{ asset('/storage/images/def-icon.png') }}" width="125px" height="125px"
+                class="rounded-circle justify-content-center align-items-center"
                 style="height:125px; width:125px;" alt="...">
+            </div>
             @endif
         </div>
         <div class="col-md-8">
