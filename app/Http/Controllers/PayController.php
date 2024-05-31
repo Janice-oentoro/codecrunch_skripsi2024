@@ -88,7 +88,10 @@ class PayController extends Controller
             // Transaction::where('id',$request->order_id)->update([
             //     'status' => 'success'
             // ]);
-            if($request->transaction_status == "capture"){
+            $status = Transaction::where('id', $request->order_id)->
+            select('status')->get();
+            
+            if($request->transaction_status == "capture" && $status == 'ongoing'){
                 Transaction::where('id',$request->order_id)->update([
                     'status' => 'success'
                 ]);

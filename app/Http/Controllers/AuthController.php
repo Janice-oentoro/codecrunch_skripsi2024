@@ -101,7 +101,7 @@ class AuthController extends Controller
                 'price' => $request->price
             ]);           
         }
-            return redirect()->route('land')->with('success', 'Edit Profile Success');
+            return redirect()->back()->with('success', 'Edit Profile Success');
     } 
 
     public function newImage(Request $request)

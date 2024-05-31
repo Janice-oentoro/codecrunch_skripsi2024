@@ -1,22 +1,30 @@
 @php
     use App\Http\Controllers\AuthController;
     use Illuminate\Support\Str;
+    use Illuminate\Support\Facades\Session;
 @endphp
 <x-layout>
     @php
         $user = Auth::user();
     @endphp
     @auth
-            @php
-                $avatar= AuthController::imageAdapter(Auth::user()->avatar);
-            @endphp
-            
-    <div class="mt-3"> 
-            @if(Auth::check() && Auth::user()->role == "consultant")
-            <div class="text-end me-5">
-                <button class="btn btn-primary" onclick=window.location="{{ url('/editskill') }}">Edit Skill</button>
-            </div>
-            @endif
+
+    @php
+        $avatar= AuthController::imageAdapter(Auth::user()->avatar);
+    @endphp
+
+    <div class="mt-3">     
+    @if (Session::has('success'))
+        <div class="alert alert-success d-block me-5" role="alert">
+            {{ nl2br(Session::get('success')) }}
+        </div>
+    @endif
+
+    @if(Auth::check() && Auth::user()->role == "consultant")
+    <div class="text-end me-5">
+        <button class="btn btn-primary" onclick=window.location="{{ url('/editskill') }}">Edit Skill</button>
+    </div>
+    @endif
 
         <div class="container mt-4 py-5 editprofcont">
             <div class="container d-block align-items-center justify-content-center" style="width:200px; height:150px;">

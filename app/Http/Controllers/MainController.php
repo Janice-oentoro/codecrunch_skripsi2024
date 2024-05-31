@@ -288,13 +288,13 @@ class MainController extends Controller
     public function deleteConProg(Request $request)
     {
         ProgConsultant::where('id', $request->progcon_id)->delete();
-        return redirect()->back()->with('success',"Delete Success");
+        return redirect()->back()->with('success-del',"Delete Programming Success");
     }
 
     public function deleteConTopic(Request $request)
     {
         TopicConsultant::where('id', $request->topic_id)->delete();
-        return redirect('/editskill')->with('success',"Delete Success");
+        return redirect('/editskill')->with('success-del',"Delete Topic Success");
     }
 
     public function addCon(Request $request){
@@ -345,7 +345,7 @@ class MainController extends Controller
         Consultation::where('id', $request->consultation_id)->update([
             'status' => 'cancelled'
         ]);
-        return redirect()->back()->with('success',"Cancel Consultation Success");
+        return redirect()->back()->with('success-del',"Cancel Consultation Success");
     }
 
     public function editCon(Request $request)
@@ -386,7 +386,7 @@ class MainController extends Controller
                 'end_consult_datetime' => $request->end_consult_datetime,
                 'link' => $request->link
             ]);
-        return redirect('/consultation')->with('success', 'Edit Consultation Success');
+        return redirect('/consultation')->with('success-edit', 'Edit Consultation Success');
     }
 
     public function addFeedback(Request $request)
@@ -554,7 +554,7 @@ class MainController extends Controller
         $rf->type = $request->type;
         $rf->status = $request->status;
         $rf->save();
-        return redirect('/transactionhistory')->with('success',"Add Refund Success");
+        return redirect()->back()->with('success',"Add Refund Success");
     }
 
     public function addWithdraw(Request $request){
@@ -565,7 +565,7 @@ class MainController extends Controller
         $wt->type = $request->type;
         $wt->status = $request->status;
         $wt->save();
-        return redirect('/transactionhistory')->with('success',"Add Withdraw Success");
+        return redirect()->back()->with('success',"Add Withdraw Success");
     }
 
 }

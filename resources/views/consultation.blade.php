@@ -4,6 +4,7 @@
     use App\Models\ConsultationFeedback;
     use Illuminate\Support\Str;
     use Illuminate\Support\Facades\Auth;
+    use Illuminate\Support\Facades\Session;
 ?>
 <x-layout>
 @php
@@ -14,6 +15,19 @@ $user = Auth::user();
 <!-- ADD CONSULTATION BUTTON MODAL -->
 @if(Auth::user()->role == "consultant")
 <div class="ms-5 my-3">
+    @if (Session::has('success'))
+        <div class="alert alert-success me-5 d-block" role="alert">
+            {{ nl2br(Session::get('success')) }}
+        </div>
+    @elseif (Session::has('success-edit'))
+    <div class="alert alert-success me-5 d-block" role="alert">
+        {{ nl2br(Session::get('success-edit')) }}
+    </div>
+    @elseif (Session::has('success-del'))
+        <div class="alert alert-danger me-5 d-block" role="alert">
+            {{ nl2br(Session::get('success-del')) }}
+        </div>
+    @endif
     <a class="btn btn-primary" data-bs-toggle="modal" style="width: 150px;"
     data-bs-target="#addconsultation">New Consultation</a>
 </div>
@@ -243,7 +257,7 @@ $user = Auth::user();
     @php
         $avatar = AuthController::imageAdapter($ccon->avatar);
     @endphp
-    <div class="card mb-3 d-block" style="width: 48%;">
+    <div class="card mb-3 me-3 d-block" style="width: 48%;">
             <div class="row g-0">
                 <div class="col-md-4 p-5">
                 @if ($ccon->avatar != null) 
@@ -301,7 +315,7 @@ $user = Auth::user();
             $feedback = true;
         };
     @endphp
-    <div class="card mb-3" style="width: 48%;">
+    <div class="card mb-3 me-3 d-block" style="width: 48%;">
             <div class="row g-0">
                 <div class="col-md-4 p-5">
                 @if ($ccon->avatar != null) 
@@ -393,7 +407,7 @@ $user = Auth::user();
     @php
         $avatar = AuthController::imageAdapter($ccon->avatar);
     @endphp
-    <div class="card mb-3" style="width: 48%;">
+    <div class="card mb-3 me-3 d-block" style="width: 48%;">
             <div class="row g-0">
                 <div class="col-md-4 p-5">
                 @if ($ccon->avatar != null) 

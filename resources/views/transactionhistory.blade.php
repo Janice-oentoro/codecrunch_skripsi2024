@@ -1,8 +1,16 @@
+<?php
+    use Illuminate\Support\Facades\Session;
+?>
 <x-layout>
 <!-- USER VIEW -->
 @if(Auth::user()->role == "user")
     @if($transCountU > 0)    
     <div class="mt-3 mx-5">
+    @if (Session::has('success'))
+        <div class="alert alert-success d-block" role="alert">
+            {{ nl2br(Session::get('success')) }}
+        </div>
+    @endif
     <div class="row g-0">
     <!-- Button trigger modal Prog -->
     <div class="col text-start"><h2>Transaction History Page</h2></div>

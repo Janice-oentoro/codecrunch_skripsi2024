@@ -1,11 +1,23 @@
+@php
+    use Illuminate\Support\Facades\Session;
+@endphp
 <x-layout>
     @php
-        $user = Auth::user()->role == "consultant";
+    $user = Auth::user()->role == "consultant";
     @endphp
+
     @auth
     <div class="container mt-3">
             <h3> Edit Skill </h3>
-
+            @if (Session::has('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ nl2br(Session::get('success')) }}
+                </div>
+            @elseif (Session::has('success-del'))
+                <div class="alert alert-danger" role="alert">
+                    {{ nl2br(Session::get('success-del')) }}
+                </div>
+            @endif
         <div class="row g-0 my-3">
          <!-- Button trigger modal Prog -->
         <div class="col-md-2">
