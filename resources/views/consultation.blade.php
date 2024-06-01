@@ -480,7 +480,7 @@ $user = Auth::user();
 
                     <div class="form-outline text-start">                        
                         <label class="form-label" for="form12">User Full Name</label>
-                        <input type="string" class="form-control @error('desc') is-invalid @enderror" value="{{old('name')}}" name="name" />
+                        <input type="string" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}" name="name" />
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
