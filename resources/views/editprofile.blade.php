@@ -15,7 +15,7 @@
 
     <div class="mt-3">     
     @if (Session::has('success'))
-        <div class="alert alert-success d-block me-5" role="alert">
+        <div class="alert alert-success d-block mx-5" role="alert">
             {{ nl2br(Session::get('success')) }}
         </div>
     @endif
@@ -45,24 +45,45 @@
             <form action="{{ route('edit-profile') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                     <div class="row mb-3 g-0">                        
-                        <label class="form-label" for="form12">Name</label>
-                            <input type="text" id="form12" class="form-control" value="{{ $user->name }}" name="name" />
+                        <label class="form-label" for="name">Name</label>
+                            <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ $user->name }}" name="name" />
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+
+                    <div class="row mb-3 g-0">                        
+                        <label class="form-label" for="email">Email</label>
+                        <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}" name="email" />
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
 
                     <div class="row mb-3 g-0">                        
-                        <label class="form-label" for="form12">Email</label>
-                        <input type="email" id="form12" class="form-control" value="{{ $user->email }}" name="email" />
-                    </div>
-
-                    <div class="row mb-3 g-0">                        
-                        <label class="form-label" for="form12">Phone</label>
-                        <input type="text" id="form12" class="form-control" value="{{ $user->phone }}" name="phone" />
+                        <label class="form-label" for="phone">Phone</label>
+                        <input type="text" id="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ $user->phone }}" name="phone" />
+                        @error('phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
 
                     @if(Auth::check() && Auth::user()->role == "consultant")
                     <div class="row mb-3 g-0">                        
-                        <label class="form-label" for="form12">Price</label>
-                        <input type="number" id="form12" class="form-control" value="{{ $user->price }}" name="price" />
+                        <label class="form-label" for="price">Price</label>
+                        <input type="number" id="price" class="form-control @error('price') is-invalid @enderror" value="{{ $user->price }}" name="price" />
+                        @error('price')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     @endif
 

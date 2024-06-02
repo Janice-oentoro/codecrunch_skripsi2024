@@ -5,8 +5,8 @@
     use App\Models\Topic;
     use App\Models\ConsultationFeedback;
     use Illuminate\Support\Arr;
-    $progs = Programming::all();    
-    $topics = Topic::all();
+    $progs = Programming::orderBy('prog_name', 'ASC')->get();
+    $topics = Topic::orderBy('topic_name', 'ASC')->get();
 ?>
 @php
     use App\Http\Controllers\AuthController;
@@ -21,7 +21,8 @@
             <div class="row g-0">
                 <div class="col-md-3">    
                     <label for="search">Search</label>
-                    <input type="text" name="search" id="search" class="form-control" aria-describedby="helpId" value="{{$search}}">
+                    <input type="text" name="search" id="search" class="form-control" aria-describedby="helpId" value="{{$search}}"
+                    placeholder="Search by Name">
                 </div>
 
                 <div class="col-md-3">

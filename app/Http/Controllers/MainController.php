@@ -20,6 +20,7 @@ use App\Models\ConsultationFeedback;
 use App\Models\Transaction;
 use App\Models\Withdraw;
 use App\Models\User;
+use App\Rules\nameMatch;
 use Carbon\Carbon; #GET CURRENT TIME
 
 class MainController extends Controller
@@ -92,7 +93,7 @@ class MainController extends Controller
             $users = User::where('role', 'consultant')->where('suspend', false)
             ->select('users.id', 'name', 'price','avatar')->paginate(6);
         }
-        return view('land', compact('users', 'search', 'filterprog'));
+        return view('land', compact('users', 'search', 'filterprog', 'filtertopic'));
     }
 
     public function detailConsultant(Request $request){
@@ -109,7 +110,6 @@ class MainController extends Controller
             $avgRating = 0;
             $countRating = 0;
         }
-
         return view('detailconsultant', compact('udtl', 'avgRating', 'countRating'));
     }
 
@@ -254,8 +254,8 @@ class MainController extends Controller
     public function viewSkill()
     {
         if(Auth::check() && Auth::user()->role == "consultant"){
-            $programmings = Programming::all();
-            $topics = Topic::all();
+            $programmings = Programming::orderBy('prog_name', 'ASC')->get();; 
+            $topics = Topic::orderBy('topic_name', 'ASC')->get();;
             $progcons = ProgConsultant::where('consultant_id', Auth::id())
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->get(['prog_consultants.id', 'consultant_id', 'prog_name']);
@@ -301,21 +301,22 @@ class MainController extends Controller
         $rules = [
             'title' => 'required|string|min:5|max:20',
             'desc' => 'required|string|min:10|max:50',
-            'name' => 'required|string',
+            'name' => ['required', 'string', new nameMatch],
             'consult_datetime' => 'required|after_or_equal:now',
             'end_consult_datetime' => 'required|after_or_equal:consult_datetime'
         ];
         $msg = [
             'title.string' => 'Title must be string',
             'title.min' => 'Title must be filled with min 5 characters',
-            'title.max' => 'Title must below than 50 characters',
+            'title.max' => 'Title must below than 20 characters',
             'title.required' => 'Title is required',
             'desc.required' => 'Description is required',
             'desc.string' => 'Description must be string',
             'desc.min' => 'Description must be filled with min 10 characters',
-            'desc.max' => 'Description must below than 255 characters',
+            'desc.max' => 'Description must below than 50 characters',
             'name.required' => 'Name is required',
             'name.string' => 'Name must be in string',
+            'name.nameMatch' => 'Name must be an exact match',
             'consult_datetime.required' => 'Start Datetime needed',
             'consult_datetime.after_or_equal:now' => 'Start Datetime must be atleast from now',
             'end_consult_datetime.required' => 'End Datetime needed',

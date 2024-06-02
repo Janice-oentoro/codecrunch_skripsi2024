@@ -40,7 +40,7 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
         
         @if ($user->avatar != null)
         <div class="avatar av-m"
-        style="background-image: url({{url($user->avatar)}});">
+        style="background-image: url({{url($avatar)}});">
         </div>
         @else
         <div class="avatar av-m"

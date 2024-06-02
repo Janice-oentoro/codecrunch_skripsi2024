@@ -9,6 +9,12 @@
 <x-layout>
 @php
 $user = Auth::user();
+if(Consultation::where('user_id', Auth::id())->exists() || Consultation::where('consultant_id', Auth::id())->exists()){
+    $c = true;
+} else {
+    $c = false;
+};
+
 @endphp
 
 @auth
@@ -30,6 +36,12 @@ $user = Auth::user();
     @endif
     <a class="btn btn-primary" data-bs-toggle="modal" style="width: 150px;"
     data-bs-target="#addconsultation">New Consultation</a>
+</div>
+@endif
+
+@if($c == false)
+<div class="ms-5 my-3">
+    <p>No Consultations</p>
 </div>
 @endif
 

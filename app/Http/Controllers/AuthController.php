@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use App\Rules\nameUnique;
+use App\Rules\emailUnique;
 
 class AuthController extends Controller
 {
@@ -47,9 +49,9 @@ class AuthController extends Controller
 
     public function registerUser(Request $request) {
         $rules = [
-            'name' => 'required|string|min:5|max:255|unique:users',
+            'name' => ['required', 'string', 'min:5', 'max:255', 'unique:users'],
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:8|alpha_num',
+            'password' => 'required|min:8',
             'phone' => 'required|string|min:10|max:13',
             'role' => 'required'
         ];
@@ -64,8 +66,8 @@ class AuthController extends Controller
             'password.alpha_num' => 'Password must contain letter and number',
             'phone.required' => 'Phone number required.',
             'phone.string' => 'Phone number must be string',
-            'phone.min' => 'Phone number 10-13 characers.',
-            'phone.min' => 'Phone number 10-13 characers.',
+            'phone.min' => 'Phone number 10-13 characters.',
+            'phone.max' => 'Phone number 10-13 characters.',
             'role.required' => 'Role is required.'
         ];
 
@@ -84,6 +86,30 @@ class AuthController extends Controller
 
     public function editProfileLogic(Request $request)
     {
+        $rules = [
+            'name' => ['required', 'string', 'min:5', 'max:255', new nameUnique],
+            'email' => ['required', 'email', 'max:255', new emailUnique],
+            // 'password' => 'required|min:8',
+            'phone' => 'required|string|min:10|max:13',
+            'price' => 'numeric'
+        ];
+        $msg = [
+            'name.string' => 'Name must be string',
+            'name.min' => 'Name must be filled with min 5 characters',
+            'name.max' => 'Name must below than 255 characters',
+            'name.nameUnique' => 'This name has been taken',
+            'email.email' => 'Please input valid email address',
+            'email.emailUnique' => 'This email has been taken',
+            // 'password.min' => 'Minimum password 8 characters',
+            'phone.required' => 'Phone number required.',
+            'phone.string' => 'Phone number must be string',
+            'phone.min' => 'Phone number 10-13 characters.',
+            'phone.max' => 'Phone number 10-13 characters.',
+            'price.number' => 'Price in numerical values only.'
+        ];
+
+        $request->validate($rules,$msg);
+
         $user = User::find(auth()->user()->id);
         if($request->hasFile('avatar')) {
             $user->update([
