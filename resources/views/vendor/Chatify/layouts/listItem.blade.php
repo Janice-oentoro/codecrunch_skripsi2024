@@ -44,7 +44,7 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
         </div>
         @else
         <div class="avatar av-m"
-        style="background-image: url({{url('storage/user-avatars/def-icon.png')}});">
+        style="background-image: url({{url('storage/images/def-icon.png')}});">
         </div>
         @endif
 
@@ -93,7 +93,7 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
         </div>
         @else
         <div class="avatar av-m"
-        style="background-image: url({{url('storage/user-avatars/def-icon.png')}});">
+        style="background-image: url({{url('storage/images/def-icon.png')}});">
         </div>
         @endif
 

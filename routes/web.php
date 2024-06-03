@@ -6,7 +6,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PayController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\FilterController;
 
 Auth::routes();
 //Route::get('/home', [MainController::class, 'home'])->name('home');
@@ -15,7 +14,7 @@ Route::get('/', [MainController::class, 'land'])->name('land');
 Route::get('/home', [MainController::class, 'land'])->name('land');
 Route::get('/about', [MainController::class, 'about'])->name('about');
 Route::get('/detailconsultant/{id}', [MainController::class,'detailConsultant'])->name('detail/{id}');
-Route::get('/topics/{progName}', [FilterController::class, 'getTopics']);
+Route::get('/topics/{progName}', [MainController::class, 'getTopics']);
 
 #AUTHS USERS
 // Route::group(['middleware' => 'guest'], function(){

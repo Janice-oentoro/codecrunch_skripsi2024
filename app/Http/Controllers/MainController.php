@@ -35,6 +35,14 @@ class MainController extends Controller
         return view('register');
     }
 
+    public function getTopics($progName)
+    {
+        // Fetch topics where the topic name contains the programming name
+        $topics = Topic::where('topic_name', 'like', '%' . $progName . '%')->get();
+
+        return response()->json($topics);
+    }
+
     public function land(Request $request) {
         session();
         $search = $request['search'] ?? "";
