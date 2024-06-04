@@ -50,18 +50,22 @@
                             <select name="filterprog" id="filterprog" class="form-select">
                                 <option value="">Select Programming</option>
                                 @foreach($progs as $prog)
-                                    <option value="{{$prog->prog_name}}">{{$prog->prog_name}}</option>
+                                    <option value="{{$prog->prog_name}}"
+                                    {{ $prog->prog_name == $filterprog ? 'selected' : '' }}
+                                    >{{$prog->prog_name}}</option>
                                 @endforeach
                             </select>
                         </div>
-
+                        
                         <!-- Filter Topic -->
                         <div class="col-md-4 ps-5" style="width:25%;">
                             <label for="filter">Topic</label>
                             <select name="filtertopic" id="filtertopic" class="form-select">
                                 <option value="">Select Topic</option>
                                 @foreach($topics as $topic)
-                                    <option value="{{$topic->id}}">{{$topic->topic_name}}</option>
+                                    <option value="{{$topic->id}}"
+                                    {{ $topic->id == $filtertopic ? 'selected' : '' }}
+                                    >{{$topic->topic_name}}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -51,33 +51,38 @@ class MainController extends Controller
 
         if($search != "") {
             $users = User::where('role', 'consultant')->where('name', 'LIKE', "%$search%")
-            ->where('suspend', false)->select('users.id', 'name', 'price', 'avatar')->paginate(6);
+            ->where('suspend', false)->select('users.id', 'name', 'price', 'avatar')
+            ->inRandomOrder()->paginate(6);
         } elseif($filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('prog_consultants', 'consultant_id', '=', 'users.id')
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")->where('suspend', false)->distinct()
-            ->select('users.id', 'name', 'price','avatar')->paginate(6);
+            ->select('users.id', 'name', 'price','avatar')
+            ->inRandomOrder()->paginate(6);
         } elseif($filtertopic != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
             ->join('topics', 'topic_id', '=', 'topics.id')
             ->where('topic_name', 'LIKE', "$filtertopic")->where('suspend', false)->distinct()
-            ->select('users.id', 'name', 'price','avatar')->paginate(6);
+            ->select('users.id', 'name', 'price','avatar')
+            ->inRandomOrder()->paginate(6);
         } elseif($search != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('prog_consultants', 'consultant_id', '=', 'users.id')
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")
             ->where('name', 'LIKE', "%$search%")->where('suspend', false)->distinct()
-            ->select('users.id', 'name', 'price','avatar')->paginate(6);
+            ->select('users.id', 'name', 'price','avatar')
+            ->inRandomOrder()->paginate(6);
         } elseif($search != "" && $filtertopic != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
             ->join('topics', 'topic_id', '=', 'topics.id')
             ->where('topic_name', 'LIKE', "$filtertopic")
             ->where('name', 'LIKE', "%$search%")->where('suspend', false)->distinct()
-            ->select('users.id', 'name', 'price','avatar')->paginate(6);
+            ->select('users.id', 'name', 'price','avatar')
+            ->inRandomOrder()->paginate(6);
         } elseif($search != "" && $filtertopic != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
@@ -87,7 +92,8 @@ class MainController extends Controller
             ->where('prog_name', 'LIKE', "$filterprog")
             ->where('topic_name', 'LIKE', "$filtertopic")
             ->where('name', 'LIKE', "%$search%")->where('suspend', false)->distinct()
-            ->select('users.id', 'name', 'price','avatar')->paginate(6);
+            ->select('users.id', 'name', 'price','avatar')
+            ->inRandomOrder()->paginate(6);
         } elseif($filtertopic != "" && $filterprog != "") {
             $users = User::where('role', 'consultant')
             ->join('topic_consultants', 'consultant_id', '=', 'users.id')
@@ -96,10 +102,12 @@ class MainController extends Controller
             ->join('programmings', 'prog_id', '=', 'programmings.id')
             ->where('prog_name', 'LIKE', "$filterprog")
             ->where('topic_name', 'LIKE', "$filtertopic")->where('suspend', false)->distinct()
-            ->select('users.id', 'name', 'price','avatar')->paginate(6);
+            ->select('users.id', 'name', 'price','avatar')
+            ->inRandomOrder()->paginate(6);
         } else {
             $users = User::where('role', 'consultant')->where('suspend', false)
-            ->select('users.id', 'name', 'price','avatar')->paginate(6);
+            ->select('users.id', 'name', 'price','avatar')
+            ->inRandomOrder()->paginate(6);
         }
         return view('land', compact('users', 'search', 'filterprog', 'filtertopic'));
     }
