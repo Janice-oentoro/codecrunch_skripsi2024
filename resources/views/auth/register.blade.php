@@ -103,12 +103,11 @@
             1. DEFINISI
 <br>•	CodeCrunch atau Kami adalah PT x suatu perseroan terbatas yang didirikan berdasarkan hukum negara Republik Indonesia, beralamat di Jl. x
 <br>•	Afiliasi merupakan (i) pihak pengendali dari; (ii) anak perusahaan dari; atau (iii) pihak-pihak yang berada di bawah satu kendali PT x.
-<br>•	Layanan CodeCrunch terdiri dari Layanan Utama yang ditawarkan kepada Pengguna melalui Platform CodeCrunch yang dapat Kami tambahkan, ubah dan/atau perbaharui dari waktu ke waktu yang diatur pada Pasal 6 Syarat dan Ketentuan ini. 
-<br>•	Layanan Utama terdiri dari fitur-fitur seperti Chat dengan IT Expert, Buat Janji Video Call, dan Layanan Home yang ditawarkan kepada Pengguna melalui Platform CodeCrunch yang dapat Kami tambahkan, ubah dan/atau perbaharui dari waktu ke waktu.
+<br>•	Layanan CodeCrunch terdiri dari fitur-fitur seperti Chat dengan IT Expert, Buat Janji Video Call, dan Layanan Home yang ditawarkan kepada Pengguna melalui Platform CodeCrunch yang dapat Kami tambahkan, ubah dan/atau perbaharui dari waktu ke waktu yang diatur pada Pasal 6 Syarat dan Ketentuan ini. 
 <br>•	Platform CodeCrunch adalah sistem yang ada di halaman situs web dengan alamat domain https://codecrunch.site/ yang dikelola oleh CodeCrunch. 
 <br>•	Pengguna atau Anda adalah setiap orang atau badan hukum yang menggunakan dan menikmati semua fitur dan fasilitas yang disediakan pada Platform CodeCrunch dan/atau Layanan CodeCrunch.
 <br>•	Catatan Expert adalah catatan hasil sesi percakapan dengan Penyedia Layanan dan saran-saran terkait dengan kondisi Pengguna. 
-<br>•	Harga Layanan adalah tarif atas Layanan CodeCrunch yang tercantum pada Platform CodeCrunch yang akan ditanggung oleh Pengguna termasuk namun tidak terbatas pada Biaya Pengiriman, Biaya Layanan, dan biaya-biaya lain yang ditetapkan CodeCrunch. Untuk menghindari keraguan, Harga Layanan yang tercantum pada Platform CodeCrunch sudah termasuk Pajak Pertambahan Nilai (“PPN”).
+<br>•	Harga Layanan adalah tarif atas Layanan CodeCrunch yang tercantum pada Platform CodeCrunch yang akan ditanggung oleh Pengguna termasuk namun tidak terbatas pada Biaya Layanan, dan biaya-biaya lain yang ditetapkan CodeCrunch. Untuk menghindari keraguan, Harga Layanan yang tercantum pada Platform CodeCrunch sudah termasuk Pajak Pertambahan Nilai (“PPN”).
 <br>•	Biaya Layanan adalah biaya atas penyediaan layanan yang akan diperoleh oleh Penyedia Layanan yang dalam hal ini ditetapkan oleh CodeCrunch dan/atau Penyedia Layanan dan ditanggung oleh Pengguna. 
 
             </p>
@@ -116,7 +115,6 @@
             2. KETENTUAN UMUM
 <br>•	Platform CodeCrunch berfungsi sebagai sarana untuk menghubungkan Pengguna, Penyedia Layanan, sebagaimana yang ditentukan oleh CodeCrunch dari waktu ke waktu. 
 <br>•	Pengguna memahami bahwa kerjasama antara CodeCrunch dan Penyedia Layanan bukan merupakan hubungan karyawan, akan tetapi hubungan kerja sama yang dijalin berdasarkan profesionalisme. CodeCrunch tidak mempekerjakan Penyedia Layanan dan CodeCrunch tidak bertanggung jawab atas tindakan, kecerobohan, kelalaian, dan/atau kelengahan Penyedia Layanan dalam memberikan Layanan CodeCrunch. Platform CodeCrunch merupakan layanan informasi dan komunikasi online yang disediakan oleh CodeCrunch.
-<br>•	CodeCrunch dapat menggunakan jasa pihak ketiga untuk menyediakan layanan pembayaran. Apabila terjadi kegagalan pada sistem pembayaran dan/atau keterlambatan pengiriman pesanan, CodeCrunch akan berupaya semaksimal mungkin dalam membantu Anda untuk menyelesaikan masalah yang mungkin timbul. Selanjutnya, Anda memahami bawah penyedia jasa perbankan atau pembayaran serta jasa pengiriman yang dipilih oleh Pengguna dapat mengenakan Biaya Pengiriman dan/atau biaya lain (apabila ada) kepada Pengguna atas penggunaan layanan yang diberikan. 
 <br>•	Platform CodeCrunch memungkinkan Anda untuk mengirimkan permintaan atas Layanan CodeCrunch kepada Penyedia Layanan. Penyedia Layanan memiliki kebijakan sendiri dan kewenangan penuh untuk menerima atau menolak setiap permintaan Anda atas Layanan CodeCrunch. Jika Penyedia Layanan menerima permintaan Anda, Platform CodeCrunch akan memberitahu Anda dan memberikan informasi mengenai Penyedia Layanan, termasuk nomor pesanan dan kemampuan untuk menghubungi Penyedia Layanan melalui telepon. 
 <br>•	Setiap fitur dan/atau Layanan CodeCrunch yang tersedia pada Platform CodeCrunch dapat diperbarui atau diubah sesuai dengan kebutuhan dan perkembangan Platform CodeCrunch. 
             </p>
@@ -165,7 +163,6 @@
             </p>
             <p>
             6. LAYANAN CODECRUNCH
- 6.1. Layanan Utama
 <br>•	Fitur Chat Dengan IT Expert
 <br>•	Fitur Chat dengan IT Expert memfasilitasi para Penyedia Layanan untuk berinteraksi dengan Pengguna melalui video call, voice call maupun chat yang dapat diakses melalui Platform CodeCrunch dengan ketentuan sebagai berikut:
 <br>•	Pengguna dapat menghubungi Penyedia Layanan ketika Penyedia Layanan berstatus online.
@@ -183,7 +180,6 @@
 <br>•	Saldo CodeCrunch
 <br>•	Saldo CodeCrunch didapatkan hanya dari pengembalian dana atas transaksi yang tidak berhasil pada Platform CodeCrunch. 
 <br>•	Untuk menghindari keraguan, Saldo CodeCrunch tidak dapat di top-up.
-<br>•	Pengguna juga dapat melakukan penarikan dana melalui bank yang ditunjuk oleh Pengguna apabila Saldo CodeCrunch lebih dari Rp10.000,- (sepuluh ribu rupiah). 
 <br>•	Saldo CodeCrunch tidak dapat dipindahtangankan atau diuangkan dalam bentuk apapun.
 <br>•	Metode pembayaran
 <br>•	Untuk dapat bertransaksi pada Platform CodeCrunch, Pengguna dapat menggunakan berbagai metode pembayaran yang tersedia pada Platform CodeCrunch. Apabila memiliki dana yang cukup pada Saldo CodeCrunch, Pengguna dapat menggunakan Saldo CodeCrunch untuk bertransaksi. 
@@ -194,7 +190,7 @@
             8. KETENTUAN TRANSAKSI
 <br>•	Fitur Chat 
 <br>•	Fitur Chat dengan IT Expert
-<br>•	Pengguna akan dikenakan tarif dengan jumlah tertentu untuk dapat menggunakan Fitur Chat dengan Dokter. 
+<br>•	Pengguna akan dikenakan tarif dengan jumlah tertentu untuk dapat menggunakan Fitur Chat dengan IT Expert. 
 <br>•	Apabila memerlukan video call maupun voice call dengan Penyedia Layanan, Pengguna perlu menginformasikan terlebih dahulu kepada Penyedia Layanan terkait dan akan tergantung pada ketersediaan masing-masing Penyedia Layanan pada saat dihubungi.
 <br>•	Saldo CodeCrunch akan terpotong secara langsung terhitung saat layar percakapan sudah muncul di layar ponsel dan saat Pengguna sudah terhubung dengan Penyedia Layanan. Satu sesi percakapan dengan Penyedia Layanan terhitung mulai dari 30 (tiga puluh) menit sampai dengan 1 (satu) jam dari sesi percakapan dimulai atau hingga Pengguna atau Pengguna Layanan mengakhiri sesi percakapan. 
 <br>•	Saat menghubungi IT Expert melalui percakapan, Pengguna dapat mengirimkan gambar kepada Penyedia Layanan yang berkaitan dengan format PNG, JPG, dan Bitmap. 
@@ -232,7 +228,7 @@ Semua pemberitahuan atau permintaan kepada Anda akan dianggap sudah diterima ole
             </p>
             <p>
             13. FUNGSI PLATFORM
-CodeCrunch senantiasa melakukan upaya untuk menjaga Platform CodeCrunch ini berfungsi dan berjalan lancar. Perlu diketahui bahwa Platform CodeCrunch dan/atau fitur Layanan CodeCrunch dapat sewaktu-waktu tidak tersedia yang disebabkan oleh berbagai alasan, termasuk namun tidak terbatas pada keperluan pemeliharaan atau masalah teknis, dan situasi ini berada di luar kuasa CodeCrunch. 
+<br>CodeCrunch senantiasa melakukan upaya untuk menjaga Platform CodeCrunch ini berfungsi dan berjalan lancar. Perlu diketahui bahwa Platform CodeCrunch dan/atau fitur Layanan CodeCrunch dapat sewaktu-waktu tidak tersedia yang disebabkan oleh berbagai alasan, termasuk namun tidak terbatas pada keperluan pemeliharaan atau masalah teknis, dan situasi ini berada di luar kuasa CodeCrunch. 
             </p>
             <p>
             14. PEMBEKUAN AKUN
@@ -250,7 +246,6 @@ CodeCrunch senantiasa melakukan upaya untuk menjaga Platform CodeCrunch ini berf
             </p>
             <p>
             16. PENGHAPUSAN AKUN
-
 <br>•	Anda dapat melakukan penghapusan akun Anda dengan mengakses fitur ‘Hapus Akun Saya’ yang tersedia pada Platform CodeCrunch.
 <br>•	Anda dapat menghapus profil yang dibuat di bawah akun Anda dengan mengakses langsung pada setiap profil yang ingin Anda hapus.
 <br>•	Dalam hal penghapusan profil sebagaimana dimaksud pada poin 2 di atas, tergantung pada alasan penghapusan yang Anda pilih, informasi dan data yang terdapat pada profil yang dihapus akan:
@@ -274,24 +269,19 @@ CodeCrunch senantiasa melakukan upaya untuk menjaga Platform CodeCrunch ini berf
 <br>Ketika Anda menggunakan Layanan CodeCrunch, Anda setuju untuk berkomunikasi dengan CodeCrunch secara elektronik termasuk namun tidak terbatas melalui email, pesan singkat, telepon, media sosial, obrolan langsung, dan/atau pusat pesan. Segala bentuk komunikasi elektronik dapat diberitahukan, diungkapkan, dan digunakan sebagai bukti sebagaimana diatur oleh undang-undang dan peraturan Republik Indonesia yang berlaku tentang komunikasi elektronik.
             </p>
             <p>
-            18. RISIKO
-<br>Dalam menyediakan Layanan CodeCrunch, CodeCrunch bekerja sama dengan Afiliasi dan/atau pihak ketiga yang dipercayakan untuk memproses pengiriman pesanan kepada Anda. Segala bentuk risiko yang timbul setelah pengemasan Produk dan pengiriman Produk akan ditanggung oleh pihak pengiriman. CodeCrunch sepenuhnya bertanggung jawab untuk menyediakan komunikasi antara pihak pengiriman dan Pengguna.
-<br>Selain pengalihan risiko pada saat pengiriman, Anda dapat mengajukan keluhan terkait Produk yang diterima jika ada ketidaksesuaian, kerusakan, pengembalian, atau pembatalan pembelian. Selanjutnya, Kami akan melakukan investigasi dan pemeriksaan tanggung jawab atas risiko Produk. Semua ketentuan pemeriksaan sampai penyelesaiannya mengacu pada aturan yang berlaku secara internal di CodeCrunch.
-            </p>
-            <p>
-            19. KETENTUAN SOFTWARE CODECRUNCH
+            18. KETENTUAN SOFTWARE CODECRUNCH
 <br>Untuk memberikan layanan terbaik kepada Anda, Kami sesekali akan melakukan pembaruan ke aplikasi Layanan CodeCrunch secara otomatis tergantung pada jenis layanan atau dengan persetujuan Anda untuk memperbarui aplikasi Kami. 
             </p>
             <p>
-            20. KEBIJAKAN DAN PERUBAHAN 
+            19. KEBIJAKAN DAN PERUBAHAN 
 <br>Kami setiap saat memiliki hak untuk melakukan perubahan pada situs, kebijakan, ketentuan layanan, dan Syarat dan Ketentuan dan selanjutnya dikirimkan kepada Anda di media yang Kami sediakan. Semua perubahan, penambahan, penghapusan, modifikasi dan lainnya yang Kami lakukan terkait layanan akan secara otomatis berlaku dalam 1x24 jam setelah diunduh dan diumumkan CodeCrunch. Harap untuk selalu membaca dan mengetahui pemberitahuan yang Kami sampaikan melalui media CodeCrunch.
             </p>
             <p>
-            21. BAHASA
+            20. BAHASA
 <br>Syarat dan Ketentuan ini dibuat dalam 2 (dua) bahasa, bahasa Indonesia dan bahasa Inggris. Dalam hal terjadi perbedaan penafsiran, maka versi bahasa Indonesia dinyatakan berlaku.
             </p>
             <p>
-            22. PERNYATAAN JAMINAN DAN PELEPASAN TANGGUNG JAWAB
+            21. PERNYATAAN JAMINAN DAN PELEPASAN TANGGUNG JAWAB
 <br>Layanan CodeCrunch dan semua informasi, konten, bahan, Produk (termasuk perangkat lunak) dan layanan lainnya termasuk atau yang tersedia melalui Layanan CodeCrunch disediakan oleh CodeCrunch "apa adanya" dan "sebagaimana tersedia", kecuali secara tertulis dinyatakan lain. CodeCrunch tidak membuat pernyataan atau jaminan dalam bentuk apapun, tersurat maupun tersirat, untuk pengoperasian Layanan CodeCrunch, atau informasi, konten, bahan, Produk (termasuk software) atau layanan lain termasuk di dalam atau disediakan melalui Layanan CodeCrunch, kecuali secara tertulis dinyatakan lain. Anda secara tegas menyetujui bahwa penggunaan Layanan CodeCrunch merupakan risiko Anda sendiri.
 <br>Selama diizinkan oleh hukum yang berlaku, CodeCrunch menolak semua jaminan lisan atau tertulis, termasuk namun tidak terbatas pada, jaminan lisan yang dapat diperjualbelikan dan kesesuaian untuk tujuan tertentu. CodeCrunch tidak menjamin Layanan CodeCrunch, informasi, konten, bahan, Produk (termasuk perangkat lunak) CodeCrunch atau layanan lainnya termasuk dalam atau tersedia untuk Anda melalui Layanan CodeCrunch, server CodeCrunch atau komunikasi elektronik yang dikirim CodeCrunch bebas dari virus atau komponen berbahaya lainnya. CodeCrunch tidak bertanggung jawab atas kerusakan yang timbul karena penggunaan Layanan CodeCrunch, atau informasi, konten, bahan, Produk (termasuk perangkat lunak) atau layanan lain yang termasuk dalam atau tersedia untuk Anda melalui Layanan CodeCrunch, termasuk namun tidak terbatas pada kerusakan langsung, tidak langsung, insidental, kausal, atau lainnya kecuali dinyatakan secara tertulis.
 <br>CodeCrunch tidak bertanggung jawab atas kelalaian yang terbukti disebabkan oleh Pengguna Platform CodeCrunch dalam pengelolaan akun Pengguna Platform CodeCrunch, yang termasuk namun tidak terbatas pada pemberian kata sandi atau informasi lain apapun terkait dengan akun Pengguna Platform CodeCrunch kepada pihak lain manapun berdasarkan alasan apapun, yang menyebabkan Pengguna Platform CodeCrunch mengalami kehilangan akses, kendali dan/atau kepemilikan atas akun Pengguna Platform CodeCrunch terhadap Platform CodeCrunch. Tanggung jawab tersebut juga termasuk pada kelalaian, kesengajaan atau kealpaan Pengguna Platform CodeCrunch dalam hal terjadinya pemberian setiap informasi terkait akun Pengguna Platform CodeCrunch melalui akses tautan pihak ketiga di luar kendali CodeCrunch. 
@@ -299,7 +289,7 @@ CodeCrunch senantiasa melakukan upaya untuk menjaga Platform CodeCrunch ini berf
 <br>Dalam hal terjadi ketidaksesuaian antara Syarat dan Ketentuan dengan ketentuan terkait lainnya yang disediakan oleh CodeCrunch, sepanjang tentang persyaratan yang sifatnya umum, maka Syarat & Ketentuan ini akan tetap berlaku.
             </p>
             <p>
-            23. HUKUM YANG BERLAKU DAN PENYELESAIAN SENGKETA
+            22. HUKUM YANG BERLAKU DAN PENYELESAIAN SENGKETA
 <br>•	Syarat dan Ketentuan ini diatur berdasarkan hukum dan ketentuan Negara Republik Indonesia.
 <br>•	Apabila terjadi perselisihan atau perbedaan pendapat yang disebabkan atau yang timbul sehubungan dengan pelaksanaan Syarat dan Ketentuan ini (“Sengketa”), maka Para Pihak sepakat akan menyelesaikan secara musyawarah untuk mufakat, atau melakukan langkah-langkah damai melalui musyawarah mufakat sejak munculnya Sengketa.
 <br>•	Apabila Sengketa tidak dapat diselesaikan melalui musyawarah mufakat dalam kurun waktu 30 (tiga puluh) hari kalender sejak Sengketa diberitahukan oleh salah satu Pihak ke Pihak lainnya, maka Para Pihak sepakat untuk menyelesaikan Sengketa secara final melalui Arbitrase yang diselenggarakan oleh Badan Arbitrase Nasional Indonesia (“BANI”) sesuai dengan ketentuan-ketentuan BANI yang berlaku pada saat itu mengenai prosedur arbitrase. Arbitrase akan dipimpin oleh 1 (satu) orang arbiter yang ditunjuk oleh Ketua BANI dan dilaksanakan di DKI Jakarta, Indonesia, menggunakan bahasa Indonesia. Putusan arbitrase akan dianggap sebagai putusan yang berkekuatan hukum tetap, mengikat dan tidak dapat digugat kembali dan tidak ada satu Pihak pun yang dapat memulai suatu persidangan atau memasukan suatu gugatan di pengadilan manapun sehubungan dengan sengketa yang timbul dari dan sehubungan dengan Syarat dan Ketentuan ini.
